@@ -1,0 +1,226 @@
+"use client"
+
+import { useState } from "react"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { ChevronDown, ChevronUp } from "lucide-react"
+
+const genderOptions = [
+  { id: "women", label: "Women", checked: true },
+  { id: "men", label: "Men", checked: false },
+  { id: "kids", label: "Kids", checked: false },
+]
+
+const categoryOptions = [
+  { id: "dresses", label: "Dresses", count: 190947 },
+  { id: "ethnic-dresses", label: "Ethnic Dresses", count: 13619 },
+  { id: "tops", label: "Tops", count: 45230 },
+  { id: "jeans", label: "Jeans", count: 23456 },
+]
+
+const brandOptions = [
+  { id: "trendyol", label: "Trendyol", count: 7251 },
+  { id: "stylecast", label: "StyleCast", count: 6840 },
+  { id: "lulu-sky", label: "LULU & SKY", count: 6268 },
+  { id: "dressberry", label: "DressBerry", count: 5586 },
+  { id: "jc-collection", label: "JC Collection", count: 5189 },
+  { id: "baesd", label: "BAESD", count: 4190 },
+  { id: "tokyo-talkies", label: "Tokyo Talkies", count: 3818 },
+]
+
+const sleeveOptions = [
+  { id: "full-sleeve", label: "Full Sleeve" },
+  { id: "half-sleeve", label: "Half Sleeve" },
+  { id: "sleeveless", label: "Sleeveless" },
+  { id: "3-4-sleeve", label: "3/4 Sleeve" },
+]
+
+const fitOptions = [
+  { id: "regular", label: "Regular Fit" },
+  { id: "slim", label: "Slim Fit" },
+  { id: "loose", label: "Loose Fit" },
+  { id: "bodycon", label: "Bodycon" },
+]
+
+const necklineOptions = [
+  { id: "round-neck", label: "Round Neck" },
+  { id: "v-neck", label: "V Neck" },
+  { id: "boat-neck", label: "Boat Neck" },
+  { id: "hal-neck", label: "Hal Neck" },
+]
+
+export default function Sidebar() {
+  const [expandedSections, setExpandedSections] = useState({
+    gender: true,
+    categories: true,
+    brands: true,
+    sleeves: false,
+    fit: false,
+    neckline: false,
+  })
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    gender: ["women"],
+    categories: [],
+    brands: [],
+    sleeves: [],
+    fit: [],
+    neckline: [],
+  })
+
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }))
+  }
+
+  const handleFilterChange = (section: keyof typeof selectedFilters, value: string, checked: boolean) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [section]: checked ? [...prev[section], value] : prev[section].filter((item) => item !== value),
+    }))
+  }
+
+  const clearAllFilters = () => {
+    setSelectedFilters({
+      gender: ["women"],
+      categories: [],
+      brands: [],
+      sleeves: [],
+      fit: [],
+      neckline: [],
+    })
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6 leading-3">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">FILTERS</h2>
+        <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-pink-600 hover:text-pink-700">
+          CLEAR ALL
+        </Button>
+      </div>
+
+      {/* Gender Filter */}
+
+      {/* Categories Filter */}
+
+      {/* Brand Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("brands")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          BRAND
+          {expandedSections.brands ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.brands && (
+          <div className="space-y-3">
+            {brandOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.brands.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("brands", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer flex-1">
+                  {option.label}
+                </label>
+                <span className="text-xs text-gray-500">({option.count})</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      {/* Sleeve Type Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("sleeves")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          SLEEVE TYPE
+          {expandedSections.sleeves ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.sleeves && (
+          <div className="space-y-3">
+            {sleeveOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.sleeves.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("sleeves", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      {/* Fit Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("fit")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          FIT
+          {expandedSections.fit ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.fit && (
+          <div className="space-y-3">
+            {fitOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.fit.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("fit", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      {/* Neckline Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("neckline")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          NECKLINE
+          {expandedSections.neckline ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.neckline && (
+          <div className="space-y-3">
+            {necklineOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.neckline.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("neckline", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
