@@ -5,7 +5,7 @@ import numpy as np
 
 # -------- Configuration --------
 EMB_DIR = "embeddings"
-USER_CLOTH_EMB = os.path.join(EMB_DIR, "user_cloths.npy")   # user wearing cloth-only images
+USER_CLOTH_EMB = os.path.join(EMB_DIR, "user_clothes.npy")   # user wearing cloth-only images
 USER_MODEL_EMB = os.path.join(EMB_DIR, "user_images.npy")   # user images with model wearing cloth
 USER_PROFILE_PATH = os.path.join(EMB_DIR, "user_profile.npy")
 
