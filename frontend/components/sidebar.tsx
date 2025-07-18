@@ -29,6 +29,24 @@ const brandOptions = [
   { id: "tokyo-talkies", label: "Tokyo Talkies", count: 3818 },
 ]
 
+const dressCodeOptions = [
+  { id: "casual", label: "Casual" },
+  { id: "formal", label: "Formal" },
+  { id: "party", label: "Party Wear" },
+  { id: "business", label: "Business" },
+  { id: "vacation", label: "Vacation" },
+]
+
+const colorOptions = [
+  { id: "black", label: "Black" },
+  { id: "white", label: "White" },
+  { id: "red", label: "Red" },
+  { id: "blue", label: "Blue" },
+  { id: "green", label: "Green" },
+  { id: "pink", label: "Pink" },
+  { id: "yellow", label: "Yellow" },
+]
+
 const sleeveOptions = [
   { id: "full-sleeve", label: "Full Sleeve" },
   { id: "half-sleeve", label: "Half Sleeve" },
@@ -55,6 +73,8 @@ export default function Sidebar() {
     gender: true,
     categories: true,
     brands: true,
+    dressCode: false,
+    color: false,
     sleeves: false,
     fit: false,
     neckline: false,
@@ -64,6 +84,8 @@ export default function Sidebar() {
     gender: ["women"],
     categories: [],
     brands: [],
+    dressCode: [],
+    color: [],
     sleeves: [],
     fit: [],
     neckline: [],
@@ -88,6 +110,8 @@ export default function Sidebar() {
       gender: ["women"],
       categories: [],
       brands: [],
+      dressCode: [],
+      color: [],
       sleeves: [],
       fit: [],
       neckline: [],
@@ -106,6 +130,8 @@ export default function Sidebar() {
       {/* Gender Filter */}
 
       {/* Categories Filter */}
+
+      <Separator className="my-4" />
 
       {/* Brand Filter */}
       <div className="mb-6">
@@ -137,6 +163,66 @@ export default function Sidebar() {
 
       <Separator className="my-4" />
 
+
+      {/* Dress Code Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("dressCode")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          DRESS CODE
+          {expandedSections.dressCode ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.dressCode && (
+          <div className="space-y-3">
+            {dressCodeOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.dressCode.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("dressCode", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      {/* Color Filter */}
+      <div className="mb-6">
+        <button
+          onClick={() => toggleSection("color")}
+          className="flex items-center justify-between w-full text-left font-medium text-gray-900 mb-3"
+        >
+          COLOR
+          {expandedSections.color ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {expandedSections.color && (
+          <div className="space-y-3">
+            {colorOptions.map((option) => (
+              <div key={option.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={option.id}
+                  checked={selectedFilters.color.includes(option.id)}
+                  onCheckedChange={(checked) => handleFilterChange("color", option.id, checked as boolean)}
+                />
+                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      
       {/* Sleeve Type Filter */}
       <div className="mb-6">
         <button

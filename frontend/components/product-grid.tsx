@@ -4,6 +4,7 @@ import { useState } from "react"
 import ProductCard from "./product-card"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 
 // Mock product data
 const mockProducts = [
@@ -83,7 +84,8 @@ const mockProducts = [
 
 export default function ProductGrid() {
   const [products, setProducts] = useState(mockProducts)
-  const [uniquenessValue, setUniquenessValue] = useState([50]) // Default value for slider
+  const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
+  const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
 
   const handleWishlistToggle = (productId: number) => {
     setProducts((prev) =>
@@ -102,30 +104,51 @@ export default function ProductGrid() {
     setProducts((prev) => prev.filter((product) => product.id !== productId))
   }
 
+  const toggleMatchStyle = () => {
+    setIsMatchStyleActive((prev) => !prev)
+  }
+
+  const getUniquenessLabel = (value: number) => {
+    if (value === 0) return "Low"
+    if (value === 50) return "Medium"
+    if (value === 100) return "High"
+    return "" // Should not happen with step 50
+  }
+
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <nav className="text-sm text-gray-600 mb-2">Home / Clothing / Dresses</nav>
-          <h1 className="text-2xl font-semibold text-gray-900">Dresses - {products.length.toLocaleString()} items</h1>
+      <div className="grid grid-cols-3 items-center mb-6">
+        <div className="justify-self-start">
+          <h1 className="text-2xl font-semibold text-gray-900">Items - {products.length.toLocaleString()} items</h1>
         </div>
-        <div className="flex items-center gap-4 w-64">
-          {" "}
-          {/* Added w-64 for slider width */}
+        <div className="justify-self-center">
+          <Button
+            onClick={toggleMatchStyle}
+            variant="outline"
+            className={`px-8 py-2 h-9 rounded-full text-sm font-medium transition-all duration-200 border-2 ${
+              isMatchStyleActive
+                ? "bg-pink-600 border-pink-600 text-white hover:bg-pink-700 hover:border-pink-700 shadow-md"
+                : "bg-white border-gray-300 text-gray-700 hover:border-pink-300 hover:text-pink-600 hover:bg-pink-50"
+            }`}
+          >
+            Match my Style
+          </Button>
+        </div>
+        <div className="justify-self-end flex items-center gap-4 w-64">
           <Label htmlFor="uniqueness-bar" className="text-sm text-gray-600 whitespace-nowrap">
-            Uniqueness Bar:
+            Uniqueness:
           </Label>
           <Slider
             id="uniqueness-bar"
             min={0}
             max={100}
-            step={1}
-            value={uniquenessValue}
-            onValueChange={setUniquenessValue}
-            className="w-full"
+            step={50}
+            value={uniquenessLevel}
+            onValueChange={setUniquenessLevel}
+            className="text-left w-4/12"
           />
-          <span className="text-sm text-gray-600">{uniquenessValue[0]}%</span>
+          <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
         </div>
       </div>
 
