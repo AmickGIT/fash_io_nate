@@ -47,7 +47,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00059_00.jpg,unknown,long sleeve,v neck,pink,pink,casual,loose fit,red,black
 00061_00.jpg,unknown,long sleeve,high neck,white,unknown,casual,tight fit,blue,black
 00062_00.jpg,polo ralph lauren,short sleeve,polo collar,black,white,casual,tight fit,black,brown
-00065_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,blue,brown
+00065_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,blue,brown
 00066_00.jpg,adidas,short sleeve,round neck,pink,red,casual,loose fit,red,black
 00068_00.jpg,unknown,long sleeve,v neck,white,gold,casual,tight fit,blue,blonde
 00070_00.jpg,guess,short sleeve,round neck,red,white,casual,loose fit,red,black
@@ -152,7 +152,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00201_00.jpg,polo ralph lauren,short sleeve,round neck,coral,green,casual,tight fit,blue,blonde
 00202_00.jpg,unknown,long sleeve,v neck,black,lace,casual,tight fit,black,blonde
 00203_00.jpg,polo,short sleeve,crew neck,white,red,casual,tight fit,blue,blonde
-00204_00.jpg,black,long sleeve,boat neck,black,silver,casual,tight fit,white,brown
+00204_00.jpg,unknown,long sleeve,boat neck,black,silver,casual,tight fit,white,brown
 00209_00.jpg,gap,short sleeve,round neck,red,white,casual,tight fit,white,blonde
 00210_00.jpg,forever new,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 00211_00.jpg,only,long sleeve,crew neck,white,unknown,casual,tight fit,black,brown
@@ -173,7 +173,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00227_00.jpg,tommy hilfiger,long sleeve,crew neck,pink,white,casual,loose fit,pink,black
 00229_00.jpg,unknown,long sleeve,scoop neck,white,white,casual,tight fit,blue,brown
 00230_00.jpg,unknown,short sleeve,round neck,brown,brown,casual,tight fit,blue,blonde
-00231_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
+00231_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 00232_00.jpg,tommy hilfiger,short sleeve,round neck,blue,red,casual,tight fit,blue,blonde
 00233_00.jpg,under armour,short sleeve,crew neck,black,pink,athletic,tight fit,orange,black
 00234_00.jpg,unknown,long sleeve,v neck,unknown,unknown,casual,tight fit,multi colored,brown
@@ -226,13 +226,13 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00301_00.jpg,unknown,short sleeve,round neck,white,orange,casual,tight fit,white,black
 00303_00.jpg,gap,short sleeve,scoop neck,white,yellow,casual,tight fit,black,brown
 00304_00.jpg,unknown,long sleeve,round neck,black,pink,casual,tight fit,blue,brown
-00305_00.jpg,black,short sleeve,round neck,black,unknown,casual,tight fit,black,black
+00305_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,black
 00306_00.jpg,unknown,long sleeve,turtleneck,green,unknown,casual,tight fit,green,black
 00307_00.jpg,unknown,long sleeve,v neck,teal,green,casual,tight fit,green,black
 00308_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
 00309_00.jpg,nike,short sleeve,round neck,black,white,casual,tight fit,black,brown
 00310_00.jpg,unknown,long sleeve,cowl neck,gray,black,casual,loose fit,black,black
-00313_00.jpg,off shoulder,long sleeve,off the shoulder,black,lace,casual,tight fit,blue,brown
+00313_00.jpg,unknown,long sleeve,off the shoulder,black,lace,casual,tight fit,blue,brown
 00314_00.jpg,stella mccartney,long sleeve,round neck,black,unknown,casual,tight fit,black,blonde
 00315_00.jpg,polo ralph lauren,short sleeve,round neck,dark blue,white,casual,tight fit,white,blonde
 00316_00.jpg,unknown,three quarter sleeve,round neck,blue,unknown,casual,tight fit,black,blonde
@@ -285,7 +285,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00371_00.jpg,unknown,short sleeve,cowl neck,black,white,casual,tight fit,black,brown
 00372_00.jpg,puma,short sleeve,round neck,black,white,casual,tight fit,black,brown
 00374_00.jpg,levi's,short sleeve,round neck,white,pink,casual,tight fit,blue,brown
-00375_00.jpg,evenodd odd,short sleeve,scoop neck,white,pink,casual,tight fit,white,brown
+00375_00.jpg,even&odd,short sleeve,scoop neck,white,pink,casual,tight fit,white,brown
 00377_00.jpg,not provided,short sleeve,circle neck,white,gray,casual,tight fit,blue,black
 00378_00.jpg,unknown,short sleeve,circle neck,white,yellow,lemonade,tight fit,black,black
 00379_00.jpg,unknown,short sleeve,round neck,black,white,casual,tight fit,white,blonde
@@ -417,7 +417,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00540_00.jpg,unknown,short sleeve,circle neck,red,unknown,casual,loose fit,red,black
 00541_00.jpg,msch,long sleeve,v neck,white,unknown,casual,tight fit,black,brown
 00542_00.jpg,levi's,long sleeve,scoop neck,black,white,casual,tight fit,black,brown
-00543_00.jpg,givencompany,long sleeve,square neck,black,no secondary color,casual,tight fit,black,brown
+00543_00.jpg,givencompany,long sleeve,square neck,black,unknown,casual,tight fit,black,brown
 00544_00.jpg,lacoste,short sleeve,v neck,navy blue,gray,casual,tight fit,blue,blonde
 00545_00.jpg,gap,long sleeve,boat neck,gray,gray,casual,tight fit,black,black
 00546_00.jpg,unknown,long sleeve,scoop neck,black,unknown,casual,tight fit,black,blonde
@@ -453,7 +453,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00580_00.jpg,evenwood,short sleeve,round neck,white,brown,casual,tight fit,yellow,brown
 00581_00.jpg,everlast,short sleeve,round neck,white,white,casual,tight fit,black,brown
 00582_00.jpg,unknown,long sleeve,round neck,navy,gray,casual,tight fit,green,blonde
-00584_00.jpg,black,short sleeve,v neck,black,unknown,casual,tight fit,black,brown
+00584_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,black,brown
 00585_00.jpg,gant,long sleeve,mock neck,pink,pink,casual,loose fit,pink,blonde
 00586_00.jpg,unknown,long sleeve,v neck,white,white,casual,tight fit,black,black
 00587_00.jpg,unknown,short sleeve,cowl neck,white,pink,casual,tight fit,blue,brown
@@ -470,7 +470,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00601_00.jpg,kaffe,long sleeve,round neck,gray,gray,casual,tight fit,black,brown
 00602_00.jpg,unknown,long sleeve,v neck,beige,beige,casual,tight fit,beige,black
 00603_00.jpg,unknown,short sleeve,scoop neck,gray,gray,casual,tight fit,black,brown
-00604_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,brown,black
+00604_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,brown,black
 00605_00.jpg,banana republic,short sleeve,round neck,white,white,casual,tight fit,blue,black
 00606_00.jpg,unknown,long sleeve,high neck,black,gray,casual,tight fit,brown,blonde
 00607_00.jpg,unknown,long sleeve,round neck,green,green,casual,tight fit,blue,blonde
@@ -484,7 +484,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00619_00.jpg,unknown,short sleeve,round neck,white,yellow,casual,tight fit,white,brown
 00621_00.jpg,unknown,long sleeve,round neck,white,white,casual,tight fit,blue,blonde
 00622_00.jpg,comma,short sleeve,v neck,orange,unknown,casual,loose fit,orange,black
-00623_00.jpg,black,short sleeve,high collar,black,silver,casual,tight fit,blue,brown
+00623_00.jpg,unknown,short sleeve,high collar,black,silver,casual,tight fit,blue,brown
 00625_00.jpg,unknown,short sleeve,round neck,gray,white,casual,loose fit,black,black
 00626_00.jpg,lauren,long sleeve,high neck,navy,green,casual,tight fit,black,black
 00628_00.jpg,unknown,short sleeve,v neck,gray,gray,casual,tight fit,blue,blonde
@@ -579,7 +579,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00750_00.jpg,unknown,long sleeve,v neck,blue,unknown,casual,tight fit,blue,blonde
 00751_00.jpg,unknown,long sleeve,round neck,white,unknown,casual,tight fit,black,brown
 00752_00.jpg,unknown,long sleeve,boat neck,blue,unknown,casual,tight fit,blue,blonde
-00753_00.jpg,black,long sleeve,boat neck,black,unknown,casual,tight fit,black,blonde
+00753_00.jpg,unknown,long sleeve,boat neck,black,unknown,casual,tight fit,black,blonde
 00754_00.jpg,unknown,long sleeve,v neck,white,unknown,casual,tight fit,white,black
 00755_00.jpg,unknown,short sleeve,round neck,green,green,casual,tight fit,green,blonde
 00756_00.jpg,unknown,short sleeve,round neck,green,green,casual,tight fit,green,blonde
@@ -694,7 +694,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00901_00.jpg,unknown,short sleeve,boat neck,navy blue,white,casual,tight fit,blue,black
 00903_00.jpg,unknown,long sleeve,v neck,green,green,casual,tight fit,black,blonde
 00904_00.jpg,unknown,short sleeve,round neck,black,pink,casual,tight fit,black,brown
-00905_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
+00905_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 00907_00.jpg,unknown,short sleeve,round neck,white,pink,casual,loose fit,blue,blonde
 00908_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 00909_00.jpg,unknown,short sleeve,round neck,yellow,blue,casual,tight fit,yellow,blonde
@@ -754,7 +754,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 00978_00.jpg,unknown,long sleeve,boat neck,red,green,casual,tight fit,red,black
 00979_00.jpg,petite,long sleeve,high neck,red,black,casual,tight fit,black,black
 00980_00.jpg,opus,short sleeve,v neck,black,white,casual,tight fit,beige,brown
-00982_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
+00982_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 00983_00.jpg,anna field,short sleeve,round neck,yellow,yellow,casual,tight fit,yellow,blonde
 00985_00.jpg,unknown,long sleeve,round neck,gray,gray,casual,tight fit,white,black
 00987_00.jpg,unknown,short sleeve,polo collar,green,white,casual,loose fit,white,blonde
@@ -818,7 +818,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01065_00.jpg,anna field,short sleeve,round neck,white,multicolored,casual,loose fit,black,blonde
 01067_00.jpg,unknown,long sleeve,high neck,black,polka dots,casual,tight fit,black,black
 01068_00.jpg,unknown,short sleeve,mock neck,red,unknown,casual,tight fit,red,black
-01071_00.jpg,black,unknown,v neck,black,unknown,casual,loose fit,black,blonde
+01071_00.jpg,unknown,unknown,v neck,black,unknown,casual,loose fit,black,blonde
 01073_00.jpg,unknown,long sleeve,v neck,teal,teal,casual,tight fit,white,black
 01075_00.jpg,dickies,long sleeve,round neck,white,red,casual,loose fit,red,black
 01076_00.jpg,unknown,long sleeve,high neck,black,purple,casual,tight fit,white,black
@@ -833,7 +833,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01087_00.jpg,weekday,short sleeve,square neck,red,orange,casual,tight fit,red,brown
 01088_00.jpg,unknown,short sleeve,v neck,white,silver,casual,tight fit,white,brown
 01089_00.jpg,unknown,long sleeve,high neck,black,unknown,casual,tight fit,black,black
-01091_00.jpg,unknown,long sleeve,v neck,navy,multi colored,casual,tight fit,blue,blonde
+01091_00.jpg,unknown,long sleeve,v neck,navy,multicolored,casual,tight fit,blue,blonde
 01093_00.jpg,unknown,long sleeve,v neck,green,black,casual,tight fit,black,brown
 01094_00.jpg,marc o'polo,short sleeve,polo collar,red,black,casual,tight fit,black,brown
 01095_00.jpg,object,long sleeve,v neck,burgundy,unknown,casual,loose fit,red,brown
@@ -869,7 +869,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01129_00.jpg,pieces,short sleeve,square neck,black,lace,casual,tight fit,blue,brown
 01130_00.jpg,polo ralph lauren,short sleeve,round neck,green,red,casual,tight fit,green,blonde
 01131_00.jpg,unknown,short sleeve,v neck,white,white,casual,tight fit,white,blonde
-01132_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
+01132_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 01133_00.jpg,unknown,short sleeve,v neck,navy,black,casual,tight fit,black,black
 01134_00.jpg,unknown,short sleeve,round neck,yellow,yellow,casual,tight fit,yellow,black
 01135_00.jpg,unknown,long sleeve,round neck,white,black,casual,tight fit,yellow,blonde
@@ -881,7 +881,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01142_00.jpg,unknown,short sleeve,v neck,pink,blush,casual,tight fit,black,blonde
 01144_00.jpg,unknown,short sleeve,v neck,white,multicolored,casual,tight fit,white,blonde
 01146_00.jpg,esprit,short sleeve,v neck,black,unknown,casual,tight fit,yellow,blonde
-01147_00.jpg,black,unknown,v neck,black,unknown,casual,tight fit,black,brown
+01147_00.jpg,unknown,unknown,v neck,black,unknown,casual,tight fit,black,brown
 01148_00.jpg,bluu,long sleeve,boat neck,gray,gray,casual,tight fit,blue,blonde
 01150_00.jpg,g star,short sleeve,v neck,dark blue,white,casual,tight fit,black,black
 01151_00.jpg,reebok,short sleeve,round neck,white,yellow,casual,loose fit,green,black
@@ -907,7 +907,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01182_00.jpg,unknown,long sleeve,high neck,black,unknown,casual,tight fit,black,black
 01183_00.jpg,unknown,short sleeve,v neck,red,unknown,casual,tight fit,black,blonde
 01184_00.jpg,unknown,long sleeve,high neck,unknown,unknown,casual,tight fit,black,blonde
-01185_00.jpg,off shoulder,short sleeve,off the shoulder,black,lace,casual,tight fit,black,blonde
+01185_00.jpg,unknown,short sleeve,off the shoulder,black,lace,casual,tight fit,black,blonde
 01186_00.jpg,polo,short sleeve,round neck,white,floral,casual,tight fit,blue,black
 01187_00.jpg,ellesse,short sleeve,round neck,blue,purple,casual,tight fit,blue,blonde
 01192_00.jpg,unknown,short sleeve,circle neck,pink,unknown,casual,loose fit,pink,black
@@ -937,11 +937,11 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01222_00.jpg,weekday,long sleeve,round neck,green,black,casual,tight fit,yellow,black
 01223_00.jpg,polo,short sleeve,crew neck,pink,green,casual,loose fit,pink,blonde
 01224_00.jpg,zadig & voltaire,short sleeve,round neck,yellow,white,casual,loose fit,yellow,black
-01225_00.jpg,off shoulder,short sleeve,square neck,black,white,casual,tight fit,black,black
+01225_00.jpg,unknown,short sleeve,square neck,black,white,casual,tight fit,black,black
 01226_00.jpg,unknown,short sleeve,v neck,red,orange,casual,tight fit,blue,blonde
 01227_00.jpg,.object,long sleeve,v neck,black,unknown,casual,tight fit,black,black
 01228_00.jpg,versace jeans couture,short sleeve,round neck,black,gold,casual,tight fit,black,black
-01230_00.jpg,evenodd,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
+01230_00.jpg,even&odd,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 01231_00.jpg,unknown,long sleeve,round neck,black,unknown,casual,tight fit,black,brown
 01233_00.jpg,unknown,long sleeve,v neck,blue,black,casual,loose fit,black,brown
 01235_00.jpg,even&odd,short sleeve,v neck,purple,unknown,casual,tight fit,purple,black
@@ -1010,7 +1010,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01315_00.jpg,tommy hilfiger,short sleeve,polo collar,red,white,casual,loose fit,red,blonde
 01316_00.jpg,unknown,long sleeve,high neck,gray,black,casual,tight fit,black,blonde
 01317_00.jpg,unknown,long sleeve,circle neck,white,pink,casual,loose fit,black,blonde
-01318_00.jpg,black,unknown,v neck,black,lace,casual,tight fit,blue,blonde
+01318_00.jpg,unknown,unknown,v neck,black,lace,casual,tight fit,blue,blonde
 01319_00.jpg,superdry,short sleeve,v neck,red,unknown,casual,tight fit,red,black
 01321_00.jpg,unknown,short sleeve,round neck,gray,gray,casual,tight fit,black,blonde
 01322_00.jpg,unknown,short sleeve,v neck,beige,brown,casual,tight fit,brown,blonde
@@ -1183,7 +1183,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01538_00.jpg,unknown,sleeveless,v neck,red,unknown,casual,tight fit,red,brown
 01539_00.jpg,unknown,short sleeve,cowl neck,black,unknown,informal,tight fit,black,brown
 01540_00.jpg,unknown,short sleeve,scoop neck,dark blue,unknown,casual,tight fit,blue,black
-01541_00.jpg,orange,short sleeve,round neck,orange,unknown,casual,tight fit,orange,blonde
+01541_00.jpg,unknown,short sleeve,round neck,orange,unknown,casual,tight fit,orange,blonde
 01545_00.jpg,verona,long sleeve,round neck,blue,gray,casual,tight fit,blue,brown
 01546_00.jpg,unknown,short sleeve,scoop neck,white,unknown,casual,loose fit,white,blonde
 01547_00.jpg,reebok,long sleeve,v neck,green,black,casual,loose fit,green,black
@@ -1204,7 +1204,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01568_00.jpg,unknown,short sleeve,v neck,white,leopard print,casual,tight fit,black,black
 01570_00.jpg,g star,short sleeve,v neck,black,white,casual,loose fit,black,brown
 01572_00.jpg,american vintage,long sleeve,crew neck,white,gray,casual,tight fit,blue,black
-01573_00.jpg,selected,short sleeve,round neck,pink,no secondary color,casual,loose fit,pink,black
+01573_00.jpg,selected,short sleeve,round neck,pink,unknown,casual,loose fit,pink,black
 01574_00.jpg,unknown,long sleeve,v neck,red,red,formal,tight fit,red,brown
 01576_00.jpg,unknown,short sleeve,polo collar,black,blue,casual,tight fit,blue,blonde
 01577_00.jpg,unknown,short sleeve,circle neck,pink,white,casual,loose fit,red,black
@@ -1216,7 +1216,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01585_00.jpg,under armour,short sleeve,round neck,white,white,casual,tight fit,navy blue,brown
 01586_00.jpg,polo ralph lauren,short sleeve,round neck,light blue,green,casual,tight fit,tan,brown
 01587_00.jpg,evaars,short sleeve,v neck,black,white,casual,tight fit,black,blonde
-01588_00.jpg,off shoulder,short sleeve,v neck,black,unknown,casual,tight fit,blue,blonde
+01588_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,blue,blonde
 01589_00.jpg,unknown,short sleeve,round neck,gray,red,casual,tight fit,black,blonde
 01590_00.jpg,unknown,long sleeve,round neck,white,green,casual,tight fit,blue,black
 01591_00.jpg,samsøe samsøe,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
@@ -1276,7 +1276,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01663_00.jpg,gap,short sleeve,round neck,orange,pink,casual,loose fit,orange,blonde
 01664_00.jpg,guess,short sleeve,round neck,black,red,casual,tight fit,black,blonde
 01665_00.jpg,unknown,short sleeve,crossover neck,yellow,white,casual,tight fit,black,brown
-01666_00.jpg,evenodd,sleeveless,v neck,white,blue,casual,tight fit,black,brown
+01666_00.jpg,even&odd,sleeveless,v neck,white,blue,casual,tight fit,black,brown
 01667_00.jpg,unknown,long sleeve,v neck,pink,red,casual,loose fit,red,black
 01668_00.jpg,unknown,long sleeve,v neck,green,unknown,casual,tight fit,black,black
 01669_00.jpg,unknown,short sleeve,v neck,blue,unknown,casual,tight fit,blue,blonde
@@ -1295,7 +1295,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01685_00.jpg,under armour,sleeveless,round neck,blue,gold,casual,tight fit,blue,black
 01686_00.jpg,unknown,short sleeve,round neck,red,unknown,casual,tight fit,red,black
 01687_00.jpg,tommy sport,sleeveless,round neck,orange,unknown,casual,tight fit,red,black
-01688_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
+01688_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 01690_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 01692_00.jpg,unknown,short sleeve,v neck,white,unknown,casual,tight fit,beige,brown
 01693_00.jpg,somewhats,short sleeve,round neck,green,black,casual,tight fit,green,brown
@@ -1493,7 +1493,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 01945_00.jpg,psycho,short sleeve,racerback,black,orange,casual,tight fit,black,blonde
 01946_00.jpg,unknown,short sleeve,high neck,white,white,casual,tight fit,red,blonde
 01947_00.jpg,ivy & oak,short sleeve,v neck,yellow,unknown,casual,loose fit,yellow,blonde
-01949_00.jpg,unknown,short sleeve,v neck,white,x,casual,tight fit,beige,black
+01949_00.jpg,unknown,short sleeve,v neck,white,unknown,casual,tight fit,beige,black
 01951_00.jpg,unknown,long sleeve,v neck,green,neon green,casual,loose fit,green,black
 01952_00.jpg,gap,short sleeve,v neck,white,unknown,casual,tight fit,blue,black
 01953_00.jpg,unknown,long sleeve,round neck,blue,white,casual,tight fit,navy blue,brown
@@ -1531,7 +1531,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 02005_00.jpg,unknown,long sleeve,round neck,white,white,casual,tight fit,white,blonde
 02006_00.jpg,unknown,long sleeve,cowl neck,black,blue,casual,tight fit,blue,blonde
 02009_00.jpg,gant,short sleeve,round neck,pink,light pink,casual,loose fit,blue,blonde
-02010_00.jpg,evenodd,short sleeve,v neck,pink,pink,casual,loose fit,pink,blonde
+02010_00.jpg,even&odd,short sleeve,v neck,pink,pink,casual,loose fit,pink,blonde
 02013_00.jpg,unknown,short sleeve,round neck,white,white,casual,tight fit,white,blonde
 02014_00.jpg,na kd,short sleeve,v neck,yellow,unknown,casual,tight fit,blue,black
 02019_00.jpg,unknown,short sleeve,round neck,black,floral pattern,casual,tight fit,black,blonde
@@ -1682,7 +1682,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 02210_00.jpg,unknown,short sleeve,v neck,dark blue,white,casual,tight fit,white,black
 02211_00.jpg,unknown,short sleeve,round neck,red,white,casual,tight fit,red,black
 02213_00.jpg,unknown,short sleeve,round neck,white,gray,casual,tight fit,blue,brown
-02214_00.jpg,off shoulder,long sleeve,square neck,black,unknown,casual,tight fit,black,black
+02214_00.jpg,unknown,long sleeve,square neck,black,unknown,casual,tight fit,black,black
 02215_00.jpg,unknown,short sleeve,round neck,pink,pink,casual,tight fit,white,brown
 02216_00.jpg,unknown,short sleeve,square neck,black,lace,casual,tight fit,beige,brown
 02217_00.jpg,unknown,short sleeve,circle neck,pink,unknown,casual,loose fit,hot pink,black
@@ -1756,7 +1756,7 @@ img,brand,sleeve,neck,primary_color,secondary_color,casuality,fit,pants_color,ha
 02312_00.jpg,levi's,short sleeve,round neck,white,pink,casual,loose fit,red,black
 02313_00.jpg,max&co.,short sleeve,round neck,blue,yellow,casual,tight fit,white,black
 02314_00.jpg,unknown,short sleeve,v neck,green,green,casual,tight fit,white,black
-02315_00.jpg,evenodo,short sleeve,scoop neck,yellow,white,casual,loose fit,yellow,black
+02315_00.jpg,even&odd,short sleeve,scoop neck,yellow,white,casual,loose fit,yellow,black
 02316_00.jpg,unknown,long sleeve,high neck,white,unknown,casual,tight fit,gray,blonde
 02317_00.jpg,unknown,short sleeve,v neck,pink,maroon,casual,tight fit,black,black
 02318_00.jpg,mister tee,short sleeve,round neck,black,pink,casual,tight fit,white,brown
@@ -1940,7 +1940,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02538_00.jpg,only,short sleeve,scoop neck,white,gray,casual,tight fit,white,black
 02539_00.jpg,unknown,long sleeve,v neck,yellow,yellow,casual,loose fit,yellow,brown
 02540_00.jpg,vila,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
-02541_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
+02541_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 02542_00.jpg,unknown,long sleeve,turtleneck,navy blue,white,casual,tight fit,blue,blonde
 02543_00.jpg,unknown,short sleeve,v neck,blue,unknown,casual,tight fit,blue,blonde
 02544_00.jpg,unknown,short sleeve,hal neck,black,gray,casual,tight fit,black,brown
@@ -2002,7 +2002,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02618_00.jpg,unknown,long sleeve,turtleneck,black,unknown,casual,tight fit,black,black
 02621_00.jpg,unknown,long sleeve,boat neck,red,blue,casual,tight fit,blue,blonde
 02622_00.jpg,missguided,long sleeve,boat neck,pale blue,light blue,casual,loose fit,black,blonde
-02623_00.jpg,black,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
+02623_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
 02624_00.jpg,missguided,long sleeve,v neck,white,yellow,casual,tight fit,blue,black
 02625_00.jpg,evans,three quarter sleeve,scoop neck,blue,white,casual,loose fit,blue,black
 02626_00.jpg,the north face,short sleeve,round neck,black,white,casual,tight fit,green,black
@@ -2029,7 +2029,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02655_00.jpg,unknown,short sleeve,round neck,black,white,casual,tight fit,blue,brown
 02656_00.jpg,unknown,long sleeve,off shoulder,black,beige,casual,loose fit,black,brown
 02658_00.jpg,yellow,off shoulder,scoop neck,yellow,yellow,casual,loose fit,yellow,brown
-02661_00.jpg,black,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
+02661_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,brown
 02662_00.jpg,unknown,long sleeve,boat neck,blue,black,casual,tight fit,blue,blonde
 02664_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 02667_00.jpg,unknown,short sleeve,v neck,black,lace,casual,tight fit,black,blonde
@@ -2049,7 +2049,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02687_00.jpg,unknown,short sleeve,round neck,red,unknown,casual,tight fit,blue,black
 02689_00.jpg,calvin klein,short sleeve,crew neck,white,green,casual,tight fit,black,blonde
 02690_00.jpg,michael kors,short sleeve,round neck,gray,pink,casual,tight fit,blue,brown
-02691_00.jpg,black,long sleeve,boat neck,black,unknown,casual,tight fit,red,black
+02691_00.jpg,unknown,long sleeve,boat neck,black,unknown,casual,tight fit,red,black
 02692_00.jpg,sixames,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 02696_00.jpg,unknown,short sleeve,hal neck,red,yellow,casual,tight fit,red,blonde
 02697_00.jpg,unknown,long sleeve,turtleneck,teal,teal,casual,tight fit,white,blonde
@@ -2065,7 +2065,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02707_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,loose fit,black,blonde
 02708_00.jpg,unknown,long sleeve,cowl neck,black,dotted,casual,tight fit,black,blonde
 02709_00.jpg,unknown,long sleeve,boat neck,red,unknown,casual,tight fit,red,black
-02710_00.jpg,unknown,short sleeve,boat neck,black,secondary color unknown,casual,tight fit,black,black
+02710_00.jpg,unknown,short sleeve,boat neck,black,unknown,casual,tight fit,black,black
 02711_00.jpg,loll skye,long sleeve,square neck,red,red,casual,loose fit,red,black
 02712_00.jpg,unknown,short sleeve,high neck,red,black,casual,tight fit,red,blonde
 02713_00.jpg,unknown,long sleeve,ruffled collar,dark blue,silver,casual,tight fit,green,black
@@ -2209,7 +2209,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02893_00.jpg,unknown,short sleeve,v neck,black,lace,casual,tight fit,black,brown
 02895_00.jpg,unknown,short sleeve,round neck,navy blue,green,casual,tight fit,blue,black
 02896_00.jpg,superdry,long sleeve,round neck,white,unknown,casual,tight fit,blue,blonde
-02897_00.jpg,orange,short sleeve,round neck,orange,orange,casual,loose fit,orange,blonde
+02897_00.jpg,unknown,short sleeve,round neck,orange,orange,casual,loose fit,orange,blonde
 02898_00.jpg,unknown,long sleeve,boat neck,dark blue,black,casual,tight fit,black,blonde
 02899_00.jpg,blanche,short sleeve,round neck,green,light green,casual,loose fit,blue,brown
 02900_00.jpg,unknown,short sleeve,cowl neck,black,unknown,casual,loose fit,black,black
@@ -2283,9 +2283,7 @@ unknown",short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 02990_00.jpg,unknown,short sleeve,circle neck,white,pink,casual,loose fit,blue,blonde
 02992_00.jpg,unknown,long sleeve,round neck,black,unknown,casual,tight fit,red,blonde
 02993_00.jpg,unknown,short sleeve,v neck,green,green,casual,tight fit,black,brown
-02994_00.jpg,"thecloth in the image can be tagged as follows:
-
-unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
+02994_00.jpg,unknown,short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 02997_00.jpg,gap,short sleeve,v neck,white,unknown,casual,tight fit,white,black
 02998_00.jpg,even ooo,short sleeve,round neck,pale yellow,pale yellow,casual,tight fit,blue,black
 02999_00.jpg,g star,long sleeve,scoop neck,black,unknown,casual,tight fit,blue,blonde
@@ -2318,14 +2316,14 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03036_00.jpg,unknown,short sleeve,deep v neck,black,unknown,casual,tight fit,brown,blonde
 03037_00.jpg,gap,long sleeve,crew neck,white,black,casual,tight fit,green,brown
 03038_00.jpg,unknown,long sleeve,v neck,blue,unknown,casual,tight fit,black,black
-03039_00.jpg,black,lace,scoop neck,black,lace,casual,tight fit,orange,blonde
+03039_00.jpg,unknown,lace,scoop neck,black,lace,casual,tight fit,orange,blonde
 03040_00.jpg,gap,short sleeve,scoop neck,white,unknown,casual,tight fit,black,brown
 03041_00.jpg,opus,short sleeve,v neck,white,gray,casual,tight fit,black,blonde
 03042_00.jpg,unknown,short sleeve,crew neck,white,red,casual,tight fit,black,brown
 03043_00.jpg,unknown,long sleeve,cowl neck,green,green,casual,tight fit,black,blonde
 03044_00.jpg,anna field,short sleeve,round neck,blue,green,casual,loose fit,white,brown
 03046_00.jpg,mint & berry,short sleeve,circle neck,pale blue,white,casual,tight fit,white,brown
-03047_00.jpg,unknown,long sleeve,v neck,yellow,multi colored,casual,tight fit,black,blonde
+03047_00.jpg,unknown,long sleeve,v neck,yellow,multicolored,casual,tight fit,black,blonde
 03048_00.jpg,even cool,short sleeve,off shoulder,pink,red,casual,tight fit,black,brown
 03049_00.jpg,unknown,short sleeve,high neck,yellow,unknown,casual,loose fit,yellow,brown
 03050_00.jpg,champion,short sleeve,round neck,gray,blue,casual,loose fit,red,black
@@ -2449,7 +2447,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03205_00.jpg,rawd,short sleeve,round neck,white,black,casual,loose fit,blue,brown
 03206_00.jpg,unknown,long sleeve,v neck,pink,red,casual,tight fit,black,brown
 03207_00.jpg,unknown,short sleeve,round neck,light blue,mint green,casual,tight fit,blue,blonde
-03208_00.jpg,evenodd,short sleeve,off shoulder,black,white,casual,tight fit,white,brown
+03208_00.jpg,even&odd,short sleeve,off shoulder,black,white,casual,tight fit,white,brown
 03209_00.jpg,unknown,short sleeve,strapless,white,red,summer,tight fit,blue,black
 03210_00.jpg,unknown,long sleeve,boat neck,olive green,olive green,casual,tight fit,black,brown
 03211_00.jpg,unknown,short sleeve,round neck,black,white,casual,tight fit,blue,black
@@ -2524,7 +2522,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03301_00.jpg,karl lagerfeld,short sleeve,round neck,white,unknown,casual,tight fit,black,brown
 03302_00.jpg,unknown,short sleeve,boat neck,green,white,casual,tight fit,black,brown
 03303_00.jpg,unknown,short sleeve,round neck,white,lace,casual,tight fit,yellow,brown
-03305_00.jpg,unknown,short sleeve,deep v neck,black,none,casual,tight fit,blue,brown
+03305_00.jpg,unknown,short sleeve,deep v neck,black,unknown,casual,tight fit,blue,brown
 03306_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,brown
 03307_00.jpg,unknown,short sleeve,v neck,beige,unknown,casual,tight fit,blue,black
 03308_00.jpg,gap,short sleeve,round neck,white,black,casual,loose fit,blue,blonde
@@ -2595,7 +2593,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03383_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,loose fit,black,blonde
 03384_00.jpg,unknown,short sleeve,cowl neck,red,unknown,casual,tight fit,red,black
 03386_00.jpg,unknown,short sleeve,round neck,green,green,casual,tight fit,green,black
-03387_00.jpg,off shoulder,short sleeve,square neck,black,unknown,casual,tight fit,black,brown
+03387_00.jpg,unknown,short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 03388_00.jpg,unknown,long sleeve,v neck,black,white,casual,tight fit,black,brown
 03389_00.jpg,vans,short sleeve,round neck,black,blue,casual,tight fit,white,brown
 03391_00.jpg,unknown,short sleeve,round neck,white,beige,casual,tight fit,black,black
@@ -2675,7 +2673,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03489_00.jpg,unknown,long sleeve,boat neck,turquoise,unknown,casual,loose fit,green,brown
 03490_00.jpg,unknown,long sleeve,v neck,teal,teal,casual,tight fit,black,brown
 03492_00.jpg,unknown,long sleeve,circle neck,pink,yellow,casual,tight fit,blue,blonde
-03494_00.jpg,off shoulder,long sleeve,scoop neck,black,unknown,casual,tight fit,black,blonde
+03494_00.jpg,unknown,long sleeve,scoop neck,black,unknown,casual,tight fit,black,blonde
 03495_00.jpg,unknown,three quarter sleeve,boat neck,black,unknown,casual,tight fit,black,black
 03497_00.jpg,unknown,short sleeve,v neck,navy blue,lace,casual,tight fit,black,brown
 03498_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,black,brown
@@ -2883,7 +2881,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03758_00.jpg,american eagle,short sleeve,round neck,gray,black,casual,tight fit,blue,blonde
 03759_00.jpg,unknown,short sleeve,round neck,white,white,casual,loose fit,white,black
 03760_00.jpg,unknown,short sleeve,v neck,gray,white,casual,tight fit,black,blonde
-03761_00.jpg,blue,long sleeve,boat neck,black,unknown,casual,tight fit,white,blonde
+03761_00.jpg,unknown,long sleeve,boat neck,black,unknown,casual,tight fit,white,blonde
 03762_00.jpg,south beach,short sleeve,round neck,white,green,casual,tight fit,blue,black
 03763_00.jpg,unknown,short sleeve,round neck,green,black,casual,tight fit,green,black
 03765_00.jpg,missguided,long sleeve,circle neck,white,gray,casual,loose fit,black,brown
@@ -2933,7 +2931,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03816_00.jpg,msch,short sleeve,round neck,white,black,casual,loose fit,blue,blonde
 03817_00.jpg,unknown,long sleeve,boat neck,orange,unknown,casual,loose fit,orange,blonde
 03818_00.jpg,unknown,short sleeve,round neck,dark blue,black,casual,tight fit,black,brown
-03819_00.jpg,off shoulder,short sleeve,square neck,black,unknown,casual,tight fit,white,black
+03819_00.jpg,unknown,short sleeve,square neck,black,unknown,casual,tight fit,white,black
 03820_00.jpg,unknown,long sleeve,circle neck,white,unknown,casual,tight fit,black,blonde
 03821_00.jpg,unknown,long sleeve,turtleneck,maroon,maroon,casual,tight fit,red,brown
 03822_00.jpg,iro,short sleeve,round neck,black,white,casual,loose fit,black,black
@@ -2993,7 +2991,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03887_00.jpg,unknown,long sleeve,v neck,orange,unknown,casual,tight fit,black,brown
 03888_00.jpg,unknown,three quarter sleeve,scoop neck,navy blue,unknown,casual,tight fit,navy blue,brown
 03889_00.jpg,unknown,long sleeve,turtleneck,brown,unknown,casual,tight fit,brown,blonde
-03890_00.jpg,good,long sleeve,square neck,white,no secondary color,casual,tight fit,black,black
+03890_00.jpg,good,long sleeve,square neck,white,unknown,casual,tight fit,black,black
 03891_00.jpg,unknown,short sleeve,v neck,dark blue,light gray,casual,loose fit,black,blonde
 03893_00.jpg,dickies,short sleeve,round neck,white,multicolored,casual,loose fit,black,black
 03894_00.jpg,unknown,short sleeve,cowl neck,white,green,casual,tight fit,blue,brown
@@ -3028,7 +3026,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 03937_00.jpg,unknown,short sleeve,scoop neck,black,unknown,casual,tight fit,black,brown
 03938_00.jpg,unknown,long sleeve,v neck,pink,red,casual,tight fit,red,black
 03939_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,red,black
-03940_00.jpg,black,short sleeve,round neck,black,white,casual,tight fit,black,blonde
+03940_00.jpg,unknown,short sleeve,round neck,black,white,casual,tight fit,black,blonde
 03941_00.jpg,unknown,long sleeve,high neck,pink,unknown,casual,tight fit,pink,brown
 03942_00.jpg,unknown,sleeveless,boat neck,navy blue,pink,casual,tight fit,blue,blonde
 03943_00.jpg,unknown,short sleeve,turtleneck,red,black,casual,tight fit,blue,brown
@@ -3080,7 +3078,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04003_00.jpg,unknown,short sleeve,round neck,red,red,casual,tight fit,white,blonde
 04004_00.jpg,envi,short sleeve,scoop neck,white,gold,casual,loose fit,white,blonde
 04005_00.jpg,unknown,short sleeve,off shoulder,black,unknown,casual,tight fit,black,brown
-04006_00.jpg,liu.jo,short sleeve,round neck,black,silver,casual,tight fit,white,blonde
+04006_00.jpg,liu jo,short sleeve,round neck,black,silver,casual,tight fit,white,blonde
 04007_00.jpg,unknown,long sleeve,boat neck,blue,unknown,casual,tight fit,blue,black
 04008_00.jpg,unknown,short sleeve,scoop neck,gray,gray,casual,tight fit,black,blonde
 04009_00.jpg,marc o polo,long sleeve,scoop neck,white,unknown,casual,tight fit,blue,black
@@ -3108,7 +3106,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04035_00.jpg,iro,quarter sleeve,round neck,light purple,pink,casual,loose fit,pink,black
 04036_00.jpg,unknown,long sleeve,cowl neck,pink,red,casual,tight fit,red,blonde
 04037_00.jpg,unknown,long sleeve,v neck,navy,pink,casual,tight fit,blue,blonde
-04038_00.jpg,unknown,long sleeve,cowl neck,green,multi colored,casual,tight fit,green,black
+04038_00.jpg,unknown,long sleeve,cowl neck,green,multicolored,casual,tight fit,green,black
 04039_00.jpg,unknown,short sleeve,v neck,navy blue,blue,casual,loose fit,blue,brown
 04040_00.jpg,unknown,long sleeve,boat neck,navy blue,pink,casual,tight fit,black,brown
 04042_00.jpg,unknown,short sleeve,v neck,black,black,casual,tight fit,black,black
@@ -3131,7 +3129,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04063_00.jpg,unknown,short sleeve,round neck,beige,beige,casual,tight fit,blue,blonde
 04064_00.jpg,unknown,short sleeve,circle neck,white,navy blue,casual,tight fit,beige,brown
 04065_00.jpg,polo ralph lauren,short sleeve,v neck,pink,unknown,casual,tight fit,white,black
-04066_00.jpg,orange,short sleeve,round neck,orange,orange,casual,tight fit,orange,black
+04066_00.jpg,unknown,short sleeve,round neck,orange,orange,casual,tight fit,orange,black
 04067_00.jpg,unknown,long sleeve,boat neck,sky blue,light blue,casual,loose fit,blue,brown
 04068_00.jpg,unknown,long sleeve,v neck,dark blue,light blue,casual,tight fit,brown,brown
 04069_00.jpg,unknown,short sleeve,deep v neck,black,unknown,casual,tight fit,blue,brown
@@ -3153,7 +3151,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04086_00.jpg,unknown,short sleeve,round neck,orange,orange,casual,tight fit,black,blonde
 04087_00.jpg,unknown,short sleeve,v neck,black,unknown,casual,tight fit,black,blonde
 04088_00.jpg,unknown,short sleeve,deep v neck,red,black,casual,tight fit,red,blonde
-04089_00.jpg,black,long sleeve,v neck,black,white,casual,tight fit,beige,black
+04089_00.jpg,unknown,long sleeve,v neck,black,white,casual,tight fit,beige,black
 04091_00.jpg,hugo,short sleeve,round neck,black,gray,casual,tight fit,black,black
 04092_00.jpg,unknown,long sleeve,v neck,white,unknown,casual,tight fit,beige,black
 04093_00.jpg,evans,short sleeve,round neck,black,orange,casual,loose fit,blue,black
@@ -3278,7 +3276,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04243_00.jpg,unknown,short sleeve,round neck,white,grey,casual,tight fit,olive green,brown
 04244_00.jpg,kaffe,long sleeve,v neck,dark green,black,casual,tight fit,black,blonde
 04245_00.jpg,unknown,long sleeve,turtleneck,orange,unknown,casual,tight fit,blue,black
-04246_00.jpg,blue,long sleeve,round neck,white,white,casual,tight fit,blue,blonde
+04246_00.jpg,unknown,long sleeve,round neck,white,white,casual,tight fit,blue,blonde
 04247_00.jpg,dorothy perkins,short sleeve,v neck,white,black,casual,tight fit,orange,black
 04249_00.jpg,unknown,short sleeve,round neck,white,lace,casual,tight fit,blue,brown
 04250_00.jpg,evans,sleeveless,round neck,dark blue,black,casual,tight fit,blue,brown
@@ -3305,7 +3303,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04274_00.jpg,unknown,short sleeve,v neck,white,white,casual,tight fit,beige,brown
 04276_00.jpg,unknown,short sleeve,v neck,beige,black,casual,loose fit,black,blonde
 04277_00.jpg,replay,long sleeve,cowl neck,gray,gray,casual,tight fit,brown,black
-04278_00.jpg,orange,short sleeve,round neck,orange,white,casual,loose fit,orange,blonde
+04278_00.jpg,unknown,short sleeve,round neck,orange,white,casual,loose fit,orange,blonde
 04279_00.jpg,unknown,long sleeve,v neck,brown,unknown,casual,tight fit,brown,blonde
 04280_00.jpg,unknown,short sleeve,v neck,green,green,casual,loose fit,green,brown
 04281_00.jpg,oliver,short sleeve,v neck,white,unknown,casual,tight fit,white,blonde
@@ -3325,8 +3323,8 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04299_00.jpg,unknown,short sleeve,deep v neck,navy blue,unknown,casual,tight fit,blue,brown
 04300_00.jpg,unknown,short sleeve,v neck,blue,navy,casual,tight fit,white,blonde
 04301_00.jpg,unknown,short sleeve,v neck,green,blue,casual,loose fit,blue,blonde
-04302_00.jpg,orange,short sleeve,v neck,orange,orange,casual,tight fit,orange,red
-04303_00.jpg,orange,long sleeve,v neck,orange,orange,casual,tight fit,orange,blonde
+04302_00.jpg,unknown,short sleeve,v neck,orange,orange,casual,tight fit,orange,red
+04303_00.jpg,unknown,long sleeve,v neck,orange,orange,casual,tight fit,orange,blonde
 04304_00.jpg,unknown,long sleeve,v neck,brown,brown,casual,tight fit,brown,blonde
 04305_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,loose fit,black,blonde
 04308_00.jpg,naf naf,short sleeve,round neck,red,floral,casual,tight fit,white,blonde
@@ -3398,7 +3396,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04388_00.jpg,unknown,short sleeve,v neck,olive green,olive green,casual,tight fit,blue,blonde
 04389_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,white,black
 04390_00.jpg,new york green,long sleeve,cowl neck,black,pink,casual,tight fit,black,black
-04391_00.jpg,off shoulder,short sleeve,square neck,black,leopard print,casual,tight fit,black,blonde
+04391_00.jpg,unknown,short sleeve,square neck,black,leopard print,casual,tight fit,black,blonde
 04394_00.jpg,unknown,short sleeve,cowl neck,black,white,casual,tight fit,black,blonde
 04396_00.jpg,maxmux,long sleeve,cowl neck,black,unknown,casual,tight fit,black,blonde
 04397_00.jpg,only,short sleeve,round neck,black,unknown,casual,tight fit,green,brown
@@ -3415,7 +3413,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04409_00.jpg,unknown,short sleeve,off shoulder,orange,unknown,casual,loose fit,orange,blonde
 04410_00.jpg,unknown,long sleeve,circle neck,green,green,casual,tight fit,black,brown
 04411_00.jpg,unknown,short sleeve,scoop neck,gray,gray,casual,tight fit,black,brown
-04412_00.jpg,weekend maxmara,short sleeve,peter pan collar,pink,no secondary color mentioned,casual,tight fit,white,blonde
+04412_00.jpg,weekend maxmara,short sleeve,peter pan collar,pink,unknown,casual,tight fit,white,blonde
 04413_00.jpg,unknown,long sleeve,v neck,white,white,casual,loose fit,white,blonde
 04414_00.jpg,unknown,short sleeve,round neck,yellow,pink,casual,tight fit,blue,blonde
 04415_00.jpg,unknown,short sleeve,round neck,brown,orange,casual,tight fit,black,brown
@@ -3464,7 +3462,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04464_00.jpg,khujo,long sleeve,high neck,orange,unknown,casual,tight fit,orange,black
 04465_00.jpg,thakoon,short sleeve,crew neck,white,multicolored,casual,tight fit,green,black
 04466_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,black
-04467_00.jpg,black,short sleeve,round neck,black,unknown,casual,tight fit,black,blonde
+04467_00.jpg,unknown,short sleeve,round neck,black,unknown,casual,tight fit,black,blonde
 04468_00.jpg,calvin klein,short sleeve,round neck,black,gray,casual,tight fit,black,blonde
 04470_00.jpg,unknown,long sleeve,boat neck,white,unknown,casual,tight fit,green,brown
 04472_00.jpg,public,long sleeve,round neck,yellow,orange,casual,loose fit,yellow,black
@@ -3501,10 +3499,10 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04508_00.jpg,unknown,short sleeve,round neck,white,white,casual,tight fit,gray,blonde
 04510_00.jpg,more & more,sleeveless,v neck,black,unknown,casual,tight fit,black,black
 04511_00.jpg,unknown,three quarter sleeve,scoop neck,white,unknown,casual,tight fit,beige,brown
-04513_00.jpg,black,short sleeve,v neck,black,lace,casual,tight fit,black,brown
+04513_00.jpg,unknown,short sleeve,v neck,black,lace,casual,tight fit,black,brown
 04515_00.jpg,adidas,short sleeve,round neck,light pink,white,casual,loose fit,pink,blonde
 04516_00.jpg,unknown,short sleeve,v neck,white,pink,casual,tight fit,black,blonde
-04519_00.jpg,orange,lace,v neck,orange,lace,casual,tight fit,white,black
+04519_00.jpg,unknown,lace,v neck,orange,lace,casual,tight fit,white,black
 04520_00.jpg,unknown,short sleeve,cowl neck,black,unknown,casual,tight fit,black,brown
 04521_00.jpg,unknown,long sleeve,round neck,orange,red,casual,tight fit,red,blonde
 04522_00.jpg,unknown,short sleeve,hal collar,pink,blush,casual,tight fit,black,black
@@ -3539,7 +3537,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04556_00.jpg,unknown,short sleeve,scoop neck,red,red,casual,tight fit,red,black
 04558_00.jpg,karl,short sleeve,round neck,pink,gold,casual,tight fit,black,blonde
 04560_00.jpg,just cavalli,short sleeve,round neck,black,pink,casual,loose fit,black,blonde
-04563_00.jpg,off shoulder,long sleeve,scoop neck,black,unknown,casual,tight fit,blue,blonde
+04563_00.jpg,unknown,long sleeve,scoop neck,black,unknown,casual,tight fit,blue,blonde
 04565_00.jpg,new look,short sleeve,v neck,white,polka dots,casual,tight fit,black,brown
 04566_00.jpg,unknown,short sleeve,v neck,red,unknown,casual,tight fit,orange,black
 04567_00.jpg,sesyof,short sleeve,round neck,white,white,casual,tight fit,blue,brown
@@ -3717,7 +3715,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04788_00.jpg,unknown,long sleeve,round neck,black,unknown,casual,tight fit,black,black
 04789_00.jpg,unknown,short sleeve,round neck,black,silver,casual,tight fit,blue,black
 04790_00.jpg,unknown,short sleeve,round neck,red,brown,casual,tight fit,blue,brown
-04791_00.jpg,black,short sleeve,mock neck,black,unknown,casual,tight fit,black,brown
+04791_00.jpg,unknown,short sleeve,mock neck,black,unknown,casual,tight fit,black,brown
 04794_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,black
 04797_00.jpg,hollister,long sleeve,scoop neck,light blue,light blue,casual,tight fit,black,blonde
 04798_00.jpg,unknown,short sleeve,v neck,white,white,casual,loose fit,blue,blonde
@@ -3847,7 +3845,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 04955_00.jpg,polo ralph lauren,short sleeve,polo collar,red,blue,casual,loose fit,red,blonde
 04956_00.jpg,unknown,short sleeve,round neck,navy blue,floral pattern,casual,tight fit,black,blonde
 04958_00.jpg,unknown,short sleeve,heart neck,white,white,casual,tight fit,yellow,blonde
-04959_00.jpg,orange,unknown,v neck,orange,unknown,casual,tight fit,orange,blonde
+04959_00.jpg,unknown,unknown,v neck,orange,unknown,casual,tight fit,orange,blonde
 04960_00.jpg,saint,short sleeve,round neck,beige,yellow,casual,tight fit,yellow,brown
 04962_00.jpg,unknown,long sleeve,v neck,pink,orange,casual,loose fit,orange,black
 04964_00.jpg,unknown,short sleeve,round neck,navy blue,white,casual,tight fit,white,brown
@@ -3962,7 +3960,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 05097_00.jpg,unknown,long sleeve,boat neck,brown,black,casual,loose fit,black,brown
 05098_00.jpg,unknown,short sleeve,boat neck,white,brown,casual,loose fit,black,brown
 05099_00.jpg,unknown,short sleeve,round neck,white,unknown,casual,tight fit,white,black
-05100_00.jpg,black,sleeveless,round neck,black,white,casual,tight fit,white,brown
+05100_00.jpg,unknown,sleeveless,round neck,black,white,casual,tight fit,white,brown
 05102_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,black
 05103_00.jpg,unknown,short sleeve,v neck,green,brown,casual,tight fit,green,blonde
 05106_00.jpg,unknown,short sleeve,hal cut out,black,unknown,casual,tight fit,black,brown
@@ -4009,7 +4007,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 05153_00.jpg,unknown,short sleeve,round neck,white,green,casual,tight fit,blue,black
 05154_00.jpg,unknown,short sleeve,hal neck,red,unknown,casual,tight fit,red,black
 05155_00.jpg,nak,short sleeve,v neck,pink,white,casual,tight fit,white,blonde
-05157_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,brown,black
+05157_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,brown,black
 05158_00.jpg,unknown,short sleeve,circle neck,navy blue,white,casual,tight fit,blue,blonde
 05159_00.jpg,unknown,long sleeve,round neck,black,pink,casual,loose fit,blue,blonde
 05161_00.jpg,only,short sleeve,round neck,black,pink,casual,tight fit,white,blonde
@@ -4136,7 +4134,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 05321_00.jpg,unknown,long sleeve,round neck,black,white,casual,tight fit,black,brown
 05323_00.jpg,unknown,short sleeve,cowl neck,white,blue,casual,loose fit,blue,brown
 05324_00.jpg,unknown,short sleeve,round neck,black,black,casual,tight fit,black,brown
-05326_00.jpg,black,short sleeve,square neck,black,unknown,casual,tight fit,black,blonde
+05326_00.jpg,unknown,short sleeve,square neck,black,unknown,casual,tight fit,black,blonde
 05328_00.jpg,vila,short sleeve,round neck,green,green,casual,tight fit,green,blonde
 05331_00.jpg,unknown,short sleeve,circle neck,pink,green,casual,loose fit,pink,brown
 05332_00.jpg,unknown,long sleeve,scoop neck,white,white,casual,tight fit,black,brown
@@ -4217,7 +4215,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 05427_00.jpg,unknown,short sleeve,square neck,black,unknown,casual,tight fit,black,brown
 05428_00.jpg,wrangler,short sleeve,round neck,white,red,casual,loose fit,black,brown
 05430_00.jpg,unknown,short sleeve,round neck,black,white,casual,tight fit,white,blonde
-05431_00.jpg,black,long sleeve,v neck,black,unknown,casual,tight fit,black,black
+05431_00.jpg,unknown,long sleeve,v neck,black,unknown,casual,tight fit,black,black
 05432_00.jpg,only,short sleeve,scoop neck,orange,brown,casual,tight fit,white,black
 05433_00.jpg,unknown,short sleeve,round neck,black,lace,casual,tight fit,black,brown
 05434_00.jpg,unknown,long sleeve,v neck,yellow,orange,casual,tight fit,blue,blonde
@@ -4260,7 +4258,7 @@ unknown",short sleeve,scoop neck,black,gray,casual,tight fit,black,blonde
 05479_00.jpg,unknown,short sleeve,circle neck,white,pink,casual,loose fit,black,blonde
 05480_00.jpg,unknown,short sleeve,square neck,red,pink,casual,tight fit,red,blonde
 05481_00.jpg,unknown,long sleeve,scoop neck,black,unknown,casual,tight fit,black,blonde
-05482_00.jpg,only,short sleeve,round neck,green,multi colored,casual,tight fit,black,blonde
+05482_00.jpg,only,short sleeve,round neck,green,multicolored,casual,tight fit,black,blonde
 05483_00.jpg,unknown,short sleeve,v neck,white,unknown,casual,tight fit,orange,black
 05484_00.jpg,unknown,short sleeve,strapless,black,unknown,casual,tight fit,white,red
 05485_00.jpg,lacoste,long sleeve,polo collar,light gray,light gray,casual,tight fit,white,brown
