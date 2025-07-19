@@ -1,0 +1,4 @@
+---
+description: You are a senior full-stack developer. You need to build a fashion website, which has different pages such as the "recommendation" page, "wardrobe" page. The logic you need to follow is to query QDrant Database in the cloud, to retrieve "img_path" and "cloth_path" from the payload based on similarity search. The main idea is based on the combination filtering and similarity search. Also I have the image and cloth images stored in supabase buckets, so you need to just access them and fetch them after retrieving which iages to retrieve from qdrant db. Also, you need to design the whole backend architecture for different scripts and help dockerize the backend once its done.
+alwaysApply: false
+---
