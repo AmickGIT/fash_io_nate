@@ -5,6 +5,8 @@ import ProductCard from "./product-card"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { Eye, CheckCircle } from "lucide-react"
+import { CardContent } from "@/components/ui/card"
 
 interface ProductGridProps {
   selectedFilters?: {
@@ -36,13 +38,15 @@ const defaultFilters = {
   neckline: [],
 };
 
-export default function ProductGrid({ selectedFilters = defaultFilters }: ProductGridProps) {
+export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate }: ProductGridProps & { onWardrobeUpdate?: () => void }) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
   const [nextOffset, setNextOffset] = useState<number | null>(null)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [successProduct, setSuccessProduct] = useState<Product | null>(null)
 
   const handleBuyClick = async (img_path: string, id?: number) => {
     try {
@@ -54,7 +58,11 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
       });
       const data = await res.json();
       if (data.success) {
+        const boughtProduct = products.find((product) => product.id === id) || null;
         setProducts((prev) => prev.filter((product) => product.id !== id));
+        setSuccessProduct(boughtProduct);
+        setShowSuccess(true);
+        if (onWardrobeUpdate) onWardrobeUpdate();
       } else {
         console.error("Buy failed", data.error);
       }
@@ -66,6 +74,11 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
   const handleNotInterestedClick = (img_path: string) => {
     console.log(`Not interested clicked for image ${img_path}`)
     setProducts((prev) => prev.filter((product) => product.img_path !== img_path))
+  }
+
+  const handleViewOrder = () => {
+    setShowSuccess(false);
+    setSuccessProduct(null);
   }
 
   const buildParams = (loadMore = false) => {
@@ -122,6 +135,38 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
 
   return (
     <div>
+      {/* Success Popup */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onClick={handleViewOrder} />
+          {/* Popup Content */}
+          <div className="bg-white rounded-lg shadow-lg max-w-sm w-full mx-4 relative z-10">
+            <CardContent className="p-6">
+              {/* Success Icon */}
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+              </div>
+              {/* Success Message */}
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Purchase Successful!</h2>
+              </div>
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <Button
+                  onClick={handleViewOrder}
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-3"
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  Continue Shopping
+                </Button>
+              </div>
+            </CardContent>
+          </div>
+        </div>
+      )}
       {/* Header */}
       <div className="grid grid-cols-3 items-center mb-6">
         <div className="justify-self-start">
