@@ -1,10 +1,44 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Dispatch, SetStateAction } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ChevronDown, ChevronUp } from "lucide-react"
+
+interface SidebarProps {
+  selectedFilters?: {
+    gender: string[];
+    categories: string[];
+    brands: string[];
+    dressCode: string[];
+    color: string[];
+    sleeves: string[];
+    fit: string[];
+    neckline: string[];
+  }
+  setSelectedFilters?: Dispatch<SetStateAction<{
+    gender: string[];
+    categories: string[];
+    brands: string[];
+    dressCode: string[];
+    color: string[];
+    sleeves: string[];
+    fit: string[];
+    neckline: string[];
+  }>>
+}
+
+const defaultFilters = {
+  gender: [],
+  categories: [],
+  brands: [],
+  dressCode: [],
+  color: [],
+  sleeves: [],
+  fit: [],
+  neckline: [],
+};
 
 const genderOptions = [
   { id: "women", label: "Women", checked: true },
@@ -29,7 +63,10 @@ const brandOptions = [
   { id: "tokyo-talkies", label: "Tokyo Talkies", count: 3818 },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({
+  selectedFilters = defaultFilters,
+  setSelectedFilters = () => {},
+}: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState({
     gender: true,
     categories: true,
@@ -39,26 +76,6 @@ export default function Sidebar() {
     sleeves: false,
     fit: false,
     neckline: false,
-  })
-
-  const [selectedFilters, setSelectedFilters] = useState<{
-    gender: string[];
-    categories: string[];
-    brands: string[];
-    dressCode: string[];
-    color: string[];
-    sleeves: string[];
-    fit: string[];
-    neckline: string[];
-  }>({
-    gender: ["women"],
-    categories: [],
-    brands: [],
-    dressCode: [],
-    color: [],
-    sleeves: [],
-    fit: [],
-    neckline: [],
   })
 
   const [brandOptions, setBrandOptions] = useState<Array<{ id: string; label: string; count: number }>>([])
@@ -260,7 +277,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.brands.includes(option.label)}
+                    checked={selectedFilters?.brands.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("brands", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer flex-1">
@@ -304,7 +321,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.dressCode.includes(option.label)}
+                    checked={selectedFilters?.dressCode.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("dressCode", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
@@ -346,7 +363,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.color.includes(option.label)}
+                    checked={selectedFilters?.color.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("color", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
@@ -389,7 +406,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.sleeves.includes(option.label)}
+                    checked={selectedFilters?.sleeves.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("sleeves", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
@@ -431,7 +448,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.fit.includes(option.label)}
+                    checked={selectedFilters?.fit.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("fit", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
@@ -473,7 +490,7 @@ export default function Sidebar() {
                 <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
                     id={option.label}
-                    checked={selectedFilters.neckline.includes(option.label)}
+                    checked={selectedFilters?.neckline.includes(option.label)}
                     onCheckedChange={(checked) => handleFilterChange("neckline", option.label, checked as boolean)}
                   />
                   <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
