@@ -23,7 +23,7 @@ export default function ProductCard({ product, onBuyClick, onNotInterestedClick 
         />
       </div>
       <CardContent className="p-4 flex flex-col items-center">
-        <div className="flex gap-2 w-full mt-2">
+        <div className="flex gap-2 w-full">
           <Button
             onClick={() => onBuyClick(product.img_path)}
             className="flex-1 bg-pink-600 hover:bg-pink-700 text-white"
