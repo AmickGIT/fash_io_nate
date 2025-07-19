@@ -198,4 +198,32 @@ def get_products(
             "next_offset": next_offset
         }
     except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/api/wardrobe")
+def get_wardrobe_items(limit: int = Query(100)):
+    """
+    Return all items where bought=True, including their payload.
+    """
+    from qdrant_client.http import models as rest
+    flt = rest.Filter(must=[rest.FieldCondition(key="bought", match=rest.MatchValue(value=True))])
+    try:
+        points, _ = client.scroll(
+            collection_name=COLLECTION_NAME,
+            scroll_filter=flt,
+            with_payload=["img_path", "bought"],
+            limit=limit
+        )
+        results = []
+        for point in points:
+            img_path = point.payload.get("img_path")
+            if img_path:
+                image_url = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/{img_path}"
+                results.append({
+                    "img_path": img_path,
+                    "image_url": image_url,
+                    "payload": point.payload
+                })
+        return results
+    except Exception as e:
         return {"error": str(e)} 

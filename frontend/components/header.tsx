@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation" // Import usePathname
 
 const navigationTabs = [
@@ -14,10 +14,28 @@ const navigationTabs = [
   { name: "Designer", href: "/designer" },
 ]
 
+interface WardrobeItem {
+  img_path: string;
+  image_url: string;
+  payload?: { bought?: boolean };
+}
+
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("")
   const [showWardrobe, setShowWardrobe] = useState(false)
+  const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
+
+  useEffect(() => {
+    if (showWardrobe) {
+      fetch("http://localhost:8000/api/wardrobe?limit=100")
+        .then(res => res.json())
+        .then((data: WardrobeItem[]) => {
+          setWardrobeItems(Array.isArray(data) ? data : [])
+        })
+        .catch(() => setWardrobeItems([]))
+    }
+  }, [showWardrobe])
 
   return (
     <header className="bg-white shadow-sm border-b relative">
@@ -74,7 +92,7 @@ export default function Header() {
                 variant="destructive"
                 className="absolute -top-1 -right-1 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs"
               >
-                5
+                {wardrobeItems.length}
               </Badge>
             </Button>
           </div>
@@ -115,15 +133,18 @@ export default function Header() {
               </Button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-h-96 overflow-y-auto">
-              {/* Mock wardrobe items */}
-              {[1, 2, 3, 4, 5].map((item) => (
-                <div key={item} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow">
-                  <div className="aspect-square bg-gray-200 rounded-md mb-2 flex items-center justify-center">
-                    <span className="text-gray-400 text-xs">Item {item}</span>
+              {wardrobeItems.length === 0 ? (
+                <div className="text-gray-400 text-xs col-span-full">No wardrobe items found.</div>
+              ) : (
+                wardrobeItems.map((item: WardrobeItem) => (
+                  <div key={item.img_path} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow flex flex-col items-center">
+                    <div className="relative w-full" style={{ aspectRatio: '189/256' }}>
+                      <img src={item.image_url} alt={item.img_path} className="object-cover rounded-t w-full h-full" style={{ width: '100%', height: '100%' }} />
+                    </div>
+                    <p className="text-xs text-gray-600 truncate w-full">{item.img_path}</p>
                   </div>
-                  <p className="text-xs text-gray-600 truncate">Wardrobe Item {item}</p>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
