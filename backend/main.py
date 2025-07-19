@@ -107,7 +107,7 @@ def get_products(
     fit: str = Query(None),
     neckline: str = Query(None),
     dress_code: str = Query(None),
-    limit: int = Query(20),
+    limit: int = Query(50),
 ):
     """
     Query QDrant for products matching the filters and return image URLs.
