@@ -38,7 +38,7 @@ const defaultFilters = {
   neckline: [],
 };
 
-export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate }: ProductGridProps & { onWardrobeUpdate?: () => void }) {
+export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate }: ProductGridProps & { onWardrobeUpdate?: (wardrobeCount: number) => void }) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -62,7 +62,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
         setProducts((prev) => prev.filter((product) => product.id !== id));
         setSuccessProduct(boughtProduct);
         setShowSuccess(true);
-        if (onWardrobeUpdate) onWardrobeUpdate();
+        if (onWardrobeUpdate) onWardrobeUpdate(data.wardrobe_count);
       } else {
         console.error("Buy failed", data.error);
       }

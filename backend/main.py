@@ -238,6 +238,7 @@ def get_wardrobe_items(limit: int = Query(100)):
 def buy_item(id: int = Body(..., embed=True)):
     """
     Set the 'bought' key of the item with the given id to True, and update the profile embedding cache.
+    Return the updated wardrobe count (number of bought=True items).
     """
     client.set_payload(
         collection_name=COLLECTION_NAME,
@@ -247,4 +248,14 @@ def buy_item(id: int = Body(..., embed=True)):
     get_profile_embedding.cache_clear()
     new_embedding = get_profile_embedding("default_user_id")
     print("Profile embedding updated and cached.")
-    return {"success": True, "point_id": id} 
+    # Fetch updated wardrobe count
+    from qdrant_client.http import models as rest
+    flt = rest.Filter(must=[rest.FieldCondition(key="bought", match=rest.MatchValue(value=True))])
+    points, _ = client.scroll(
+        collection_name=COLLECTION_NAME,
+        scroll_filter=flt,
+        with_payload=["bought"],
+        limit=10000
+    )
+    wardrobe_count = len(points)
+    return {"success": True, "point_id": id, "wardrobe_count": wardrobe_count} 

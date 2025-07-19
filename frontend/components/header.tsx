@@ -20,22 +20,51 @@ interface WardrobeItem {
   payload?: { bought?: boolean };
 }
 
-export default function Header() {
+interface HeaderProps {
+  wardrobeCount?: number;
+  onWardrobeUpdate?: (newCount?: number) => void;
+}
+
+export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
 
+  // Fetch wardrobe items and update count
+  const fetchWardrobe = () => {
+    fetch("http://localhost:8000/api/wardrobe?limit=10000")
+      .then(res => res.json())
+      .then((data: WardrobeItem[]) => {
+        const items = Array.isArray(data) ? data : []
+        setWardrobeItems(items)
+        if (onWardrobeUpdate) onWardrobeUpdate(items.length)
+      })
+      .catch(() => {
+        setWardrobeItems([])
+        if (onWardrobeUpdate) onWardrobeUpdate(0)
+      })
+  }
+
   useEffect(() => {
     if (showWardrobe) {
-      fetch("http://localhost:8000/api/wardrobe?limit=100")
-        .then(res => res.json())
-        .then((data: WardrobeItem[]) => {
-          setWardrobeItems(Array.isArray(data) ? data : [])
-        })
-        .catch(() => setWardrobeItems([]))
+      fetchWardrobe()
     }
   }, [showWardrobe])
+
+  // Always fetch count on mount
+  useEffect(() => {
+    fetchWardrobe()
+  }, [])
+
+  // Handler to update count after buy
+  const handleWardrobeUpdate = (newCount?: number) => {
+    if (typeof newCount === "number") {
+      // setWardrobeCount(newCount) // This line is removed
+    } else {
+      fetchWardrobe()
+    }
+  }
 
   return (
     <header className="bg-white shadow-sm border-b relative">
@@ -92,7 +121,7 @@ export default function Header() {
                 variant="destructive"
                 className="absolute -top-1 -right-1 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs"
               >
-                {wardrobeItems.length}
+                {wardrobeCount}
               </Badge>
             </Button>
           </div>
