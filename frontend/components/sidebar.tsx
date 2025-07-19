@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 interface SidebarProps {
-  selectedFilters?: {
+  selectedFilters: {
     gender: string[];
     categories: string[];
     brands: string[];
@@ -17,7 +17,7 @@ interface SidebarProps {
     fit: string[];
     neckline: string[];
   }
-  setSelectedFilters?: Dispatch<SetStateAction<{
+  setSelectedFilters: Dispatch<SetStateAction<{
     gender: string[];
     categories: string[];
     brands: string[];
@@ -64,8 +64,8 @@ const brandOptions = [
 ]
 
 export default function Sidebar({
-  selectedFilters = defaultFilters,
-  setSelectedFilters = () => {},
+  selectedFilters,
+  setSelectedFilters,
 }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState({
     gender: true,

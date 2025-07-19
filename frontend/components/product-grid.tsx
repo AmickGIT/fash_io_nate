@@ -37,6 +37,16 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
 
+  const handleBuyClick = (img_path: string) => {
+    console.log(`Buy clicked for image ${img_path}`)
+    // Implement buy functionality
+  }
+
+  const handleNotInterestedClick = (img_path: string) => {
+    console.log(`Not interested clicked for image ${img_path}`)
+    setProducts((prev) => prev.filter((product) => product.img_path !== img_path))
+  }
+
   useEffect(() => {
     if (!selectedFilters) return;
     setLoading(true)
@@ -64,23 +74,6 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
       })
   }, [selectedFilters])
 
-  const handleWishlistToggle = (productId: number) => {
-    setProducts((prev) =>
-      prev.map((product) => (product.id === productId ? { ...product, isWishlisted: !product.isWishlisted } : product)),
-    )
-  }
-
-  const handleBuyClick = (productId: number) => {
-    console.log(`Buy clicked for product ${productId}`)
-    // Implement buy functionality
-  }
-
-  const handleNotInterestedClick = (productId: number) => {
-    console.log(`Not interested clicked for product ${productId}`)
-    // Implement not interested functionality
-    setProducts((prev) => prev.filter((product) => product.id !== productId))
-  }
-
   const toggleMatchStyle = () => {
     setIsMatchStyleActive((prev) => !prev)
   }
@@ -99,7 +92,36 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
         <div className="justify-self-start">
           <h1 className="text-2xl font-semibold text-gray-900">Items - {products.length.toLocaleString()} items</h1>
         </div>
+        <div className="justify-self-center">
+          <Button
+            onClick={toggleMatchStyle}
+            variant="outline"
+            className={`px-8 py-2 h-9 rounded-full text-sm font-medium transition-all duration-200 border-2 ${
+              isMatchStyleActive
+                ? "bg-pink-600 border-pink-600 text-white hover:bg-pink-700 hover:border-pink-700 shadow-md"
+                : "bg-white border-gray-300 text-gray-700 hover:border-pink-300 hover:text-pink-600 hover:bg-pink-50"
+            }`}
+          >
+            Match my Style
+          </Button>
+        </div>
+        <div className="justify-self-end flex items-center gap-4 w-64">
+          <Label htmlFor="uniqueness-bar" className="text-sm text-gray-600 whitespace-nowrap">
+            Uniqueness:
+          </Label>
+          <Slider
+            id="uniqueness-bar"
+            min={0}
+            max={100}
+            step={50}
+            value={uniquenessLevel}
+            onValueChange={setUniquenessLevel}
+            className="text-left w-4/12"
+          />
+          <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
+        </div>
       </div>
+      
       {/* Product Grid */}
       {loading ? (
         <div className="text-center py-12 text-gray-500">Loading products...</div>
@@ -111,6 +133,8 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
             <ProductCard
               key={product.img_path}
               product={product}
+              onBuyClick={handleBuyClick}
+              onNotInterestedClick={handleNotInterestedClick}
             />
           ))}
         </div>
