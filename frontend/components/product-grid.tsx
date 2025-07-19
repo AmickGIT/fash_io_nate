@@ -19,6 +19,12 @@ interface ProductGridProps {
   }
 }
 
+interface Product {
+  id: number;
+  img_path: string;
+  image_url: string;
+}
+
 const defaultFilters = {
   gender: [],
   categories: [],
@@ -31,16 +37,30 @@ const defaultFilters = {
 };
 
 export default function ProductGrid({ selectedFilters = defaultFilters }: ProductGridProps) {
-  const [products, setProducts] = useState<{ img_path: string; image_url: string }[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
   const [nextOffset, setNextOffset] = useState<number | null>(null)
 
-  const handleBuyClick = (img_path: string) => {
-    console.log(`Buy clicked for image ${img_path}`)
-    // Implement buy functionality
+  const handleBuyClick = async (img_path: string, id?: number) => {
+    try {
+      if (!id) return;
+      const res = await fetch("http://localhost:8000/api/buy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setProducts((prev) => prev.filter((product) => product.id !== id));
+      } else {
+        console.error("Buy failed", data.error);
+      }
+    } catch (err) {
+      console.error("Buy error", err);
+    }
   }
 
   const handleNotInterestedClick = (img_path: string) => {
@@ -148,7 +168,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
             <ProductCard
               key={product.img_path}
               product={product}
-              onBuyClick={handleBuyClick}
+              onBuyClick={(img_path) => handleBuyClick(img_path, product.id)}
               onNotInterestedClick={handleNotInterestedClick}
             />
           ))}

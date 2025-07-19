@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
 from qdrant_client import QdrantClient
 from qdrant_client.http import models as rest
@@ -120,6 +120,7 @@ def get_profile_embedding(user_id: str) -> list:
     )
     points = response[0]
     if not points:
+        print("No points found")
         return [0.0] * 1024  # fallback vector, adjust dim as needed
     mat = np.stack([p.vector for p in points], axis=0)
     profile = mat.mean(axis=0)
@@ -192,7 +193,11 @@ def get_products(
             img_path = point.payload.get("img_path")
             if img_path:
                 image_url = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/{img_path}"
-                results.append({"img_path": img_path, "image_url": image_url})
+                results.append({
+                    "id": point.id,
+                    "img_path": img_path,
+                    "image_url": image_url
+                })
         return {
             "items": results,
             "next_offset": next_offset
@@ -220,10 +225,26 @@ def get_wardrobe_items(limit: int = Query(100)):
             if img_path:
                 image_url = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/{img_path}"
                 results.append({
+                    "id": point.id,
                     "img_path": img_path,
                     "image_url": image_url,
                     "payload": point.payload
                 })
         return results
     except Exception as e:
-        return {"error": str(e)} 
+        return {"error": str(e)}
+
+@app.post("/api/buy")
+def buy_item(id: int = Body(..., embed=True)):
+    """
+    Set the 'bought' key of the item with the given id to True, and update the profile embedding cache.
+    """
+    client.set_payload(
+        collection_name=COLLECTION_NAME,
+        payload={"bought": True},
+        points=[id]
+    )
+    get_profile_embedding.cache_clear()
+    new_embedding = get_profile_embedding("default_user_id")
+    print("Profile embedding updated and cached.")
+    return {"success": True, "point_id": id} 
