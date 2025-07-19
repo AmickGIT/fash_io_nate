@@ -4,6 +4,8 @@ from qdrant_client import QdrantClient
 from qdrant_client.http import models as rest
 from typing import List, Optional
 import os
+from functools import lru_cache
+import numpy as np
 
 app = FastAPI()
 
@@ -99,6 +101,30 @@ def get_brands():
 SUPABASE_URL = "https://pkraxwnlcgejwxunkeco.supabase.co"
 SUPABASE_BUCKET = "imgbucket"
 
+@lru_cache(maxsize=32)
+def get_profile_embedding(user_id: str) -> list:
+    """
+    Scroll all bought=True points, average their vectors, and return a list.
+    This function is LRU‐cached so repeated calls are fast.
+    """
+    from qdrant_client.http.models import Filter, FieldCondition, MatchValue
+    flt = Filter(
+        must=[FieldCondition(key="bought", match=MatchValue(value=True))]
+    )
+    response = client.scroll(
+        collection_name=COLLECTION_NAME,
+        scroll_filter=flt,
+        with_payload=False,
+        with_vectors=True,
+        limit=10000
+    )
+    points = response[0]
+    if not points:
+        return [0.0] * 1024  # fallback vector, adjust dim as needed
+    mat = np.stack([p.vector for p in points], axis=0)
+    profile = mat.mean(axis=0)
+    return profile.tolist()
+
 @app.get("/api/products")
 def get_products(
     brand: Optional[List[str]] = Query(None),
@@ -107,12 +133,14 @@ def get_products(
     fit: Optional[List[str]] = Query(None),
     neckline: Optional[List[str]] = Query(None),
     dress_code: Optional[List[str]] = Query(None),
+    match_style: bool = Query(False),
     limit: int = Query(50, gt=0),
-    offset: Optional[int] = Query(None, ge=0),  # <-- new!
+    offset: Optional[int] = Query(None, ge=0),
 ):
     """
     Query QDrant for products matching the filters and return image URLs.
     Supports pagination with offset and returns next_offset for 'load more'.
+    If match_style is true, uses the user's profile embedding for vector search.
     """
     from qdrant_client.http import models as rest
     must_filters = []
@@ -140,13 +168,25 @@ def get_products(
     scroll_filter = rest.Filter(must=must_filters, must_not=must_not_filters) if must_filters or must_not_filters else None
 
     try:
-        points, next_offset = client.scroll(
-            collection_name=COLLECTION_NAME,
-            scroll_filter=scroll_filter,
-            with_payload=["img_path"],
-            limit=limit,
-            offset=offset
-        )
+        if match_style:
+            # Use user profile embedding for vector search
+            query_vec = get_profile_embedding("default_user_id")
+            points = client.search(
+                collection_name=COLLECTION_NAME,
+                query_vector=query_vec,
+                query_filter=scroll_filter,
+                limit=limit,
+                with_payload=["img_path"],
+            )
+            next_offset = None  # Qdrant search does not support offset
+        else:
+            points, next_offset = client.scroll(
+                collection_name=COLLECTION_NAME,
+                scroll_filter=scroll_filter,
+                with_payload=["img_path"],
+                limit=limit,
+                offset=offset
+            )
         results = []
         for point in points:
             img_path = point.payload.get("img_path")

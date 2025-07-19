@@ -57,6 +57,9 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
     selectedFilters.neckline.forEach(n => params.append("neckline", n));
     selectedFilters.dressCode.forEach(d => params.append("dress_code", d));
     params.set("limit", "20")
+    if (isMatchStyleActive) {
+      params.set("match_style", "true")
+    }
     if (loadMore && nextOffset != null) {
       params.set("offset", String(nextOffset))
     }
@@ -80,13 +83,13 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
     }
   }
 
-  // Initial load or when filters change
+  // Initial load or when filters or match style changes
   useEffect(() => {
     loadProducts(false)
     // eslint-disable-next-line
-  }, [JSON.stringify(selectedFilters)])
+  }, [JSON.stringify(selectedFilters), isMatchStyleActive])
 
-  const toggleMatchStyle = () => {
+  const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
   }
 
@@ -106,8 +109,8 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
         </div>
         <div className="justify-self-center">
           <Button
-            onClick={toggleMatchStyle}
-            variant="outline"
+            onClick={handleMatchStyleClick}
+            variant={isMatchStyleActive ? "default" : "outline"}
             className={`px-8 py-2 h-9 rounded-full text-sm font-medium transition-all duration-200 border-2 ${
               isMatchStyleActive
                 ? "bg-pink-600 border-pink-600 text-white hover:bg-pink-700 hover:border-pink-700 shadow-md"
