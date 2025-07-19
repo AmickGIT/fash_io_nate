@@ -36,6 +36,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
   const [error, setError] = useState<string | null>(null)
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
+  const [nextOffset, setNextOffset] = useState<number | null>(null)
 
   const handleBuyClick = (img_path: string) => {
     console.log(`Buy clicked for image ${img_path}`)
@@ -47,32 +48,43 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
     setProducts((prev) => prev.filter((product) => product.img_path !== img_path))
   }
 
-  useEffect(() => {
-    if (!selectedFilters) return;
+  const buildParams = (loadMore = false) => {
+    const params = new URLSearchParams()
+    selectedFilters.brands.forEach(b => params.append("brand", b));
+    selectedFilters.color.forEach(c => params.append("color", c));
+    selectedFilters.sleeves.forEach(s => params.append("sleeve", s));
+    selectedFilters.fit.forEach(f => params.append("fit", f));
+    selectedFilters.neckline.forEach(n => params.append("neckline", n));
+    selectedFilters.dressCode.forEach(d => params.append("dress_code", d));
+    params.set("limit", "20")
+    if (loadMore && nextOffset != null) {
+      params.set("offset", String(nextOffset))
+    }
+    return params
+  }
+
+  const loadProducts = async (loadMore = false) => {
     setLoading(true)
     setError(null)
-    // Build query params from selectedFilters
-    const params = new URLSearchParams()
-    if (selectedFilters.brands.length > 0) params.append("brand", selectedFilters.brands[0])
-    if (selectedFilters.color.length > 0) params.append("color", selectedFilters.color[0])
-    if (selectedFilters.sleeves.length > 0) params.append("sleeve", selectedFilters.sleeves[0])
-    if (selectedFilters.fit.length > 0) params.append("fit", selectedFilters.fit[0])
-    if (selectedFilters.neckline.length > 0) params.append("neckline", selectedFilters.neckline[0])
-    if (selectedFilters.dressCode.length > 0) params.append("dress_code", selectedFilters.dressCode[0])
-    fetch(`http://localhost:8000/api/products?${params.toString()}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch products")
-        return res.json()
-      })
-      .then((data) => {
-        setProducts(data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [selectedFilters])
+    try {
+      const params = buildParams(loadMore)
+      const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`)
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      setProducts(prev => loadMore ? [...prev, ...data.items] : data.items)
+      setNextOffset(data.next_offset)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Initial load or when filters change
+  useEffect(() => {
+    loadProducts(false)
+    // eslint-disable-next-line
+  }, [JSON.stringify(selectedFilters)])
 
   const toggleMatchStyle = () => {
     setIsMatchStyleActive((prev) => !prev)
@@ -123,7 +135,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
       </div>
       
       {/* Product Grid */}
-      {loading ? (
+      {loading && products.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Loading products...</div>
       ) : error ? (
         <div className="text-center py-12 text-red-500">{error}</div>
@@ -141,11 +153,16 @@ export default function ProductGrid({ selectedFilters = defaultFilters }: Produc
       )}
 
       {/* Load More */}
-      <div className="flex justify-center mt-12">
-        <button className="px-8 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
-          Load More Products
-        </button>
-      </div>
+      {nextOffset != null && !loading && (
+        <div className="flex justify-center mt-12">
+          <button
+            className="px-8 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+            onClick={() => loadProducts(true)}
+          >
+            Load More Products
+          </button>
+        </div>
+      )}
     </div>
   )
 }
