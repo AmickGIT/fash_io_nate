@@ -24,6 +24,48 @@ COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "images_and_clothes_swin")
 # Connect to QDrant using URL and API key
 client = QdrantClient(url=QDRANT_DB_URL, api_key=QDRANT_API_KEY)
 
+def get_unique_field(field: str):
+    try:
+        scroll = client.scroll(
+            collection_name=COLLECTION_NAME,
+            with_payload=[field],
+            limit=10000
+        )
+        points = scroll[0]
+        values = set()
+        for point in points:
+            value = point.payload.get(field)
+            if value:
+                values.add(value)
+        return sorted(values)
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/api/dress-codes")
+def get_dress_codes():
+    """Fetch unique dress codes (casuality) from QDrant."""
+    return get_unique_field("casuality")
+
+@app.get("/api/colors")
+def get_colors():
+    """Fetch unique primary colors from QDrant."""
+    return get_unique_field("primary_color")
+
+@app.get("/api/sleeves")
+def get_sleeves():
+    """Fetch unique sleeve types from QDrant."""
+    return get_unique_field("sleeve")
+
+@app.get("/api/fits")
+def get_fits():
+    """Fetch unique fits from QDrant."""
+    return get_unique_field("fit")
+
+@app.get("/api/necklines")
+def get_necklines():
+    """Fetch unique necklines from QDrant."""
+    return get_unique_field("neck")
+
 @app.get("/api/brands")
 def get_brands():
     """

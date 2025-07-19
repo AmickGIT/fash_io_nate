@@ -29,45 +29,6 @@ const brandOptions = [
   { id: "tokyo-talkies", label: "Tokyo Talkies", count: 3818 },
 ]
 
-const dressCodeOptions = [
-  { id: "casual", label: "Casual" },
-  { id: "formal", label: "Formal" },
-  { id: "party", label: "Party Wear" },
-  { id: "business", label: "Business" },
-  { id: "vacation", label: "Vacation" },
-]
-
-const colorOptions = [
-  { id: "black", label: "Black" },
-  { id: "white", label: "White" },
-  { id: "red", label: "Red" },
-  { id: "blue", label: "Blue" },
-  { id: "green", label: "Green" },
-  { id: "pink", label: "Pink" },
-  { id: "yellow", label: "Yellow" },
-]
-
-const sleeveOptions = [
-  { id: "full-sleeve", label: "Full Sleeve" },
-  { id: "half-sleeve", label: "Half Sleeve" },
-  { id: "sleeveless", label: "Sleeveless" },
-  { id: "3-4-sleeve", label: "3/4 Sleeve" },
-]
-
-const fitOptions = [
-  { id: "regular", label: "Regular Fit" },
-  { id: "slim", label: "Slim Fit" },
-  { id: "loose", label: "Loose Fit" },
-  { id: "bodycon", label: "Bodycon" },
-]
-
-const necklineOptions = [
-  { id: "round-neck", label: "Round Neck" },
-  { id: "v-neck", label: "V Neck" },
-  { id: "boat-neck", label: "Boat Neck" },
-  { id: "hal-neck", label: "Hal Neck" },
-]
-
 export default function Sidebar() {
   const [expandedSections, setExpandedSections] = useState({
     gender: true,
@@ -118,6 +79,111 @@ export default function Sidebar() {
       .catch((err) => {
         setBrandsError(err.message)
         setBrandsLoading(false)
+      })
+  }, [])
+
+  // Dress Code
+  const [dressCodeOptions, setDressCodeOptions] = useState<string[]>([])
+  const [dressCodeLoading, setDressCodeLoading] = useState(true)
+  const [dressCodeError, setDressCodeError] = useState<string | null>(null)
+  useEffect(() => {
+    setDressCodeLoading(true)
+    fetch("http://localhost:8000/api/dress-codes")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch dress codes")
+        return res.json()
+      })
+      .then((data) => {
+        setDressCodeOptions(data)
+        setDressCodeLoading(false)
+      })
+      .catch((err) => {
+        setDressCodeError(err.message)
+        setDressCodeLoading(false)
+      })
+  }, [])
+
+  // Color
+  const [colorOptions, setColorOptions] = useState<string[]>([])
+  const [colorLoading, setColorLoading] = useState(true)
+  const [colorError, setColorError] = useState<string | null>(null)
+  useEffect(() => {
+    setColorLoading(true)
+    fetch("http://localhost:8000/api/colors")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch colors")
+        return res.json()
+      })
+      .then((data) => {
+        setColorOptions(data)
+        setColorLoading(false)
+      })
+      .catch((err) => {
+        setColorError(err.message)
+        setColorLoading(false)
+      })
+  }, [])
+
+  // Sleeve
+  const [sleeveOptions, setSleeveOptions] = useState<string[]>([])
+  const [sleeveLoading, setSleeveLoading] = useState(true)
+  const [sleeveError, setSleeveError] = useState<string | null>(null)
+  useEffect(() => {
+    setSleeveLoading(true)
+    fetch("http://localhost:8000/api/sleeves")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch sleeves")
+        return res.json()
+      })
+      .then((data) => {
+        setSleeveOptions(data)
+        setSleeveLoading(false)
+      })
+      .catch((err) => {
+        setSleeveError(err.message)
+        setSleeveLoading(false)
+      })
+  }, [])
+
+  // Fit
+  const [fitOptions, setFitOptions] = useState<string[]>([])
+  const [fitLoading, setFitLoading] = useState(true)
+  const [fitError, setFitError] = useState<string | null>(null)
+  useEffect(() => {
+    setFitLoading(true)
+    fetch("http://localhost:8000/api/fits")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch fits")
+        return res.json()
+      })
+      .then((data) => {
+        setFitOptions(data)
+        setFitLoading(false)
+      })
+      .catch((err) => {
+        setFitError(err.message)
+        setFitLoading(false)
+      })
+  }, [])
+
+  // Neckline
+  const [necklineOptions, setNecklineOptions] = useState<string[]>([])
+  const [necklineLoading, setNecklineLoading] = useState(true)
+  const [necklineError, setNecklineError] = useState<string | null>(null)
+  useEffect(() => {
+    setNecklineLoading(true)
+    fetch("http://localhost:8000/api/necklines")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch necklines")
+        return res.json()
+      })
+      .then((data) => {
+        setNecklineOptions(data)
+        setNecklineLoading(false)
+      })
+      .catch((err) => {
+        setNecklineError(err.message)
+        setNecklineLoading(false)
       })
   }, [])
 
@@ -177,7 +243,12 @@ export default function Sidebar() {
           {expandedSections.brands ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.brands && (
-          <div className="space-y-3 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+          <div
+            className={
+              "space-y-3" +
+              (brandOptions.length > 10 ? " max-h-72 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
             {brandsLoading ? (
               <div className="text-sm text-gray-500">Loading brands...</div>
             ) : brandsError ? (
@@ -216,19 +287,32 @@ export default function Sidebar() {
           {expandedSections.dressCode ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.dressCode && (
-          <div className="space-y-3">
-            {dressCodeOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.dressCode.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("dressCode", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
-                  {option.label}
-                </label>
-              </div>
-            ))}
+          <div
+            className={
+              "space-y-3" +
+              (dressCodeOptions.length > 5 ? " max-h-36 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
+            {dressCodeLoading ? (
+              <div className="text-sm text-gray-500">Loading dress codes...</div>
+            ) : dressCodeError ? (
+              <div className="text-sm text-red-500">{dressCodeError}</div>
+            ) : dressCodeOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No dress codes found.</div>
+            ) : (
+              dressCodeOptions.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option}
+                    checked={selectedFilters.dressCode.includes(option)}
+                    onCheckedChange={(checked) => handleFilterChange("dressCode", option, checked as boolean)}
+                  />
+                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option)}
+                  </label>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
@@ -245,19 +329,32 @@ export default function Sidebar() {
           {expandedSections.color ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.color && (
-          <div className="space-y-3">
-            {colorOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.color.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("color", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
-                  {option.label}
-                </label>
-              </div>
-            ))}
+          <div
+            className={
+              "space-y-3" +
+              (colorOptions.length > 5 ? " max-h-36 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
+            {colorLoading ? (
+              <div className="text-sm text-gray-500">Loading colors...</div>
+            ) : colorError ? (
+              <div className="text-sm text-red-500">{colorError}</div>
+            ) : colorOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No colors found.</div>
+            ) : (
+              colorOptions.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option}
+                    checked={selectedFilters.color.includes(option)}
+                    onCheckedChange={(checked) => handleFilterChange("color", option, checked as boolean)}
+                  />
+                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option)}
+                  </label>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
@@ -275,19 +372,32 @@ export default function Sidebar() {
           {expandedSections.sleeves ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.sleeves && (
-          <div className="space-y-3">
-            {sleeveOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.sleeves.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("sleeves", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
-                  {option.label}
-                </label>
-              </div>
-            ))}
+          <div
+            className={
+              "space-y-3" +
+              (sleeveOptions.length > 5 ? " max-h-36 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
+            {sleeveLoading ? (
+              <div className="text-sm text-gray-500">Loading sleeves...</div>
+            ) : sleeveError ? (
+              <div className="text-sm text-red-500">{sleeveError}</div>
+            ) : sleeveOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No sleeves found.</div>
+            ) : (
+              sleeveOptions.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option}
+                    checked={selectedFilters.sleeves.includes(option)}
+                    onCheckedChange={(checked) => handleFilterChange("sleeves", option, checked as boolean)}
+                  />
+                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option)}
+                  </label>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
@@ -304,19 +414,32 @@ export default function Sidebar() {
           {expandedSections.fit ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.fit && (
-          <div className="space-y-3">
-            {fitOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.fit.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("fit", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
-                  {option.label}
-                </label>
-              </div>
-            ))}
+          <div
+            className={
+              "space-y-3" +
+              (fitOptions.length > 5 ? " max-h-36 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
+            {fitLoading ? (
+              <div className="text-sm text-gray-500">Loading fits...</div>
+            ) : fitError ? (
+              <div className="text-sm text-red-500">{fitError}</div>
+            ) : fitOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No fits found.</div>
+            ) : (
+              fitOptions.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option}
+                    checked={selectedFilters.fit.includes(option)}
+                    onCheckedChange={(checked) => handleFilterChange("fit", option, checked as boolean)}
+                  />
+                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option)}
+                  </label>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
@@ -333,19 +456,32 @@ export default function Sidebar() {
           {expandedSections.neckline ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.neckline && (
-          <div className="space-y-3">
-            {necklineOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.neckline.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("neckline", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
-                  {option.label}
-                </label>
-              </div>
-            ))}
+          <div
+            className={
+              "space-y-3" +
+              (necklineOptions.length > 5 ? " max-h-36 overflow-y-auto pr-1 custom-scrollbar" : "")
+            }
+          >
+            {necklineLoading ? (
+              <div className="text-sm text-gray-500">Loading necklines...</div>
+            ) : necklineError ? (
+              <div className="text-sm text-red-500">{necklineError}</div>
+            ) : necklineOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No necklines found.</div>
+            ) : (
+              necklineOptions.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option}
+                    checked={selectedFilters.neckline.includes(option)}
+                    onCheckedChange={(checked) => handleFilterChange("neckline", option, checked as boolean)}
+                  />
+                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option)}
+                  </label>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
