@@ -32,12 +32,16 @@ def get_unique_field(field: str):
             limit=10000
         )
         points = scroll[0]
-        values = set()
+        value_counts = {}
         for point in points:
             value = point.payload.get(field)
             if value:
-                values.add(value)
-        return sorted(values)
+                value_counts[value] = value_counts.get(value, 0) + 1
+        # Return list of {label, count} sorted by count descending
+        return [
+            {"label": v, "count": c}
+            for v, c in sorted(value_counts.items(), key=lambda x: x[1], reverse=True)
+        ]
     except Exception as e:
         return {"error": str(e)}
 
@@ -70,7 +74,7 @@ def get_necklines():
 def get_brands():
     """
     Query QDrant for all items, aggregate by brand, and return brand counts.
-    Returns: List of {id, label, count}
+    Returns: List of {label, count}
     """
     try:
         scroll = client.scroll(
@@ -85,7 +89,7 @@ def get_brands():
             if brand:
                 brand_counts[brand] = brand_counts.get(brand, 0) + 1
         result = [
-            {"id": brand.lower().replace(" ", "-"), "label": brand, "count": count}
+            {"label": brand, "count": count}
             for brand, count in sorted(brand_counts.items(), key=lambda x: x[1], reverse=True)
         ]
         return result

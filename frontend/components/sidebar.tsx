@@ -83,7 +83,7 @@ export default function Sidebar() {
   }, [])
 
   // Dress Code
-  const [dressCodeOptions, setDressCodeOptions] = useState<string[]>([])
+  const [dressCodeOptions, setDressCodeOptions] = useState<{ label: string; count: number }[]>([])
   const [dressCodeLoading, setDressCodeLoading] = useState(true)
   const [dressCodeError, setDressCodeError] = useState<string | null>(null)
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function Sidebar() {
   }, [])
 
   // Color
-  const [colorOptions, setColorOptions] = useState<string[]>([])
+  const [colorOptions, setColorOptions] = useState<{ label: string; count: number }[]>([])
   const [colorLoading, setColorLoading] = useState(true)
   const [colorError, setColorError] = useState<string | null>(null)
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function Sidebar() {
   }, [])
 
   // Sleeve
-  const [sleeveOptions, setSleeveOptions] = useState<string[]>([])
+  const [sleeveOptions, setSleeveOptions] = useState<{ label: string; count: number }[]>([])
   const [sleeveLoading, setSleeveLoading] = useState(true)
   const [sleeveError, setSleeveError] = useState<string | null>(null)
   useEffect(() => {
@@ -146,7 +146,7 @@ export default function Sidebar() {
   }, [])
 
   // Fit
-  const [fitOptions, setFitOptions] = useState<string[]>([])
+  const [fitOptions, setFitOptions] = useState<{ label: string; count: number }[]>([])
   const [fitLoading, setFitLoading] = useState(true)
   const [fitError, setFitError] = useState<string | null>(null)
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function Sidebar() {
   }, [])
 
   // Neckline
-  const [necklineOptions, setNecklineOptions] = useState<string[]>([])
+  const [necklineOptions, setNecklineOptions] = useState<{ label: string; count: number }[]>([])
   const [necklineLoading, setNecklineLoading] = useState(true)
   const [necklineError, setNecklineError] = useState<string | null>(null)
   useEffect(() => {
@@ -256,14 +256,14 @@ export default function Sidebar() {
             ) : brandOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No brands found.</div>
             ) : (
-              brandOptions.map((option) => (
-                <div key={option.id} className="flex items-center space-x-2">
+              brandOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option.id}
-                    checked={selectedFilters.brands.includes(option.id)}
-                    onCheckedChange={(checked) => handleFilterChange("brands", option.id, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.brands.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("brands", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer flex-1">
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer flex-1">
                     {toCamelCase(option.label)}
                   </label>
                   <span className="text-xs text-gray-500">({option.count})</span>
@@ -300,15 +300,15 @@ export default function Sidebar() {
             ) : dressCodeOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No dress codes found.</div>
             ) : (
-              dressCodeOptions.map((option) => (
-                <div key={option} className="flex items-center space-x-2">
+              dressCodeOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option}
-                    checked={selectedFilters.dressCode.includes(option)}
-                    onCheckedChange={(checked) => handleFilterChange("dressCode", option, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.dressCode.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("dressCode", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
-                    {toCamelCase(option)}
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option.label)}
                   </label>
                 </div>
               ))
@@ -342,15 +342,15 @@ export default function Sidebar() {
             ) : colorOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No colors found.</div>
             ) : (
-              colorOptions.map((option) => (
-                <div key={option} className="flex items-center space-x-2">
+              colorOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option}
-                    checked={selectedFilters.color.includes(option)}
-                    onCheckedChange={(checked) => handleFilterChange("color", option, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.color.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("color", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
-                    {toCamelCase(option)}
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option.label)}
                   </label>
                 </div>
               ))
@@ -385,15 +385,15 @@ export default function Sidebar() {
             ) : sleeveOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No sleeves found.</div>
             ) : (
-              sleeveOptions.map((option) => (
-                <div key={option} className="flex items-center space-x-2">
+              sleeveOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option}
-                    checked={selectedFilters.sleeves.includes(option)}
-                    onCheckedChange={(checked) => handleFilterChange("sleeves", option, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.sleeves.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("sleeves", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
-                    {toCamelCase(option)}
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option.label)}
                   </label>
                 </div>
               ))
@@ -427,15 +427,15 @@ export default function Sidebar() {
             ) : fitOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No fits found.</div>
             ) : (
-              fitOptions.map((option) => (
-                <div key={option} className="flex items-center space-x-2">
+              fitOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option}
-                    checked={selectedFilters.fit.includes(option)}
-                    onCheckedChange={(checked) => handleFilterChange("fit", option, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.fit.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("fit", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
-                    {toCamelCase(option)}
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option.label)}
                   </label>
                 </div>
               ))
@@ -469,15 +469,15 @@ export default function Sidebar() {
             ) : necklineOptions.length === 0 ? (
               <div className="text-sm text-gray-500">No necklines found.</div>
             ) : (
-              necklineOptions.map((option) => (
-                <div key={option} className="flex items-center space-x-2">
+              necklineOptions.map((option, idx) => (
+                <div key={option.label + '-' + option.count + '-' + idx} className="flex items-center space-x-2">
                   <Checkbox
-                    id={option}
-                    checked={selectedFilters.neckline.includes(option)}
-                    onCheckedChange={(checked) => handleFilterChange("neckline", option, checked as boolean)}
+                    id={option.label}
+                    checked={selectedFilters.neckline.includes(option.label)}
+                    onCheckedChange={(checked) => handleFilterChange("neckline", option.label, checked as boolean)}
                   />
-                  <label htmlFor={option} className="text-sm text-gray-700 cursor-pointer">
-                    {toCamelCase(option)}
+                  <label htmlFor={option.label} className="text-sm text-gray-700 cursor-pointer">
+                    {toCamelCase(option.label)}
                   </label>
                 </div>
               ))
