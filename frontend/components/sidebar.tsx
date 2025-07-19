@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -80,7 +80,16 @@ export default function Sidebar() {
     neckline: false,
   })
 
-  const [selectedFilters, setSelectedFilters] = useState({
+  const [selectedFilters, setSelectedFilters] = useState<{
+    gender: string[];
+    categories: string[];
+    brands: string[];
+    dressCode: string[];
+    color: string[];
+    sleeves: string[];
+    fit: string[];
+    neckline: string[];
+  }>({
     gender: ["women"],
     categories: [],
     brands: [],
@@ -90,6 +99,27 @@ export default function Sidebar() {
     fit: [],
     neckline: [],
   })
+
+  const [brandOptions, setBrandOptions] = useState<Array<{ id: string; label: string; count: number }>>([])
+  const [brandsLoading, setBrandsLoading] = useState(true)
+  const [brandsError, setBrandsError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setBrandsLoading(true)
+    fetch("http://localhost:8000/api/brands")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch brands")
+        return res.json()
+      })
+      .then((data) => {
+        setBrandOptions(data)
+        setBrandsLoading(false)
+      })
+      .catch((err) => {
+        setBrandsError(err.message)
+        setBrandsLoading(false)
+      })
+  }, [])
 
   const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections((prev) => ({
@@ -118,6 +148,10 @@ export default function Sidebar() {
     })
   }
 
+  function toCamelCase(str: string) {
+    return str.replace(/(^|\s|-)\w/g, match => match.toUpperCase());
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-sm border p-6 leading-3">
       <div className="flex items-center justify-between mb-6">
@@ -143,20 +177,28 @@ export default function Sidebar() {
           {expandedSections.brands ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
         {expandedSections.brands && (
-          <div className="space-y-3">
-            {brandOptions.map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={option.id}
-                  checked={selectedFilters.brands.includes(option.id)}
-                  onCheckedChange={(checked) => handleFilterChange("brands", option.id, checked as boolean)}
-                />
-                <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer flex-1">
-                  {option.label}
-                </label>
-                <span className="text-xs text-gray-500">({option.count})</span>
-              </div>
-            ))}
+          <div className="space-y-3 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+            {brandsLoading ? (
+              <div className="text-sm text-gray-500">Loading brands...</div>
+            ) : brandsError ? (
+              <div className="text-sm text-red-500">{brandsError}</div>
+            ) : brandOptions.length === 0 ? (
+              <div className="text-sm text-gray-500">No brands found.</div>
+            ) : (
+              brandOptions.map((option) => (
+                <div key={option.id} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={option.id}
+                    checked={selectedFilters.brands.includes(option.id)}
+                    onCheckedChange={(checked) => handleFilterChange("brands", option.id, checked as boolean)}
+                  />
+                  <label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer flex-1">
+                    {toCamelCase(option.label)}
+                  </label>
+                  <span className="text-xs text-gray-500">({option.count})</span>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
