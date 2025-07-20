@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import JSONResponse
 from qdrant_client import QdrantClient, models       # gRPC client + models
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 import os
@@ -128,10 +128,10 @@ def get_profile_embedding(user_id: str) -> Tuple[List[List[float]], List[List[fl
     negative_embeddings = fetch_vectors("not_interested", True)
 
     # If you want to ensure non-empty lists, you could fallback to a zero vector:
-    if not positive_embeddings:
-        positive_embeddings = [[0.0] * VECTOR_DIMENSION]
-    if not negative_embeddings:
-        negative_embeddings = [[0.0] * VECTOR_DIMENSION]
+    # if not positive_embeddings:
+    #     positive_embeddings = [[0.0] * VECTOR_DIMENSION]
+    # if not negative_embeddings:
+    #     negative_embeddings = [[0.0] * VECTOR_DIMENSION]
 
     return positive_embeddings, negative_embeddings
 
@@ -186,6 +186,13 @@ def get_products(
             # Use user profile embedding for vector search
             # query_vec = get_profile_embedding("default_user_id")
             positive_embeddings, negative_embeddings = get_profile_embedding("default_user_id")
+
+            if not positive_embeddings or len(positive_embeddings) == 0:
+                return JSONResponse(
+                    status_code=400,
+                    content={"error": "Please add at least one item to your wardrobe to get personalized recommendations."}
+                )
+            
             points = client.recommend(
                 collection_name=COLLECTION_NAME,
                 positive=positive_embeddings,   

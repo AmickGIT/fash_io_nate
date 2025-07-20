@@ -122,7 +122,13 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       const params = buildParams(loadMore)
       const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`)
       const data = await res.json()
-      if (data.error) throw new Error(data.error)
+      if (res.status === 400 && data.error?.includes("wardrobe")) {
+        alert(data.error);
+        setIsMatchStyleActive(false);
+        return;
+      }
+      if (!res.ok) throw new Error(data.error || 'Something went wrong')
+
       setProducts(prev => loadMore ? [...prev, ...data.items] : data.items)
       setNextOffset(data.next_offset)
     } catch (err: any) {
