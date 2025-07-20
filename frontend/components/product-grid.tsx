@@ -207,21 +207,23 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
             Match my Style
           </Button>
         </div>
-        <div className="justify-self-end flex items-center gap-4 w-64">
-          <Label htmlFor="uniqueness-bar" className="text-sm text-gray-600 whitespace-nowrap">
-            Uniqueness:
-          </Label>
-          <Slider
-            id="uniqueness-bar"
-            min={0}
-            max={100}
-            step={50}
-            value={uniquenessLevel}
-            onValueChange={setUniquenessLevel}
-            className="text-left w-4/12"
-          />
-          <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
-        </div>
+        {isMatchStyleActive && (
+          <div className="justify-self-end flex items-center gap-4 w-64">
+            <Label htmlFor="uniqueness-bar" className="text-sm text-gray-600 whitespace-nowrap">
+              Uniqueness:
+            </Label>
+            <Slider
+              id="uniqueness-bar"
+              min={0}
+              max={100}
+              step={50}
+              value={uniquenessLevel}
+              onValueChange={setUniquenessLevel}
+              className="text-left w-4/12"
+            />
+            <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
+          </div>
+        )}
       </div>
       
       {/* Product Grid */}
