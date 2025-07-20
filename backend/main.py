@@ -145,6 +145,7 @@ def get_products(
     neckline: Optional[List[str]] = Query(None),
     dress_code: Optional[List[str]] = Query(None),
     match_style: bool = Query(False),
+    uniqueness: Optional[int] = Query(50),
     limit: int = Query(50, gt=0),
     offset: Optional[int] = Query(None, ge=0),
 ):
@@ -162,6 +163,17 @@ def get_products(
                 should=[rest.FieldCondition(key=field, match=rest.MatchValue(value=v)) for v in values]
             )
         return None
+    
+    # def get_recommend_strategy(level: str):
+    #     if level == "low":
+    #         return RecommendStrategy.AVERAGE_VECTOR, True  # use mean vector
+    #     elif level == "medium":
+    #         return RecommendStrategy.AVERAGE_VECTOR, False  # use all vectors
+    #     elif level == "high":
+    #         return RecommendStrategy.SUM_SCORES, False
+    #     else:
+    #         raise ValueError("Uniqueness level must be 'low', 'medium', or 'high'")
+
 
     for field, values in [
         ("brand", brand),
@@ -183,8 +195,6 @@ def get_products(
     
     try:
         if match_style:
-            # Use user profile embedding for vector search
-            # query_vec = get_profile_embedding("default_user_id")
             positive_embeddings, negative_embeddings = get_profile_embedding("default_user_id")
 
             if not positive_embeddings or len(positive_embeddings) == 0:
@@ -192,17 +202,44 @@ def get_products(
                     status_code=400,
                     content={"error": "Please add at least one item to your wardrobe to get personalized recommendations."}
                 )
+            if uniqueness == 0:
+                points = client.recommend(
+                    collection_name=COLLECTION_NAME,
+                    positive=positive_embeddings,   
+                    negative=negative_embeddings,
+                    query_filter=scroll_filter,
+                    strategy=models.RecommendStrategy.AVERAGE_VECTOR,
+                    limit=limit,
+                    with_payload=['img_path'],
+                )
+            elif uniqueness == 50:
+                points = client.recommend(
+                    collection_name=COLLECTION_NAME,
+                    positive=positive_embeddings,   
+                    negative=negative_embeddings,
+                    query_filter=scroll_filter,
+                    strategy=models.RecommendStrategy.SUM_SCORES,
+                    limit=limit,
+                    with_payload=['img_path'],
+                )
+            elif uniqueness == 100:
+                points = client.recommend(
+                    collection_name=COLLECTION_NAME,
+                    positive=positive_embeddings,   
+                    query_filter=scroll_filter,
+                    strategy=models.RecommendStrategy.SUM_SCORES,
+                    limit=limit,
+                    with_payload=['img_path'],
+                )
+            # points = client.recommend(
+            #     collection_name=COLLECTION_NAME,
+            #     positive=positive_embeddings,   
+            #     negative=negative_embeddings,
+            #     query_filter=scroll_filter,
+            #     limit=limit,
+            #     with_payload=True,
+            # )
             
-            points = client.recommend(
-                collection_name=COLLECTION_NAME,
-                positive=positive_embeddings,   
-                negative=negative_embeddings,
-                query_filter=scroll_filter,
-                limit=limit,
-                with_payload=True,
-            )
-            for hit in points:
-                print(f"ID: {hit.id}, Score: {hit.score:.3f}, Path: {hit.payload['img_path']}")
             next_offset = None  # Qdrant search does not support offset
         else:
             points, next_offset = client.scroll(

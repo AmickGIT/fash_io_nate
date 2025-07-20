@@ -43,6 +43,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
+  const [localuniquenessLevel, setLocalUniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
   const [nextOffset, setNextOffset] = useState<number | null>(null)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -108,6 +109,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     params.set("limit", "20")
     if (isMatchStyleActive) {
       params.set("match_style", "true")
+      params.set("uniqueness", String(uniquenessLevel[0]))
     }
     if (loadMore && nextOffset != null) {
       params.set("offset", String(nextOffset))
@@ -138,11 +140,11 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     }
   }
 
-  // Initial load or when filters or match style changes
+  // Initial load or when filters, match style, or uniqueness changes
   useEffect(() => {
     loadProducts(false)
     // eslint-disable-next-line
-  }, [JSON.stringify(selectedFilters), isMatchStyleActive])
+  }, [JSON.stringify(selectedFilters), isMatchStyleActive, uniquenessLevel[0]])
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
@@ -217,8 +219,11 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               min={0}
               max={100}
               step={50}
-              value={uniquenessLevel}
-              onValueChange={setUniquenessLevel}
+              value={localuniquenessLevel}
+              onValueChange={setLocalUniquenessLevel} // Live update local state
+              onValueCommit={(val) => {
+                setUniquenessLevel(val); // Commit final value only after release
+              }}
               className="text-left w-4/12"
             />
             <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
