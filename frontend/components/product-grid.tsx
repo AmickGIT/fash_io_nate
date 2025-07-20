@@ -71,9 +71,25 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     }
   }
 
-  const handleNotInterestedClick = (img_path: string) => {
-    console.log(`Not interested clicked for image ${img_path}`)
-    setProducts((prev) => prev.filter((product) => product.img_path !== img_path))
+  const handleNotInterestedClick = async (img_path: string, id?: number) => {
+    try {
+      if (!id) return;
+      const res = await fetch("http://localhost:8000/api/not_interested", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+      });
+      const data = await res.json();
+      if (data.success) {
+        // Remove the product from the current view
+        setProducts((prev) => prev.filter((product) => product.id !== id));
+        console.log(`Not interested clicked for image ${img_path}`);
+      } else {
+        console.error("Not interested failed", data.error);
+      }
+    } catch (err) {
+      console.error("Not interested error", err);
+    }
   }
 
   const handleViewOrder = () => {
@@ -214,7 +230,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               key={product.img_path}
               product={product}
               onBuyClick={(img_path) => handleBuyClick(img_path, product.id)}
-              onNotInterestedClick={handleNotInterestedClick}
+              onNotInterestedClick={(img_path) => handleNotInterestedClick(img_path, product.id)}
             />
           ))}
         </div>

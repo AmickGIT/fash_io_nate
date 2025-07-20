@@ -1,11 +1,13 @@
 from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
-from qdrant_client import QdrantClient
-from qdrant_client.http import models as rest
-from typing import List, Optional
+
+from qdrant_client import QdrantClient, models       # gRPC client + models
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 import os
 from functools import lru_cache
 import numpy as np
+from typing import List, Optional, Tuple
+
 
 app = FastAPI()
 
@@ -102,29 +104,37 @@ SUPABASE_URL = "https://pkraxwnlcgejwxunkeco.supabase.co"
 SUPABASE_BUCKET = "imgbucket"
 
 @lru_cache(maxsize=32)
-def get_profile_embedding(user_id: str) -> list:
-    """
-    Scroll all bought=True points, average their vectors, and return a list.
-    This function is LRU‐cached so repeated calls are fast.
-    """
-    from qdrant_client.http.models import Filter, FieldCondition, MatchValue
-    flt = Filter(
-        must=[FieldCondition(key="bought", match=MatchValue(value=True))]
-    )
-    response = client.scroll(
-        collection_name=COLLECTION_NAME,
-        scroll_filter=flt,
-        with_payload=False,
-        with_vectors=True,
-        limit=10000
-    )
-    points = response[0]
-    if not points:
-        print("No points found")
-        return [0.0] * 2048  # fallback vector, adjust dim as needed
-    mat = np.stack([p.vector for p in points], axis=0)
-    profile = mat.mean(axis=0)
-    return profile.tolist()
+def get_profile_embedding(user_id: str) -> Tuple[List[List[float]], List[List[float]]]:
+    VECTOR_DIMENSION = 2048
+    def fetch_vectors(flag_key: str, flag_value: bool) -> List[List[float]]:
+        flt = Filter(
+            must=[FieldCondition(key=flag_key, match=MatchValue(value=flag_value))]
+        )
+        resp = client.scroll(
+            collection_name=COLLECTION_NAME,
+            scroll_filter=flt,
+            with_payload=False,
+            with_vectors=True,
+            limit=10_000,
+        )
+        pts = resp[0]
+        # Extract raw vectors; each p.vector is a list[float]
+        return [p.vector for p in pts]
+
+    # 1) All bought item vectors
+    positive_embeddings = fetch_vectors("bought", True)
+
+    # 2) All not_interested item vectors
+    negative_embeddings = fetch_vectors("not_interested", True)
+
+    # If you want to ensure non-empty lists, you could fallback to a zero vector:
+    if not positive_embeddings:
+        positive_embeddings = [[0.0] * VECTOR_DIMENSION]
+    if not negative_embeddings:
+        negative_embeddings = [[0.0] * VECTOR_DIMENSION]
+
+    return positive_embeddings, negative_embeddings
+
 
 @app.get("/api/products")
 def get_products(
@@ -165,20 +175,27 @@ def get_products(
         if should_filter:
             must_filters.append(should_filter)
 
-    must_not_filters = [rest.FieldCondition(key="bought", match=rest.MatchValue(value=True))]
+    must_not_filters = [
+        rest.FieldCondition(key="bought", match=rest.MatchValue(value=True)),
+        rest.FieldCondition(key="not_interested", match=rest.MatchValue(value=True))
+    ]
     scroll_filter = rest.Filter(must=must_filters, must_not=must_not_filters) if must_filters or must_not_filters else None
-
+    
     try:
         if match_style:
             # Use user profile embedding for vector search
-            query_vec = get_profile_embedding("default_user_id")
-            points = client.search(
+            # query_vec = get_profile_embedding("default_user_id")
+            positive_embeddings, negative_embeddings = get_profile_embedding("default_user_id")
+            points = client.recommend(
                 collection_name=COLLECTION_NAME,
-                query_vector=query_vec,
+                positive=positive_embeddings,   
+                negative=negative_embeddings,
                 query_filter=scroll_filter,
                 limit=limit,
-                with_payload=["img_path"],
+                with_payload=True,
             )
+            for hit in points:
+                print(f"ID: {hit.id}, Score: {hit.score:.3f}, Path: {hit.payload['img_path']}")
             next_offset = None  # Qdrant search does not support offset
         else:
             points, next_offset = client.scroll(
@@ -258,4 +275,23 @@ def buy_item(id: int = Body(..., embed=True)):
         limit=10000
     )
     wardrobe_count = len(points)
-    return {"success": True, "point_id": id, "wardrobe_count": wardrobe_count} 
+    return {"success": True, "point_id": id, "wardrobe_count": wardrobe_count}
+
+@app.post("/api/not_interested")
+def mark_not_interested(id: int = Body(..., embed=True)):
+    """
+    Set the 'not_interested' key of the item with the given id to True.
+    Return success status.
+    """
+    try:
+        client.set_payload(
+            collection_name=COLLECTION_NAME,
+            payload={"not_interested": True},
+            points=[id]
+        )
+        # Clear the profile embedding cache since user preferences changed
+        get_profile_embedding.cache_clear()
+        print(f"Item {id} marked as not interested.")
+        return {"success": True, "point_id": id}
+    except Exception as e:
+        return {"error": str(e)} 
