@@ -121,7 +121,7 @@ def get_profile_embedding(user_id: str) -> list:
     points = response[0]
     if not points:
         print("No points found")
-        return [0.0] * 1024  # fallback vector, adjust dim as needed
+        return [0.0] * 2048  # fallback vector, adjust dim as needed
     mat = np.stack([p.vector for p in points], axis=0)
     profile = mat.mean(axis=0)
     return profile.tolist()
