@@ -2,7 +2,7 @@ from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from qdrant_client import QdrantClient, models       # gRPC client + models
-from qdrant_client.http.models import Filter, FieldCondition, MatchValue
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue, HasIdCondition
 import os
 from functools import lru_cache
 import numpy as np
@@ -158,16 +158,35 @@ def get_products(
     Supports pagination with offset and returns next_offset for 'load more'.
     If match_style is true, uses the user's profile embedding for vector search.
     """
-    text_embedding = None
-    if search_query:
-        print(f"Encoding search query: {search_query}")
-        text_embedding = text_embedder.encode(search_query)
-        # You can now use this 'text_embedding' for your search logic
-        print(f"Generated embedding of shape: {text_embedding.shape}")
-
-
     from qdrant_client.http import models as rest
     must_filters = []
+
+    # Cross-collection text search
+    if search_query:
+        text_embedding = text_embedder.encode(search_query)
+        print(f"Generated embedding of shape: {text_embedding.shape}")
+        # Query EXT_COLLECTION_NAME for nearest neighbors using client.search
+        ext_pts = client.search(
+            collection_name=EXT_COLLECTION_NAME,
+            query_vector=('text', text_embedding.tolist()),
+            limit=20
+        )
+        text_ids = [pt.id for pt in ext_pts] if ext_pts else []
+
+        if not text_ids:
+            return {
+                "items": [],
+                "next_offset": None,
+                "error": "No matches found for search query"
+            }
+        
+        print(f"Number of IDs from text search: {len(text_ids)}")
+
+        # FIXED: Use HasIdCondition for point ID filtering
+        text_filter = rest.Filter(
+            must=[HasIdCondition(has_id=text_ids)]
+        )
+        must_filters.insert(0, text_filter)
 
     def build_should_filter(field, values):
         if values:

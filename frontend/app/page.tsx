@@ -1,9 +1,9 @@
 "use client"
 
-import Header from "@/components/header"
-import Sidebar from "@/components/sidebar"
-import ProductGrid from "@/components/product-grid"
-import { Suspense, useState } from "react"
+import { useState } from 'react';
+import Header from "@/components/header";
+import ProductGrid from "@/components/product-grid";
+import Sidebar from "@/components/sidebar";
 
 interface Filters {
   gender: string[];
@@ -18,7 +18,7 @@ interface Filters {
 
 export default function Home() {
   const [selectedFilters, setSelectedFilters] = useState<Filters>({
-    gender: ["women"],
+    gender: [],
     categories: [],
     brands: [],
     dressCode: [],
@@ -26,30 +26,45 @@ export default function Home() {
     sleeves: [],
     fit: [],
     neckline: [],
-  })
-  const [wardrobeCount, setWardrobeCount] = useState(0)
+  });
+
+  const [wardrobeCount, setWardrobeCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
+
+  const handleSearch = () => {
+    setSubmittedQuery(searchQuery);
+  };
 
   const handleWardrobeUpdate = (newCount?: number) => {
-    if (typeof newCount === "number") {
-      setWardrobeCount(newCount)
+    if (typeof newCount === 'number') {
+      setWardrobeCount(newCount);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header wardrobeCount={wardrobeCount} onWardrobeUpdate={handleWardrobeUpdate} />
-      <main className="container mx-auto px-4 py-6">
-        <div className="flex gap-6">
-          <aside className="w-64 flex-shrink-0">
-            <Sidebar selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
-          </aside>
-          <div className="flex-1">
-            <Suspense fallback={<div>Loading products...</div>}>
-              <ProductGrid selectedFilters={selectedFilters} onWardrobeUpdate={handleWardrobeUpdate} />
-            </Suspense>
+    <div className="bg-gray-50 min-h-screen">
+      <Header
+        wardrobeCount={wardrobeCount}
+        onWardrobeUpdate={handleWardrobeUpdate}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        onSearch={handleSearch}
+      />
+      <main className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-1">
+            <Sidebar selectedFilters={selectedFilters} onFilterChange={setSelectedFilters} />
+          </div>
+          <div className="lg:col-span-3">
+            <ProductGrid
+              selectedFilters={selectedFilters}
+              onWardrobeUpdate={handleWardrobeUpdate}
+              searchQuery={submittedQuery}
+            />
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }

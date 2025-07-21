@@ -23,12 +23,12 @@ interface WardrobeItem {
 interface HeaderProps {
   wardrobeCount?: number;
   onWardrobeUpdate?: (newCount?: number) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  onSearch: () => void;
 }
 
-export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderProps) {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [search_query, setSearch_query] = useState<string>("");
+export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuery, setSearchQuery, onSearch }: HeaderProps) {
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
@@ -92,16 +92,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderPr
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={async (e) => {
                   if (e.key === "Enter") {
-                    setSearch_query(searchQuery);
-                    try {
-                      const params = new URLSearchParams();
-                      if (searchQuery) params.set("search_query", searchQuery);
-                      const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`);
-                      const data = await res.json();
-                      setSearchResults(data.items || []);
-                    } catch (err) {
-                      setSearchResults([]);
-                    }
+                    onSearch();
                   }
                 }}
                 className="pl-10 pr-10 w-full"
@@ -110,8 +101,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderPr
                 <button
                   onClick={() => {
                     setSearchQuery("")
-                    setSearch_query("")
-                    setSearchResults([])
+                    onSearch()
                   }}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >

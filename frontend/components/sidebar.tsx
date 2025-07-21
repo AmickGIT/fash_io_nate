@@ -16,8 +16,8 @@ interface SidebarProps {
     sleeves: string[];
     fit: string[];
     neckline: string[];
-  }
-  setSelectedFilters: Dispatch<SetStateAction<{
+  };
+  onFilterChange: Dispatch<SetStateAction<{
     gender: string[];
     categories: string[];
     brands: string[];
@@ -65,7 +65,7 @@ const brandOptions = [
 
 export default function Sidebar({
   selectedFilters,
-  setSelectedFilters,
+  onFilterChange,
 }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState({
     gender: true,
@@ -212,14 +212,14 @@ export default function Sidebar({
   }
 
   const handleFilterChange = (section: keyof typeof selectedFilters, value: string, checked: boolean) => {
-    setSelectedFilters((prev) => ({
+    onFilterChange((prev) => ({
       ...prev,
       [section]: checked ? [...prev[section], value] : prev[section].filter((item) => item !== value),
     }))
   }
 
   const clearAllFilters = () => {
-    setSelectedFilters({
+    onFilterChange({
       gender: ["women"],
       categories: [],
       brands: [],

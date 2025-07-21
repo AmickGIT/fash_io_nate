@@ -18,7 +18,8 @@ interface ProductGridProps {
     sleeves: string[];
     fit: string[];
     neckline: string[];
-  }
+  };
+  searchQuery: string;
 }
 
 interface Product {
@@ -38,7 +39,7 @@ const defaultFilters = {
   neckline: [],
 };
 
-export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate }: ProductGridProps & { onWardrobeUpdate?: (wardrobeCount: number) => void }) {
+export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate, searchQuery }: ProductGridProps & { onWardrobeUpdate?: (wardrobeCount: number) => void }) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -107,6 +108,9 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     selectedFilters.neckline.forEach(n => params.append("neckline", n));
     selectedFilters.dressCode.forEach(d => params.append("dress_code", d));
     params.set("limit", "20")
+    if (searchQuery) {
+      params.set("search_query", searchQuery);
+    }
     if (isMatchStyleActive) {
       params.set("match_style", "true")
       params.set("uniqueness", String(uniquenessLevel[0]))
@@ -144,7 +148,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   useEffect(() => {
     loadProducts(false)
     // eslint-disable-next-line
-  }, [JSON.stringify(selectedFilters), isMatchStyleActive, uniquenessLevel[0]])
+  }, [JSON.stringify(selectedFilters), isMatchStyleActive, uniquenessLevel[0], searchQuery])
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
