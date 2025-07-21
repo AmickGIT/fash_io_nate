@@ -7,6 +7,7 @@ import os
 from functools import lru_cache
 import numpy as np
 from typing import List, Optional, Tuple
+from text_embedder import TextEmbedder
 
 
 app = FastAPI()
@@ -28,6 +29,7 @@ EXT_COLLECTION_NAME = "text_img_clothes"
 
 # Connect to QDrant using URL and API key
 client = QdrantClient(url=QDRANT_DB_URL, api_key=QDRANT_API_KEY)
+text_embedder = TextEmbedder()
 
 def get_unique_field(field: str):
     try:
@@ -156,8 +158,13 @@ def get_products(
     Supports pagination with offset and returns next_offset for 'load more'.
     If match_style is true, uses the user's profile embedding for vector search.
     """
-    if(search_query):
-        print(search_query)
+    text_embedding = None
+    if search_query:
+        print(f"Encoding search query: {search_query}")
+        text_embedding = text_embedder.encode(search_query)
+        # You can now use this 'text_embedding' for your search logic
+        print(f"Generated embedding of shape: {text_embedding.shape}")
+
 
     from qdrant_client.http import models as rest
     must_filters = []
