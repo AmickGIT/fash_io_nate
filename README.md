@@ -2,6 +2,13 @@
 
 A full-stack AI-powered fashion recommendation platform.
 
+## How to Use
+
+- **Frontend:**: Go into the frontend directory and run `npm run dev`
+- **Backend:**: Go into the backend directory and run `uvicorn main:app --reload`
+
+Now the website is up and running.
+
 ## Project Overview
 
 Fashionate is a modern web application for personalized fashion recommendations. It features:
@@ -63,4 +70,3 @@ MIT (or your license here)
 
 ---
 
-**For more details, see the code and comments in each folder.** 
