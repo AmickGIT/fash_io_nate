@@ -26,7 +26,8 @@ interface SidebarProps {
     sleeves: string[];
     fit: string[];
     neckline: string[];
-  }>>
+  }>>;
+  onClearSearch?: () => void;
 }
 
 const defaultFilters = {
@@ -66,6 +67,7 @@ const brandOptions = [
 export default function Sidebar({
   selectedFilters,
   onFilterChange,
+  onClearSearch,
 }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState({
     gender: true,
@@ -228,8 +230,9 @@ export default function Sidebar({
       sleeves: [],
       fit: [],
       neckline: [],
-    })
-  }
+    });
+    if (onClearSearch) onClearSearch();
+  };
 
   function toCamelCase(str: string) {
     return str.replace(/(^|\s|-)\w/g, match => match.toUpperCase());
