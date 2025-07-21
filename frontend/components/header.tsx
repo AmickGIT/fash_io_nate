@@ -118,20 +118,6 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
 
           {/* User Actions */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="flex flex-col items-center p-2">
-              <User className="w-5 h-5" />
-              <span className="text-xs mt-1">Profile</span>
-            </Button>
-            <Button variant="ghost" size="sm" className="flex flex-col items-center p-2 relative">
-              <Heart className="w-5 h-5" />
-              <span className="text-xs mt-1">Wishlist</span>
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs"
-              >
-                3
-              </Badge>
-            </Button>
             <Button
               variant="ghost"
               size="sm"
