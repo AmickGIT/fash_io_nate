@@ -26,9 +26,10 @@ interface HeaderProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   onSearch: () => void;
+  onClearSearch: () => void;
 }
 
-export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuery, setSearchQuery, onSearch }: HeaderProps) {
+export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuery, setSearchQuery, onSearch, onClearSearch }: HeaderProps) {
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
@@ -99,10 +100,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
               />
               {searchQuery && (
                 <button
-                  onClick={() => {
-                    setSearchQuery("")
-                    onSearch()
-                  }}
+                  onClick={onClearSearch}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <X className="w-4 h-4" />

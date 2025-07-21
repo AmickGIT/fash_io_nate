@@ -36,6 +36,11 @@ export default function Home() {
     setSubmittedQuery(searchQuery);
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setSubmittedQuery("");
+  };
+
   const handleWardrobeUpdate = (newCount?: number) => {
     if (typeof newCount === 'number') {
       setWardrobeCount(newCount);
@@ -50,6 +55,7 @@ export default function Home() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         onSearch={handleSearch}
+        onClearSearch={handleClearSearch}
       />
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
