@@ -10,8 +10,6 @@ import { usePathname } from "next/navigation" // Import usePathname
 
 const navigationTabs = [
   { name: "Recommender", href: "/" },
-  { name: "Virtual Try-On", href: "/virtual-try-on" },
-  { name: "Designer", href: "/designer" },
 ]
 
 interface WardrobeItem {
