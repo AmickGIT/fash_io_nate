@@ -135,7 +135,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       }
       if (!res.ok) throw new Error(data.error || 'Something went wrong')
 
-      setProducts(prev => loadMore ? [...prev, ...data.items] : data.items)
+      setProducts(prev => loadMore ? [...prev, ...(data.items || [])] : (data.items || []))
       setNextOffset(data.next_offset)
     } catch (err: any) {
       setError(err.message)
