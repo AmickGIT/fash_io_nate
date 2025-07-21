@@ -32,8 +32,9 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
 
-  const handleSearch = () => {
-    setSubmittedQuery(searchQuery);
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+    setSubmittedQuery(value);
   };
 
   const handleClearSearch = () => {

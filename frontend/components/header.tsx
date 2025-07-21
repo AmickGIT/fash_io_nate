@@ -25,7 +25,7 @@ interface HeaderProps {
   onWardrobeUpdate?: (newCount?: number) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  onSearch: () => void;
+  onSearch: (query: string) => void;
   onClearSearch: () => void;
 }
 
@@ -33,6 +33,12 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
+
+  // Local state for the search input
+  const [inputValue, setInputValue] = useState(searchQuery);
+  useEffect(() => {
+    setInputValue(searchQuery);
+  }, [searchQuery]);
 
   // Fetch wardrobe items and update count
   const fetchWardrobe = () => {
@@ -89,18 +95,21 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
               <Input
                 type="text"
                 placeholder="Search for products, brands and more"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={async (e) => {
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    onSearch();
+                    onSearch(inputValue);
                   }
                 }}
                 className="pl-10 pr-10 w-full"
               />
-              {searchQuery && (
+              {inputValue && (
                 <button
-                  onClick={onClearSearch}
+                  onClick={() => {
+                    setInputValue("");
+                    onClearSearch();
+                  }}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <X className="w-4 h-4" />
