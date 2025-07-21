@@ -3,3 +3,5 @@ data/
 filtered_clothes/
 
 filtered_images/
+
+/backend/__pycache__/
