@@ -1,6 +1,6 @@
 "use client"
 
-import { Search, User, Heart, ShoppingBag } from "lucide-react"
+import { Search, User, Heart, ShoppingBag , X} from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -27,6 +27,8 @@ interface HeaderProps {
 
 export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [search_query, setSearch_query] = useState<string>("");
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
@@ -88,6 +90,20 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderPr
                 placeholder="Search for products, brands and more"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={async (e) => {
+                  if (e.key === "Enter") {
+                    setSearch_query(searchQuery);
+                    try {
+                      const params = new URLSearchParams();
+                      if (searchQuery) params.set("search_query", searchQuery);
+                      const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`);
+                      const data = await res.json();
+                      setSearchResults(data.items || []);
+                    } catch (err) {
+                      setSearchResults([]);
+                    }
+                  }
+                }}
                 className="pl-10 pr-4 w-full"
               />
             </div>

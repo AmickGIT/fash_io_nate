@@ -24,6 +24,7 @@ app.add_middleware(
 QDRANT_DB_URL = os.getenv("QDRANT_DB_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "images_and_clothes_swin")
+EXT_COLLECTION_NAME = "text_img_clothes"
 
 # Connect to QDrant using URL and API key
 client = QdrantClient(url=QDRANT_DB_URL, api_key=QDRANT_API_KEY)
@@ -148,12 +149,16 @@ def get_products(
     uniqueness: Optional[int] = Query(50),
     limit: int = Query(50, gt=0),
     offset: Optional[int] = Query(None, ge=0),
+    search_query: Optional[str] = Query(None),
 ):
     """
     Query QDrant for products matching the filters and return image URLs.
     Supports pagination with offset and returns next_offset for 'load more'.
     If match_style is true, uses the user's profile embedding for vector search.
     """
+    if(search_query):
+        print(search_query)
+
     from qdrant_client.http import models as rest
     must_filters = []
 
