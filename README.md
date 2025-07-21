@@ -79,6 +79,19 @@ Transfers the **style** (e.g. print, texture) of one garment onto the **structur
 - **ML Models**: PyTorch (ANN, Style Transfer, VITON)
 - **Search & Rec**: FAISS, HNSW, MMR
 - **Embeddings**: Swin Transformer, SentenceTransformer
+## To run website:
+
+### Frontend: Go into the frontend directory and run npm run dev
+### Backend: Go into the backend directory and run uvicorn main:app --reload
+
+## UI Features
+- Filtering: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
+- Search Bar: The search bar understands the context of your search and filters out results. For example: It can handle queries like “Pink Athletic Wear, that go with black pants” and returns the most relevant clothes in the dataset.
+- Virtual Wardrobe: This feature is to store their whole wardrobe in the platform, which will help the recommender model understand the user’s preference.
+- Buy/Not Interested: We can buy/reject clothes based on our liking, bought clothes get stored in the virtual wardrobe.
+- Match my Style: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
+- Uniqueness Bar: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
+- Wardrobe Builder (Future Prospect): 
 
 ## Run inside SD-VITON Directory
 ### Try-On Finetuning (SD-VITON Condition Generator)
