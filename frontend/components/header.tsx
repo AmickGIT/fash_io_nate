@@ -104,8 +104,20 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate }: HeaderPr
                     }
                   }
                 }}
-                className="pl-10 pr-4 w-full"
+                className="pl-10 pr-10 w-full"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => {
+                    setSearchQuery("")
+                    setSearch_query("")
+                    setSearchResults([])
+                  }}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
 
