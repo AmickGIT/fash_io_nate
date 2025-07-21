@@ -4,4 +4,5 @@ filtered_clothes/
 
 filtered_images/
 
-/backend/__pycache__/
+backend/__pycache__/main.cpython-312.pyc
+
