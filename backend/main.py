@@ -8,6 +8,9 @@ from functools import lru_cache
 import numpy as np
 from typing import List, Optional, Tuple
 from text_embedder import TextEmbedder
+from dotenv import load_dotenv
+
+
 
 
 app = FastAPI()
@@ -20,12 +23,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+load_dotenv()
 # QDrant connection details (update as needed)
 QDRANT_DB_URL = os.getenv("QDRANT_DB_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "images_and_clothes_swin")
-EXT_COLLECTION_NAME = "text_img_clothes"
+COLLECTION_NAME = os.getenv("QDRANT_COLLECTION")
+EXT_COLLECTION_NAME = os.getenv("EXT_COLLECTION_NAME")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET")
 
 # Connect to QDrant using URL and API key
 client = QdrantClient(url=QDRANT_DB_URL, api_key=QDRANT_API_KEY)
@@ -103,8 +108,6 @@ def get_brands():
     except Exception as e:
         return {"error": str(e)}
 
-SUPABASE_URL = "https://pkraxwnlcgejwxunkeco.supabase.co"
-SUPABASE_BUCKET = "imgbucket"
 
 @lru_cache(maxsize=32)
 def get_profile_embedding(user_id: str) -> Tuple[List[List[float]], List[List[float]]]:
