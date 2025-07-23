@@ -22,12 +22,11 @@ interface HeaderProps {
   wardrobeCount?: number;
   onWardrobeUpdate?: (newCount?: number) => void;
   searchQuery: string;
-  setSearchQuery: (query: string) => void;
   onSearch: (query: string) => void;
   onClearSearch: () => void;
 }
 
-export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuery, setSearchQuery, onSearch, onClearSearch }: HeaderProps) {
+export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuery, onSearch, onClearSearch }: HeaderProps) {
   const [showWardrobe, setShowWardrobe] = useState(false)
   const [wardrobeItems, setWardrobeItems] = useState<WardrobeItem[]>([])
   const pathname = usePathname() // Get the current path
@@ -64,14 +63,6 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
     fetchWardrobe()
   }, [])
 
-  // Handler to update count after buy
-  const handleWardrobeUpdate = (newCount?: number) => {
-    if (typeof newCount === "number") {
-      // setWardrobeCount(newCount) // This line is removed
-    } else {
-      fetchWardrobe()
-    }
-  }
 
   return (
     <header className="bg-white shadow-sm border-b relative">

@@ -48,7 +48,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
   const [nextOffset, setNextOffset] = useState<number | null>(null)
   const [showSuccess, setShowSuccess] = useState(false)
-  const [successProduct, setSuccessProduct] = useState<Product | null>(null)
+  // const [successProduct, setSuccessProduct] = useState<Product | null>(null)
 
   const handleBuyClick = async (img_path: string, id?: number) => {
     try {
@@ -62,7 +62,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       if (data.success) {
         const boughtProduct = products.find((product) => product.id === id) || null;
         setProducts((prev) => prev.filter((product) => product.id !== id));
-        setSuccessProduct(boughtProduct);
+        // setSuccessProduct(boughtProduct);
         setShowSuccess(true);
         if (onWardrobeUpdate) onWardrobeUpdate(data.wardrobe_count);
       } else {
@@ -96,7 +96,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
 
   const handleViewOrder = () => {
     setShowSuccess(false);
-    setSuccessProduct(null);
+    // setSuccessProduct(null);
   }
 
   const buildParams = (loadMore = false) => {
