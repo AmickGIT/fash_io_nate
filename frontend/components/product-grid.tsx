@@ -44,11 +44,10 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uniquenessLevel, setUniquenessLevel] = useState([50]) // Default to Medium
-  const [localuniquenessLevel, setLocalUniquenessLevel] = useState([50]) // Default to Medium
+  const [localuniquenessLevel, setLocaluniquenessLevel] = useState([50]) // Default to Medium
   const [isMatchStyleActive, setIsMatchStyleActive] = useState(false)
   const [nextOffset, setNextOffset] = useState<number | null>(null)
   const [showSuccess, setShowSuccess] = useState(false)
-  // const [successProduct, setSuccessProduct] = useState<Product | null>(null)
 
   const handleBuyClick = async (img_path: string, id?: number) => {
     try {
@@ -61,14 +60,13 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       const data = await res.json();
       if (data.success) {
         setProducts((prev) => prev.filter((product) => product.id !== id));
-        // setSuccessProduct(boughtProduct);
         setShowSuccess(true);
         if (onWardrobeUpdate) onWardrobeUpdate(data.wardrobe_count);
       } else {
         console.error("Buy failed", data.error);
       }
     } catch (err) {
-      console.error("Buy error", err);
+      console.error("Buy error", err instanceof Error ? err.message : String(err));
     }
   }
 
@@ -82,20 +80,18 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       });
       const data = await res.json();
       if (data.success) {
-        // Remove the product from the current view
         setProducts((prev) => prev.filter((product) => product.id !== id));
         console.log(`Not interested clicked for image ${img_path}`);
       } else {
         console.error("Not interested failed", data.error);
       }
     } catch (err) {
-      console.error("Not interested error", err);
+      console.error("Not interested error", err instanceof Error ? err.message : String(err));
     }
   }
 
   const handleViewOrder = () => {
     setShowSuccess(false);
-    // setSuccessProduct(null);
   }
 
   const buildParams = (loadMore = false) => {
@@ -136,17 +132,15 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
 
       setProducts(prev => loadMore ? [...prev, ...(data.items || [])] : (data.items || []))
       setNextOffset(data.next_offset)
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err))
     } finally {
       setLoading(false)
     }
   }
 
-  // Initial load or when filters, match style, or uniqueness changes
   useEffect(() => {
     loadProducts(false)
-    // eslint-disable-next-line
   }, [JSON.stringify(selectedFilters), isMatchStyleActive, uniquenessLevel[0], searchQuery])
 
   const handleMatchStyleClick = () => {
@@ -157,7 +151,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     if (value === 0) return "Low"
     if (value === 50) return "Medium"
     if (value === 100) return "High"
-    return "" // Should not happen with step 50
+    return ""
   }
 
   return (
@@ -165,22 +159,17 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       {/* Success Popup */}
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Backdrop */}
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onClick={handleViewOrder} />
-          {/* Popup Content */}
           <div className="bg-white rounded-lg shadow-lg max-w-sm w-full mx-4 relative z-10">
             <CardContent className="p-6">
-              {/* Success Icon */}
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
               </div>
-              {/* Success Message */}
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Purchase Successful!</h2>
               </div>
-              {/* Action Buttons */}
               <div className="space-y-3">
                 <Button
                   onClick={handleViewOrder}
@@ -194,7 +183,6 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
           </div>
         </div>
       )}
-      {/* Header */}
       <div className="grid grid-cols-3 items-center mb-6">
         <div className="justify-self-start">
           <h1 className="text-2xl font-semibold text-gray-900">Items - {products.length.toLocaleString()} items</h1>
@@ -223,18 +211,14 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               max={100}
               step={50}
               value={localuniquenessLevel}
-              onValueChange={setLocalUniquenessLevel} // Live update local state
-              onValueCommit={(val) => {
-                setUniquenessLevel(val); // Commit final value only after release
-              }}
+              onValueChange={setLocaluniquenessLevel}
+              onValueCommit={(val) => { setUniquenessLevel(val); }}
               className="text-left w-4/12"
             />
             <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
           </div>
         )}
       </div>
-      
-      {/* Product Grid */}
       {loading && products.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Loading products...</div>
       ) : error ? (
@@ -251,8 +235,6 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
           ))}
         </div>
       )}
-
-      {/* Load More */}
       {nextOffset != null && !loading && (
         <div className="flex justify-center mt-12">
           <button
