@@ -266,7 +266,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
             <div className="absolute inset-0 z-40 flex items-center justify-center bg-white/80 backdrop-blur-sm">
               <div className="bg-white rounded-lg shadow-lg border px-6 py-4 flex items-center gap-3">
                 <div className="w-6 h-6 border-4 border-pink-200 border-t-pink-600 rounded-full animate-spin"></div>
-                <span className="text-gray-600 font-medium">Loading more products...</span>
+                {/* <span className="text-gray-600 font-medium">Loading more products...</span> */}
               </div>
             </div>
           )}
@@ -280,12 +280,6 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
           >
             Load More Products
           </button>
-        </div>
-      )}
-      {loading && (
-        <div className="fixed top-4 right-4 z-40 bg-white rounded-lg shadow-lg border px-4 py-2 flex items-center gap-2">
-          <div className="w-4 h-4 border-2 border-pink-200 border-t-pink-600 rounded-full animate-spin"></div>
-          <span className="text-sm text-gray-600">Loading...</span>
         </div>
       )}
     </div>
