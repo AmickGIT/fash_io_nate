@@ -1,11 +1,12 @@
 "use client"
 
-import { Search, ShoppingBag , X} from "lucide-react"
+import { Search, ShoppingBag, X } from "lucide-react"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { usePathname } from "next/navigation" // Import usePathname
 
 const navigationTabs = [
@@ -32,37 +33,37 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
   const pathname = usePathname() // Get the current path
 
   // Local state for the search input
-  const [inputValue, setInputValue] = useState(searchQuery);
+  const [inputValue, setInputValue] = useState(searchQuery)
   useEffect(() => {
-    setInputValue(searchQuery);
-  }, [searchQuery]);
+    setInputValue(searchQuery)
+  }, [searchQuery])
 
   // Fetch wardrobe items and update count
-  const fetchWardrobe = () => {
+  const fetchWardrobe = useCallback(() => {
     fetch("http://localhost:8000/api/wardrobe?limit=10000")
       .then(res => res.json())
       .then((data: WardrobeItem[]) => {
         const items = Array.isArray(data) ? data : []
         setWardrobeItems(items)
-        if (onWardrobeUpdate) onWardrobeUpdate(items.length)
+        onWardrobeUpdate?.(items.length)
       })
       .catch(() => {
         setWardrobeItems([])
-        if (onWardrobeUpdate) onWardrobeUpdate(0)
+        onWardrobeUpdate?.(0)
       })
-  }
+  }, [onWardrobeUpdate])
 
+  // Fetch on mount
+  useEffect(() => {
+    fetchWardrobe()
+  }, [fetchWardrobe])
+
+  // Fetch when wardrobe panel toggles open
   useEffect(() => {
     if (showWardrobe) {
       fetchWardrobe()
     }
-  }, [showWardrobe])
-
-  // Always fetch count on mount
-  useEffect(() => {
-    fetchWardrobe()
-  }, [])
-
+  }, [showWardrobe, fetchWardrobe])
 
   return (
     <header className="bg-white shadow-sm border-b relative">
@@ -88,7 +89,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    onSearch(inputValue);
+                    onSearch(inputValue)
                   }
                 }}
                 className="pl-10 pr-10 w-full"
@@ -96,8 +97,8 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
               {inputValue && (
                 <button
                   onClick={() => {
-                    setInputValue("");
-                    onClearSearch();
+                    setInputValue("")
+                    onClearSearch()
                   }}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
@@ -168,7 +169,13 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
                 wardrobeItems.map((item: WardrobeItem) => (
                   <div key={item.img_path} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow flex flex-col items-center">
                     <div className="relative w-full" style={{ aspectRatio: '189/256' }}>
-                      <img src={item.image_url} alt={item.img_path} className="object-cover rounded-t w-full h-full" style={{ width: '100%', height: '100%' }} />
+                      <Image
+                        src={item.image_url}
+                        alt={item.img_path}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="rounded-t"
+                      />
                     </div>
                     <p className="text-xs text-gray-600 truncate w-full">{item.img_path}</p>
                   </div>
