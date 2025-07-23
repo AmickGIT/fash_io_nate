@@ -1,4 +1,4 @@
-torch==2.7.1
+torch==2.7.1+cpu -f https://download.pytorch.org/whl/cpu
 sentence-transformers
 fastapi
 uvicorn[standard]
