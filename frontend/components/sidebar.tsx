@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { API_BASE } from "@/lib/constants"
 
 interface SidebarProps {
   selectedFilters: {
@@ -53,7 +54,7 @@ export default function Sidebar({
 
   useEffect(() => {
     setBrandsLoading(true)
-    fetch("http://localhost:8000/api/brands")
+    fetch(`${API_BASE}/api/brands`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch brands")
         return res.json()
@@ -74,7 +75,7 @@ export default function Sidebar({
   const [dressCodeError, setDressCodeError] = useState<string | null>(null)
   useEffect(() => {
     setDressCodeLoading(true)
-    fetch("http://localhost:8000/api/dress-codes")
+    fetch(`${API_BASE}/api/dress-codes`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch dress codes")
         return res.json()
@@ -95,7 +96,7 @@ export default function Sidebar({
   const [colorError, setColorError] = useState<string | null>(null)
   useEffect(() => {
     setColorLoading(true)
-    fetch("http://localhost:8000/api/colors")
+    fetch(`${API_BASE}/api/colors`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch colors")
         return res.json()
@@ -116,7 +117,7 @@ export default function Sidebar({
   const [sleeveError, setSleeveError] = useState<string | null>(null)
   useEffect(() => {
     setSleeveLoading(true)
-    fetch("http://localhost:8000/api/sleeves")
+    fetch(`${API_BASE}/api/sleeves`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch sleeves")
         return res.json()
@@ -137,7 +138,7 @@ export default function Sidebar({
   const [fitError, setFitError] = useState<string | null>(null)
   useEffect(() => {
     setFitLoading(true)
-    fetch("http://localhost:8000/api/fits")
+    fetch(`${API_BASE}/api/fits`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch fits")
         return res.json()
@@ -158,7 +159,7 @@ export default function Sidebar({
   const [necklineError, setNecklineError] = useState<string | null>(null)
   useEffect(() => {
     setNecklineLoading(true)
-    fetch("http://localhost:8000/api/necklines")
+    fetch(`${API_BASE}/api/necklines`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch necklines")
         return res.json()

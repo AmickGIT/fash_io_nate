@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Eye, CheckCircle } from "lucide-react"
 import { CardContent } from "@/components/ui/card"
+import { API_BASE } from "@/lib/constants"
 
 interface ProductGridProps {
   selectedFilters?: {
@@ -52,7 +53,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   const handleBuyClick = async (img_path: string, id?: number) => {
     try {
       if (!id) return;
-      const res = await fetch("http://localhost:8000/api/buy", {
+      const res = await fetch(`${API_BASE}/api/buy`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
@@ -73,7 +74,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   const handleNotInterestedClick = async (img_path: string, id?: number) => {
     try {
       if (!id) return;
-      const res = await fetch("http://localhost:8000/api/not_interested", {
+      const res = await fetch(`${API_BASE}/api/not_interested`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
@@ -132,7 +133,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       setError(null);
       try {
         const params = buildParams(loadMore);
-        const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`);
+        const res = await fetch(`${API_BASE}/api/products?${params.toString()}`);
         const data = await res.json();
         if (res.status === 400 && data.error?.includes("wardrobe")) {
           alert(data.error);

@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { useState, useEffect, useCallback, SetStateAction, Dispatch } from "react"
-import { usePathname } from "next/navigation" // Import usePathname
+import { usePathname } from "next/navigation"
+import { API_BASE } from "@/lib/constants"
 
 const navigationTabs = [
   { name: "Recommender", href: "/" },
@@ -41,7 +42,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
 
   // Fetch wardrobe items and update count
   const fetchWardrobe = useCallback(() => {
-    fetch("http://localhost:8000/api/wardrobe?limit=10000")
+    fetch(`${API_BASE}/api/wardrobe?limit=10000`)
       .then(res => res.json())
       .then((data: WardrobeItem[]) => {
         const items = Array.isArray(data) ? data : []
