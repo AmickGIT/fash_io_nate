@@ -263,13 +263,13 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
           
           {/* Loading overlay centered over the grid */}
           {loading && products.length > 0 && (
-            <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
-              <div className="bg-white rounded-lg shadow-lg border px-6 py-4 flex items-center gap-3 pointer-events-auto">
-                <div className="w-6 h-6 border-4 border-pink-200 border-t-pink-600 rounded-full animate-spin"></div>
+            <div className="absolute inset-0 z-40 flex items-center justify-center backdrop-blur-sm">
+              <div className="bg-white rounded-lg shadow-lg border px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-2 sm:gap-3 mx-4">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 border-4 border-pink-200 border-t-pink-600 rounded-full animate-spin"></div>
               </div>
             </div>
           )}
-        </div>
+  </div>
       )}
       {nextOffset != null && !loading && (
         <div className="flex justify-center mt-12">
