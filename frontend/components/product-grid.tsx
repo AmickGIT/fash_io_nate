@@ -116,28 +116,31 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     return params
   }
 
-  const loadProducts = async (loadMore = false) => {
-    setLoading(true)
-    setError(null)
-    try {
-      const params = buildParams(loadMore)
-      const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`)
-      const data = await res.json()
-      if (res.status === 400 && data.error?.includes("wardrobe")) {
-        alert(data.error);
-        setIsMatchStyleActive(false);
-        return;
-      }
-      if (!res.ok) throw new Error(data.error || 'Something went wrong')
+  const loadProducts = useCallback(
+    async (loadMore = false) => {
+      setLoading(true)
+      setError(null)
+      try {
+        const params = buildParams(loadMore)
+        const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`)
+        const data = await res.json()
+        if (res.status === 400 && data.error?.includes("wardrobe")) {
+          alert(data.error);
+          setIsMatchStyleActive(false);
+          return;
+        }
+        if (!res.ok) throw new Error(data.error || 'Something went wrong')
 
-      setProducts(prev => loadMore ? [...prev, ...(data.items || [])] : (data.items || []))
-      setNextOffset(data.next_offset)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : String(err))
-    } finally {
-      setLoading(false)
-    }
-  }
+        setProducts(prev => loadMore ? [...prev, ...(data.items || [])] : (data.items || []))
+        setNextOffset(data.next_offset)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : String(err))
+      } finally {
+        setLoading(false)
+      }
+    },
+    [buildParams]
+  )
 
   const selectedFiltersString = useMemo(() => JSON.stringify(selectedFilters), [selectedFilters]);
 
