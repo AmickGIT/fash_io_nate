@@ -1,85 +1,30 @@
-<<<<<<< HEAD
-# Fashionate
-
-A full-stack AI-powered fashion recommendation platform.
-
-## How to Use
-
-- **Frontend:**: Go into the frontend directory and run `npm run dev`
-- **Backend:**: Go into the backend directory and run `uvicorn main:app --reload`
-
-Now the website is up and running.
-
-## Project Overview
-
-Fashionate is a modern web application for personalized fashion recommendations. It features:
-- **Backend:** FastAPI (Python) with Qdrant vector search for similarity and attribute-based filtering.
-- **Frontend:** Next.js (React) for a fast, interactive user experience.
-- **Embeddings:** Uses Sentence Transformers for text embedding and supports hybrid search (text + filters).
-
-## Features
-- Product search with natural language queries
-- Attribute-based filtering (brand, color, sleeve, fit, neckline, dress code)
-- Personalized recommendations ("Match my Style")
-- Wardrobe management (buy, not interested)
-- Responsive, modern UI
-
-## Prerequisites
-- Python 3.8+
-- Node.js 16+
-- npm or yarn
-- Qdrant instance (local or cloud)
-
-## Installation
-
-### 1. Clone the repository
-```sh
-git clone <your-repo-url>
-cd Fashionate-Old
-```
-
-### 2. Backend Setup
-```sh
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-# Set up your .env file with QDRANT_DB_URL and QDRANT_API_KEY
-uvicorn main:app --reload
-```
-
-### 3. Frontend Setup
-```sh
-cd ../frontend
-npm install
-npm run dev
-# The app will be available at http://localhost:3000
-```
-
-## Folder Structure
-- `backend/` — FastAPI backend, Qdrant integration, embedding logic
-- `frontend/` — Next.js frontend, React components, UI
-- `embeddings/` — Precomputed embedding files
-- `data/` — Data files (CSV, etc.)
-
-## Environment Variables
-- Backend: `.env` file with QDRANT_DB_URL, QDRANT_API_KEY, etc.
-- Frontend: `.env.local` for any frontend secrets (optional)
-
-## License
-MIT (or your license here)
-
----
-
-=======
 # FASHIONATE
 
 > An AI-powered full-stack virtual fashion styling and recommendation platform.
 
 Our project blends the following into a unified web platform that understands your fashion sense, recommends what suits your skin tone.
 
----
 
+## To run website:
+
+### Frontend: Go into the frontend directory and run npm run dev
+### Backend: Go into the backend directory and run uvicorn main:app --reload
+
+## UI Features
+- Filtering: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
+- Search Bar: The search bar understands the context of your search and filters out results. For example: It can handle queries like “Pink Athletic Wear, that go with black pants” and returns the most relevant clothes in the dataset.
+- Virtual Wardrobe: This feature is to store their whole wardrobe in the platform, which will help the recommender model understand the user’s preference.
+- Buy/Not Interested: We can buy/reject clothes based on our liking, bought clothes get stored in the virtual wardrobe.
+- Match my Style: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
+- Uniqueness Bar: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
+- Wardrobe Builder (Future Prospect): 
+
+## Example of the "Match my Style" functionality based on user preferences and past choices:
+![MatchMyStyle](demos/match_my_style.gif)
+
+---
+## Process Flow:
+![Dia](demos/Fashionate.jpg)
 ## Features
 
 ### 1. Skin Color Compatibility Model
@@ -153,21 +98,8 @@ Transfers the **style** (e.g. print, texture) of one garment onto the **structur
 - **ML Models**: PyTorch (ANN, Style Transfer, VITON)
 - **Search & Rec**: FAISS, HNSW, MMR
 - **Embeddings**: Swin Transformer, SentenceTransformer
-## To run website:
 
-### Frontend: Go into the frontend directory and run npm run dev
-### Backend: Go into the backend directory and run uvicorn main:app --reload
-
-## UI Features
-- Filtering: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
-- Search Bar: The search bar understands the context of your search and filters out results. For example: It can handle queries like “Pink Athletic Wear, that go with black pants” and returns the most relevant clothes in the dataset.
-- Virtual Wardrobe: This feature is to store their whole wardrobe in the platform, which will help the recommender model understand the user’s preference.
-- Buy/Not Interested: We can buy/reject clothes based on our liking, bought clothes get stored in the virtual wardrobe.
-- Match my Style: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
-- Uniqueness Bar: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
-- Wardrobe Builder (Future Prospect): 
-
-## Run inside SD-VITON Directory
+## Run inside SDVITON Directory
 ### Try-On Finetuning (SD-VITON Condition Generator)
 ```bash
 python3 train_condition.py \
@@ -193,5 +125,3 @@ checkpoints/finetune_cond/tocg_step_007000.pth --dataroot ./my_data/ --data_list
 ```
 
 
-
->>>>>>> b329ac6a05696a67735f5a8135f07278de693335
