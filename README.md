@@ -5,10 +5,20 @@
 Our project blends the following into a unified web platform that understands your fashion sense, recommends what suits your skin tone.
 
 
-## To run website:
+## 🚀 Try It Live!
 
-### Frontend: Go into the frontend directory and run npm run dev
-### Backend: Go into the backend directory and run uvicorn main:app --reload
+### [**✨ Fashionate - Your Fashion Destination ✨**](https://fash-io-nate.vercel.app/)
+
+🎯 **Experience AI-powered fashion recommendations**
+
+---
+
+**🔔 Current Status:**
+- ✅ Fully functional fashion recommendation system
+- ⚠️ Wardrobe is currently shared among all users
+- 🔜 Individual user profiles coming soon
+
+
 
 ## UI Features
 - Filtering: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
