@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Query, Body
-# from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from qdrant_client import QdrantClient, models       # gRPC client + models
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, HasIdCondition
@@ -8,7 +8,6 @@ from functools import lru_cache
 from typing import List, Optional, Tuple
 from text_embedder import TextEmbedder
 from dotenv import load_dotenv
-from flask import request, make_response
 
 
 
@@ -18,22 +17,13 @@ app = FastAPI()
 
 
 # Allow CORS for frontend
-@app.before_request
-def handle_preflight():
-    if request.method == "OPTIONS":
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "*")
-        response.headers.add('Access-Control-Allow-Methods', "*")
-        return response
-
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    return response
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://fash-io-nate.vercel.app"],  # Your frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 load_dotenv()
 
