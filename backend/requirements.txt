@@ -5,3 +5,4 @@ fastapi
 uvicorn[standard]
 qdrant-client
 python-dotenv
+numpy<2.0
