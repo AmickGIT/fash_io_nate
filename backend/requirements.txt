@@ -1,3 +1,6 @@
 fastapi
 uvicorn
 qdrant-client 
+sentence_transformers
+numpy
+python-dotenv
