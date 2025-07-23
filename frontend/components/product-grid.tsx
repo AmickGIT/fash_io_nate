@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Eye, CheckCircle } from "lucide-react"
 import { CardContent } from "@/components/ui/card"
-import { unique } from "next/dist/build/utils"
 
 interface ProductGridProps {
   selectedFilters?: {
