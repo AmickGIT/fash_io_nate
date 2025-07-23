@@ -154,10 +154,15 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     [buildParams]
   );
 
-
   useEffect(() => {
-    loadProducts(false)
-  }, [selectedFiltersString, isMatchStyleActive, uniqueness, searchQuery, loadProducts])
+    async function reload() {
+      await loadProducts(false);
+    }
+    reload();
+  }, [selectedFiltersString, isMatchStyleActive, uniqueness, searchQuery]);
+
+
+  
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
