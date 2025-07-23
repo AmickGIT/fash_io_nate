@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, SetStateAction, Dispatch } from "react"
 import { usePathname } from "next/navigation" // Import usePathname
 
 const navigationTabs = [
@@ -23,6 +23,7 @@ interface HeaderProps {
   wardrobeCount?: number;
   onWardrobeUpdate?: (newCount?: number) => void;
   searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
   onSearch: (query: string) => void;
   onClearSearch: () => void;
 }
