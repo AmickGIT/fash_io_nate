@@ -4,8 +4,6 @@
 
 Our project blends the following into a unified web platform that understands your fashion sense, recommends what suits your skin tone.
 
-## Example of the "Match my Style" functionality based on user preferences and past choices:
-![MatchMyStyle](demos/match_my_style.gif)
 
 ## To run website:
 
@@ -20,6 +18,9 @@ Our project blends the following into a unified web platform that understands yo
 - Match my Style: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
 - Uniqueness Bar: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
 - Wardrobe Builder (Future Prospect): 
+
+## Example of the "Match my Style" functionality based on user preferences and past choices:
+![MatchMyStyle](demos/match_my_style.gif)
 
 ---
 ## Process Flow:
