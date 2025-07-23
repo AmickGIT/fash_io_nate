@@ -1,0 +1,393 @@
+(detectron2) C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON>python3 train_condition.py --gpu_ids 0 --Ddownx2 --Ddropout --interflowloss --occlusion --tvlambda_tvob 2.0 --tvlambda_taco 2.0 --dataroot ./my_data/ --data_list train_pairs.txt --tocg_checkpoint checkpoints/tocg.pth --batch-size 2 --save_count 1000 --G_lr 0.00015 --D_lr 0.00015--workers 4 --checkpoint_dir checkpoints/finetune_cond --name finetune_cond --unfreeze_last 2 --keep_step 10000
+usage: train_condition.py [-h] [--name NAME] [--gpu_ids GPU_IDS] [-j WORKERS] [-b BATCH_SIZE] [--fp16] [--dataroot DATAROOT] [--datamode DATAMODE]
+                          [--data_list DATA_LIST] [--fine_width FINE_WIDTH] [--fine_height FINE_HEIGHT] [--checkpoint_dir CHECKPOINT_DIR]
+                          [--tocg_checkpoint TOCG_CHECKPOINT] [--display_count DISPLAY_COUNT] [--save_count SAVE_COUNT] [--load_step LOAD_STEP]
+                          [--keep_step KEEP_STEP] [--shuffle] [--semantic_nc SEMANTIC_NC] [--output_nc OUTPUT_NC] [--cond_G_ngf COND_G_NGF]
+                          [--cond_G_num_layers COND_G_NUM_LAYERS] [--warp_feature {encoder,T1}] [--out_layer {relu,conv}] [--Ddownx2] [--Ddropout]
+                          [--num_D NUM_D] [--lasttvonly] [--interflowloss] [--G_lr G_LR] [--D_lr D_LR] [--CElamda CELAMDA] [--GANlambda GANLAMBDA]
+                          [--tvlambda_tvob TVLAMBDA_TVOB] [--tvlambda_taco TVLAMBDA_TACO] [--upsample {nearest,bilinear}] [--spectral] [--occlusion]
+                          [--unfreeze_last UNFREEZE_LAST]
+
+(detectron2) C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON>python3 train_condition.py --gpu_ids 0 --Ddownx2 --Ddropout --interflowloss --occlusion --tvlambda_tvob 2.0 --tvlambda_taco 2.0 --dataroot ./my_data/ --data_list train_pairs.txt --tocg_checkpoint checkpoints/tocg.pth --batch-size 2 --save_count 1000 --G_lr 0.00015 --D_lr 0.00015 --workers 4 --checkpoint_dir checkpoints/finetune_cond --name finetune_cond --unfreeze_last 2 --keep_step 10000
+Namespace(name='finetune_cond', gpu_ids='0', workers=4, batch_size=2, fp16=False, dataroot='./my_data/', datamode='train', data_list='train_pairs.txt', fine_width=192, fine_height=256, checkpoint_dir='checkpoints/finetune_cond', tocg_checkpoint='checkpoints/tocg.pth', display_count=100, save_count=1000, load_step=0, keep_step=10000, shuffle=False, semantic_nc=13, output_nc=13, cond_G_ngf=96, cond_G_num_layers=5, warp_feature='T1', out_layer='relu', Ddownx2=True, Ddropout=True, num_D=2, lasttvonly=False, interflowloss=True, G_lr=0.00015, D_lr=0.00015, CElamda=10, GANlambda=1, tvlambda_tvob=2.0, tvlambda_taco=2.0, upsample='bilinear', spectral=False, occlusion=True, unfreeze_last=2)
+Start to train finetune_cond!
+MultiscaleDiscriminator(
+  (layer0): Sequential(
+    (0): Conv2d(33, 64, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (3): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (4): LeakyReLU(negative_slope=0.2, inplace=True)
+    (5): Dropout(p=0.5, inplace=False)
+    (6): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (7): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (8): LeakyReLU(negative_slope=0.2, inplace=True)
+    (9): Dropout(p=0.5, inplace=False)
+    (10): Conv2d(256, 512, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+    (11): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (12): LeakyReLU(negative_slope=0.2, inplace=True)
+    (13): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+  )
+  (layer1): Sequential(
+    (0): Conv2d(33, 64, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (3): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (4): LeakyReLU(negative_slope=0.2, inplace=True)
+    (5): Dropout(p=0.5, inplace=False)
+    (6): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2))
+    (7): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (8): LeakyReLU(negative_slope=0.2, inplace=True)
+    (9): Dropout(p=0.5, inplace=False)
+    (10): Conv2d(256, 512, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+    (11): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (12): LeakyReLU(negative_slope=0.2, inplace=True)
+    (13): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), padding=(2, 2))
+  )
+  (downsample): AvgPool2d(kernel_size=3, stride=2, padding=[1, 1])
+)
+Unfrozen ConditionGenerator layers for finetuning: ['residual_sequential_flow_list', 'out_layer_input1_resblk']
+C:\Users\Shreshth\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+C:\Users\Shreshth\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG19_Weights.IMAGENET1K_V1`. You can also use `weights=VGG19_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+  0%|                                                                                                                                  | 0/10000 [00:00<?, ?it/s]C:\Users\Shreshth\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\torch\nn\functional.py:5015: UserWarning: Default grid_sample and affine_grid behavior has changed to align_corners=False since 1.3.0. Please specify align_corners=True if the old behavior is desired. See the documentation of grid_sample for details.
+  warnings.warn(
+C:\Users\Shreshth\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\torch\nn\_reduction.py:51: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\networks.py:361: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\tensor\python_tensor.cpp:80.)
+  real_tensor = self.Tensor(input.size()).fill_(self.real_label)
+  0%|▏                                                                                                                      | 20/10000 [00:15<2:01:51,  1.36it/s]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+  1%|█▏                                                                                                                     | 99/10000 [01:13<2:02:21,  1.35it/s]step:      100, time: 0.734
+loss G: 14.2585, L1_cloth loss: 0.3903, VGG loss: 1.9084, TV_tvob loss: 1.3254, TV_taco loss: 0.0307, CE: 0.4322, G GAN: 0.9722
+loss D: 2.0393, D real: 0.9827, D fake: 1.0566, z_non_roi: 0.3337, z_roi: 0.1074
+  2%|█▉                                                                                                                    | 167/10000 [02:04<2:15:01,  1.21it/s]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+  2%|██▎                                                                                                                   | 199/10000 [02:28<2:01:17,  1.35it/s]step:      200, time: 0.752
+loss G: 14.0836, L1_cloth loss: 0.3275, VGG loss: 1.8797, TV_tvob loss: 1.3587, TV_taco loss: 0.0306, CE: 0.5022, G GAN: 0.7664
+loss D: 1.6946, D real: 0.8022, D fake: 0.8924, z_non_roi: 0.2831, z_roi: 0.0787
+  3%|███▌                                                                                                                  | 299/10000 [03:43<2:00:22,  1.34it/s]step:      300, time: 0.749
+loss G: 17.9048, L1_cloth loss: 0.4929, VGG loss: 2.2061, TV_tvob loss: 1.4883, TV_taco loss: 0.0325, CE: 0.6581, G GAN: 0.7563
+loss D: 1.4630, D real: 0.7774, D fake: 0.6855, z_non_roi: 0.2824, z_roi: 0.1085
+  3%|████                                                                                                                  | 345/10000 [04:17<1:59:43,  1.34it/s]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+  4%|████▋                                                                                                                 | 399/10000 [04:57<1:59:05,  1.34it/s]step:      400, time: 0.747
+loss G: 12.5771, L1_cloth loss: 0.4168, VGG loss: 2.2683, TV_tvob loss: 1.1236, TV_taco loss: 0.0299, CE: 0.2731, G GAN: 0.6829
+loss D: 1.3167, D real: 0.6949, D fake: 0.6218, z_non_roi: 0.2130, z_roi: 0.2073
+  5%|█████▉                                                                                                                | 499/10000 [06:12<1:57:48,  1.34it/s]step:      500, time: 0.755
+loss G: 12.4556, L1_cloth loss: 0.4008, VGG loss: 2.1013, TV_tvob loss: 1.2081, TV_taco loss: 0.0353, CE: 0.2865, G GAN: 0.6509
+loss D: 1.2867, D real: 0.6353, D fake: 0.6514, z_non_roi: 0.2454, z_roi: 0.0985
+  6%|██████▌                                                                                                               | 554/10000 [06:53<1:57:46,  1.34it/s]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+  6%|███████                                                                                                               | 599/10000 [07:27<1:56:50,  1.34it/s]step:      600, time: 0.739
+loss G: 12.7832, L1_cloth loss: 0.4529, VGG loss: 1.9177, TV_tvob loss: 1.1602, TV_taco loss: 0.0285, CE: 0.2988, G GAN: 0.6148
+loss D: 1.1819, D real: 0.6236, D fake: 0.5583, z_non_roi: 0.2393, z_roi: 0.1175
+  7%|████████▏                                                                                                             | 699/10000 [09:07<3:05:50,  1.20s/it]step:      700, time: 1.187
+loss G: 13.1552, L1_cloth loss: 0.3965, VGG loss: 2.2022, TV_tvob loss: 1.3576, TV_taco loss: 0.0321, CE: 0.3310, G GAN: 0.5663
+loss D: 1.1477, D real: 0.5776, D fake: 0.5701, z_non_roi: 0.2755, z_roi: 0.0571
+  8%|█████████▍                                                                                                            | 799/10000 [11:06<3:03:22,  1.20s/it]step:      800, time: 1.187
+loss G: 10.6032, L1_cloth loss: 0.2112, VGG loss: 1.7256, TV_tvob loss: 1.0021, TV_taco loss: 0.0275, CE: 0.3729, G GAN: 0.6581
+loss D: 1.1233, D real: 0.6284, D fake: 0.4949, z_non_roi: 0.2626, z_roi: 0.0559
+  9%|██████████▌                                                                                                           | 899/10000 [13:06<3:01:21,  1.20s/it]step:      900, time: 1.197
+loss G: 14.1538, L1_cloth loss: 0.4273, VGG loss: 2.3654, TV_tvob loss: 1.3667, TV_taco loss: 0.0328, CE: 0.3753, G GAN: 0.6184
+loss D: 1.0668, D real: 0.5809, D fake: 0.4859, z_non_roi: 0.2346, z_roi: 0.1097
+ 10%|███████████▊                                                                                                          | 999/10000 [15:05<2:59:34,  1.20s/it]step:     1000, time: 1.190
+loss G: 14.4502, L1_cloth loss: 0.4076, VGG loss: 2.1336, TV_tvob loss: 1.4663, TV_taco loss: 0.0286, CE: 0.4373, G GAN: 0.5303
+loss D: 1.0203, D real: 0.4772, D fake: 0.5431, z_non_roi: 0.2786, z_roi: 0.0691
+ 11%|████████████▊                                                                                                        | 1099/10000 [17:06<2:56:58,  1.19s/it]step:     1100, time: 1.195
+loss G: 13.8353, L1_cloth loss: 0.4301, VGG loss: 2.1904, TV_tvob loss: 1.1498, TV_taco loss: 0.0337, CE: 0.4051, G GAN: 0.5683
+loss D: 0.9755, D real: 0.4641, D fake: 0.5114, z_non_roi: 0.2393, z_roi: 0.1187
+ 12%|██████████████                                                                                                       | 1199/10000 [19:06<2:55:09,  1.19s/it]step:     1200, time: 1.198
+loss G: 13.1317, L1_cloth loss: 0.3799, VGG loss: 2.1925, TV_tvob loss: 1.1393, TV_taco loss: 0.0311, CE: 0.3916, G GAN: 0.5316
+loss D: 1.0127, D real: 0.3938, D fake: 0.6189, z_non_roi: 0.2516, z_roi: 0.0996
+ 13%|███████████████▏                                                                                                     | 1299/10000 [21:05<2:52:58,  1.19s/it]step:     1300, time: 1.200
+loss G: 13.6737, L1_cloth loss: 0.4131, VGG loss: 1.6040, TV_tvob loss: 1.4532, TV_taco loss: 0.0296, CE: 0.3560, G GAN: 1.0801
+loss D: 0.8188, D real: 0.5448, D fake: 0.2740, z_non_roi: 0.2702, z_roi: 0.0624
+ 14%|████████████████▎                                                                                                    | 1399/10000 [23:05<2:51:26,  1.20s/it]step:     1400, time: 1.193
+loss G: 13.9151, L1_cloth loss: 0.4459, VGG loss: 2.0804, TV_tvob loss: 1.1046, TV_taco loss: 0.0304, CE: 0.3599, G GAN: 1.1553
+loss D: 0.7761, D real: 0.5136, D fake: 0.2626, z_non_roi: 0.2777, z_roi: 0.0740
+ 15%|█████████████████▌                                                                                                   | 1499/10000 [25:04<2:49:33,  1.20s/it]step:     1500, time: 1.191
+loss G: 14.2308, L1_cloth loss: 0.4116, VGG loss: 1.6986, TV_tvob loss: 1.3994, TV_taco loss: 0.0316, CE: 0.4500, G GAN: 0.6984
+loss D: 0.8347, D real: 0.2761, D fake: 0.5587, z_non_roi: 0.2876, z_roi: 0.0686
+ 16%|██████████████████▋                                                                                                  | 1599/10000 [27:04<2:47:11,  1.19s/it]step:     1600, time: 1.201
+loss G: 12.5575, L1_cloth loss: 0.4209, VGG loss: 2.0820, TV_tvob loss: 1.0165, TV_taco loss: 0.0288, CE: 0.2902, G GAN: 0.8758
+loss D: 0.6537, D real: 0.2587, D fake: 0.3950, z_non_roi: 0.2505, z_roi: 0.1480
+ 17%|███████████████████▉                                                                                                 | 1699/10000 [29:04<2:45:34,  1.20s/it]step:     1700, time: 1.188
+loss G: 14.8480, L1_cloth loss: 0.3864, VGG loss: 1.7417, TV_tvob loss: 1.2828, TV_taco loss: 0.0359, CE: 0.4643, G GAN: 1.6403
+loss D: 0.3363, D real: 0.2176, D fake: 0.1187, z_non_roi: 0.2666, z_roi: 0.0543
+ 18%|█████████████████████                                                                                                | 1799/10000 [31:03<2:43:13,  1.19s/it]step:     1800, time: 1.196
+loss G: 18.5382, L1_cloth loss: 0.3274, VGG loss: 1.8652, TV_tvob loss: 1.3530, TV_taco loss: 0.0548, CE: 0.8763, G GAN: 1.4471
+loss D: 0.3652, D real: 0.2208, D fake: 0.1443, z_non_roi: 0.2771, z_roi: 0.0961
+ 19%|██████████████████████▏                                                                                              | 1899/10000 [33:03<2:41:16,  1.19s/it]step:     1900, time: 1.198
+loss G: 16.5300, L1_cloth loss: 0.4040, VGG loss: 2.5395, TV_tvob loss: 1.2212, TV_taco loss: 0.0350, CE: 0.4300, G GAN: 2.7811
+loss D: 0.6700, D real: 0.4103, D fake: 0.2597, z_non_roi: 0.2179, z_roi: 0.1392
+ 20%|███████████████████████▍                                                                                             | 1999/10000 [35:03<2:39:10,  1.19s/it]step:     2000, time: 1.195
+loss G: 14.8746, L1_cloth loss: 0.5117, VGG loss: 2.5117, TV_tvob loss: 1.3972, TV_taco loss: 0.0402, CE: 0.2069, G GAN: 1.9584
+loss D: 0.3079, D real: 0.2055, D fake: 0.1024, z_non_roi: 0.2392, z_roi: 0.1046
+ 21%|████████████████████████▌                                                                                            | 2099/10000 [37:03<2:45:53,  1.26s/it]step:     2100, time: 1.196
+loss G: 13.0245, L1_cloth loss: 0.3466, VGG loss: 1.9184, TV_tvob loss: 0.9257, TV_taco loss: 0.0413, CE: 0.3799, G GAN: 1.5285
+loss D: 0.4637, D real: 0.3192, D fake: 0.1445, z_non_roi: 0.3110, z_roi: 0.0676
+ 22%|█████████████████████████▋                                                                                           | 2199/10000 [39:03<2:35:23,  1.20s/it]step:     2200, time: 1.191
+loss G: 15.9114, L1_cloth loss: 0.4323, VGG loss: 2.2861, TV_tvob loss: 1.3000, TV_taco loss: 0.0431, CE: 0.4781, G GAN: 1.4820
+loss D: 0.3607, D real: 0.2399, D fake: 0.1208, z_non_roi: 0.2710, z_roi: 0.0825
+ 23%|██████████████████████████▉                                                                                          | 2299/10000 [41:02<2:33:44,  1.20s/it]step:     2300, time: 1.184
+loss G: 17.2773, L1_cloth loss: 0.3771, VGG loss: 1.6108, TV_tvob loss: 1.3128, TV_taco loss: 0.0390, CE: 0.6238, G GAN: 2.5765
+loss D: 0.4006, D real: 0.2936, D fake: 0.1070, z_non_roi: 0.3215, z_roi: 0.0560
+ 24%|████████████████████████████                                                                                         | 2399/10000 [43:02<2:31:37,  1.20s/it]step:     2400, time: 1.198
+loss G: 16.9903, L1_cloth loss: 0.4759, VGG loss: 2.1062, TV_tvob loss: 1.2443, TV_taco loss: 0.0454, CE: 0.5747, G GAN: 1.4209
+loss D: 0.4306, D real: 0.2655, D fake: 0.1650, z_non_roi: 0.3175, z_roi: 0.0600
+ 25%|█████████████████████████████▏                                                                                       | 2499/10000 [45:02<2:29:37,  1.20s/it]step:     2500, time: 1.197
+loss G: 14.7189, L1_cloth loss: 0.3447, VGG loss: 2.0733, TV_tvob loss: 1.1547, TV_taco loss: 0.0396, CE: 0.5227, G GAN: 1.2165
+loss D: 0.3180, D real: 0.0631, D fake: 0.2549, z_non_roi: 0.2898, z_roi: 0.0765
+ 26%|██████████████████████████████▍                                                                                      | 2599/10000 [47:02<2:27:22,  1.19s/it]step:     2600, time: 1.194
+loss G: 13.5702, L1_cloth loss: 0.4577, VGG loss: 1.8134, TV_tvob loss: 1.2923, TV_taco loss: 0.0420, CE: 0.2735, G GAN: 1.4427
+loss D: 0.2028, D real: 0.0878, D fake: 0.1150, z_non_roi: 0.2765, z_roi: 0.0571
+ 27%|███████████████████████████████▌                                                                                     | 2699/10000 [49:03<2:25:53,  1.20s/it]step:     2700, time: 1.196
+loss G: 17.1334, L1_cloth loss: 0.4620, VGG loss: 2.1565, TV_tvob loss: 1.3367, TV_taco loss: 0.0411, CE: 0.5152, G GAN: 2.0961
+loss D: 0.1170, D real: 0.0665, D fake: 0.0505, z_non_roi: 0.3162, z_roi: 0.0370
+ 28%|████████████████████████████████▋                                                                                    | 2799/10000 [51:04<2:23:42,  1.20s/it]step:     2800, time: 1.194
+loss G: 16.2655, L1_cloth loss: 0.4290, VGG loss: 1.4606, TV_tvob loss: 1.3400, TV_taco loss: 0.0493, CE: 0.5531, G GAN: 1.8580
+loss D: 0.2644, D real: 0.1877, D fake: 0.0768, z_non_roi: 0.2051, z_roi: 0.1413
+ 29%|█████████████████████████████████▉                                                                                   | 2899/10000 [53:03<2:21:37,  1.20s/it]step:     2900, time: 1.194
+loss G: 15.0725, L1_cloth loss: 0.4164, VGG loss: 2.2138, TV_tvob loss: 1.2749, TV_taco loss: 0.0423, CE: 0.2998, G GAN: 2.7082
+loss D: 0.1991, D real: 0.0915, D fake: 0.1076, z_non_roi: 0.2741, z_roi: 0.0805
+ 30%|███████████████████████████████████                                                                                  | 2999/10000 [55:08<2:20:58,  1.21s/it]step:     3000, time: 1.203
+loss G: 12.2060, L1_cloth loss: 0.3714, VGG loss: 1.6179, TV_tvob loss: 1.3497, TV_taco loss: 0.0387, CE: 0.2542, G GAN: 1.2004
+loss D: 0.3393, D real: 0.0805, D fake: 0.2588, z_non_roi: 0.2433, z_roi: 0.1115
+ 31%|████████████████████████████████████▎                                                                                | 3099/10000 [57:09<2:17:49,  1.20s/it]step:     3100, time: 1.196
+loss G: 16.4471, L1_cloth loss: 0.5361, VGG loss: 1.9648, TV_tvob loss: 1.3579, TV_taco loss: 0.0434, CE: 0.4272, G GAN: 1.5752
+loss D: 0.2071, D real: 0.0767, D fake: 0.1304, z_non_roi: 0.3839, z_roi: 0.0884
+ 32%|█████████████████████████████████████▍                                                                               | 3199/10000 [59:14<2:20:41,  1.24s/it]step:     3200, time: 1.237
+loss G: 14.9197, L1_cloth loss: 0.4336, VGG loss: 2.4077, TV_tvob loss: 1.3327, TV_taco loss: 0.0436, CE: 0.3115, G GAN: 1.9835
+loss D: 0.1288, D real: 0.0889, D fake: 0.0399, z_non_roi: 0.2524, z_roi: 0.0714
+ 33%|█████████████████████████████████████▉                                                                             | 3299/10000 [1:01:18<2:18:27,  1.24s/it]step:     3300, time: 1.240
+loss G: 16.3463, L1_cloth loss: 0.6048, VGG loss: 2.0529, TV_tvob loss: 1.2896, TV_taco loss: 0.0405, CE: 0.3114, G GAN: 2.1400
+loss D: 0.1415, D real: 0.0790, D fake: 0.0625, z_non_roi: 0.2626, z_roi: 0.0695
+ 34%|███████████████████████████████████████                                                                            | 3399/10000 [1:03:21<2:17:20,  1.25s/it]step:     3400, time: 1.262
+loss G: 14.5440, L1_cloth loss: 0.3647, VGG loss: 2.0089, TV_tvob loss: 0.9972, TV_taco loss: 0.0397, CE: 0.4651, G GAN: 1.8037
+loss D: 0.1428, D real: 0.0606, D fake: 0.0822, z_non_roi: 0.2513, z_roi: 0.1084
+ 35%|████████████████████████████████████████▏                                                                          | 3499/10000 [1:05:25<2:14:38,  1.24s/it]step:     3500, time: 1.235
+loss G: 13.3468, L1_cloth loss: 0.2872, VGG loss: 1.2988, TV_tvob loss: 1.0515, TV_taco loss: 0.0451, CE: 0.4555, G GAN: 2.0396
+loss D: 0.0928, D real: 0.0330, D fake: 0.0598, z_non_roi: 0.3185, z_roi: 0.0696
+ 36%|█████████████████████████████████████████▍                                                                         | 3599/10000 [1:07:29<2:12:20,  1.24s/it]step:     3600, time: 1.244
+loss G: 17.0848, L1_cloth loss: 0.4489, VGG loss: 1.5009, TV_tvob loss: 1.1613, TV_taco loss: 0.0411, CE: 0.5794, G GAN: 2.5757
+loss D: 0.1936, D real: 0.1298, D fake: 0.0638, z_non_roi: 0.2355, z_roi: 0.0845
+ 37%|██████████████████████████████████████████▌                                                                        | 3699/10000 [1:09:34<2:11:32,  1.25s/it]step:     3700, time: 1.247
+loss G: 15.9777, L1_cloth loss: 0.4247, VGG loss: 2.2483, TV_tvob loss: 1.0054, TV_taco loss: 0.0414, CE: 0.4567, G GAN: 2.4300
+loss D: 0.3544, D real: 0.2235, D fake: 0.1308, z_non_roi: 0.2968, z_roi: 0.0941
+ 38%|███████████████████████████████████████████▋                                                                       | 3799/10000 [1:11:41<2:09:02,  1.25s/it]step:     3800, time: 1.249
+loss G: 15.0136, L1_cloth loss: 0.4027, VGG loss: 1.8948, TV_tvob loss: 1.0455, TV_taco loss: 0.0395, CE: 0.4572, G GAN: 1.9834
+loss D: 0.1080, D real: 0.0527, D fake: 0.0553, z_non_roi: 0.2383, z_roi: 0.1286
+ 39%|████████████████████████████████████████████▊                                                                      | 3899/10000 [1:13:46<2:06:51,  1.25s/it]step:     3900, time: 1.248
+loss G: 16.7777, L1_cloth loss: 0.4564, VGG loss: 1.7433, TV_tvob loss: 1.2995, TV_taco loss: 0.0408, CE: 0.5515, G GAN: 1.8823
+loss D: 0.4013, D real: 0.3609, D fake: 0.0404, z_non_roi: 0.2554, z_roi: 0.1373
+ 40%|█████████████████████████████████████████████▉                                                                     | 3999/10000 [1:15:50<2:04:26,  1.24s/it]step:     4000, time: 1.250
+loss G: 14.9871, L1_cloth loss: 0.3643, VGG loss: 2.2155, TV_tvob loss: 1.2829, TV_taco loss: 0.0396, CE: 0.3982, G GAN: 2.1704
+loss D: 0.1021, D real: 0.0354, D fake: 0.0667, z_non_roi: 0.2715, z_roi: 0.0596
+ 41%|███████████████████████████████████████████████▏                                                                   | 4099/10000 [1:17:56<2:04:32,  1.27s/it]step:     4100, time: 1.254
+loss G: 16.8745, L1_cloth loss: 0.4160, VGG loss: 1.9717, TV_tvob loss: 1.1903, TV_taco loss: 0.0405, CE: 0.6541, G GAN: 1.3680
+loss D: 0.1783, D real: 0.0742, D fake: 0.1041, z_non_roi: 0.2794, z_roi: 0.0932
+ 42%|████████████████████████████████████████████████▎                                                                  | 4199/10000 [1:20:15<2:00:40,  1.25s/it]step:     4200, time: 1.242
+loss G: 14.1914, L1_cloth loss: 0.3030, VGG loss: 2.2518, TV_tvob loss: 1.2169, TV_taco loss: 0.0422, CE: 0.4077, G GAN: 1.9813
+loss D: 0.0569, D real: 0.0297, D fake: 0.0272, z_non_roi: 0.2510, z_roi: 0.0819
+ 43%|█████████████████████████████████████████████████▍                                                                 | 4299/10000 [1:22:16<1:54:30,  1.21s/it]step:     4300, time: 1.202
+loss G: 17.0490, L1_cloth loss: 0.5036, VGG loss: 2.3483, TV_tvob loss: 1.1288, TV_taco loss: 0.0449, CE: 0.4789, G GAN: 2.1879
+loss D: 0.0782, D real: 0.0478, D fake: 0.0305, z_non_roi: 0.2468, z_roi: 0.0938
+ 44%|██████████████████████████████████████████████████▌                                                                | 4399/10000 [1:24:25<1:59:10,  1.28s/it]step:     4400, time: 1.267
+loss G: 14.9527, L1_cloth loss: 0.4926, VGG loss: 2.2471, TV_tvob loss: 1.2695, TV_taco loss: 0.0481, CE: 0.2716, G GAN: 2.0833
+loss D: 0.0914, D real: 0.0589, D fake: 0.0325, z_non_roi: 0.2500, z_roi: 0.0944
+ 45%|███████████████████████████████████████████████████▋                                                               | 4499/10000 [1:26:48<2:00:40,  1.32s/it]step:     4500, time: 1.286
+loss G: 12.6304, L1_cloth loss: 0.3555, VGG loss: 1.6641, TV_tvob loss: 1.1657, TV_taco loss: 0.0403, CE: 0.3000, G GAN: 1.6909
+loss D: 0.0716, D real: 0.0289, D fake: 0.0427, z_non_roi: 0.2421, z_roi: 0.0661
+ 46%|████████████████████████████████████████████████████▉                                                              | 4599/10000 [1:28:56<1:53:50,  1.26s/it]step:     4600, time: 1.266
+loss G: 12.8270, L1_cloth loss: 0.3276, VGG loss: 2.0335, TV_tvob loss: 1.5131, TV_taco loss: 0.0451, CE: 0.2544, G GAN: 1.5285
+loss D: 0.1836, D real: 0.0710, D fake: 0.1126, z_non_roi: 0.2831, z_roi: 0.0451
+ 47%|██████████████████████████████████████████████████████                                                             | 4699/10000 [1:31:04<1:52:20,  1.27s/it]step:     4700, time: 1.274
+loss G: 14.9278, L1_cloth loss: 0.4084, VGG loss: 1.7132, TV_tvob loss: 1.4088, TV_taco loss: 0.0432, CE: 0.4084, G GAN: 1.7934
+loss D: 0.1015, D real: 0.0658, D fake: 0.0357, z_non_roi: 0.3235, z_roi: 0.0259
+ 48%|███████████████████████████████████████████████████████▏                                                           | 4799/10000 [1:33:11<1:49:46,  1.27s/it]step:     4800, time: 1.258
+loss G: 13.4972, L1_cloth loss: 0.4369, VGG loss: 1.7461, TV_tvob loss: 1.2603, TV_taco loss: 0.0487, CE: 0.2407, G GAN: 2.0209
+loss D: 0.0628, D real: 0.0374, D fake: 0.0254, z_non_roi: 0.2835, z_roi: 0.0529
+ 49%|████████████████████████████████████████████████████████▎                                                          | 4899/10000 [1:35:25<1:58:15,  1.39s/it]step:     4900, time: 1.516
+loss G: 18.4898, L1_cloth loss: 0.4355, VGG loss: 2.6173, TV_tvob loss: 1.3773, TV_taco loss: 0.0422, CE: 0.6180, G GAN: 2.1506
+loss D: 0.1114, D real: 0.0511, D fake: 0.0603, z_non_roi: 0.2359, z_roi: 0.1115
+ 50%|█████████████████████████████████████████████████████████▍                                                         | 4999/10000 [1:37:28<1:42:17,  1.23s/it]step:     5000, time: 1.208
+loss G: 13.8219, L1_cloth loss: 0.3400, VGG loss: 1.7774, TV_tvob loss: 1.1223, TV_taco loss: 0.0423, CE: 0.3927, G GAN: 2.0168
+loss D: 0.1307, D real: 0.0401, D fake: 0.0906, z_non_roi: 0.2540, z_roi: 0.1175
+ 51%|██████████████████████████████████████████████████████████▋                                                        | 5099/10000 [1:39:29<1:37:51,  1.20s/it]step:     5100, time: 1.190
+loss G: 15.6874, L1_cloth loss: 0.4602, VGG loss: 1.8457, TV_tvob loss: 0.9026, TV_taco loss: 0.0459, CE: 0.5061, G GAN: 1.9324
+loss D: 0.1006, D real: 0.0578, D fake: 0.0428, z_non_roi: 0.3067, z_roi: 0.0423
+ 52%|███████████████████████████████████████████████████████████▊                                                       | 5199/10000 [1:41:28<1:35:52,  1.20s/it]step:     5200, time: 1.188
+loss G: 12.8463, L1_cloth loss: 0.3494, VGG loss: 1.7160, TV_tvob loss: 1.3253, TV_taco loss: 0.0411, CE: 0.2254, G GAN: 2.2865
+loss D: 0.0817, D real: 0.0566, D fake: 0.0251, z_non_roi: 0.3069, z_roi: 0.0562
+ 53%|████████████████████████████████████████████████████████████▉                                                      | 5299/10000 [1:43:28<1:33:51,  1.20s/it]step:     5300, time: 1.197
+loss G: 14.7942, L1_cloth loss: 0.4450, VGG loss: 2.3337, TV_tvob loss: 1.4502, TV_taco loss: 0.0402, CE: 0.2811, G GAN: 1.8834
+loss D: 0.0328, D real: 0.0155, D fake: 0.0172, z_non_roi: 0.2776, z_roi: 0.0580
+ 54%|██████████████████████████████████████████████████████████████                                                     | 5399/10000 [1:45:28<1:31:50,  1.20s/it]step:     5400, time: 1.194
+loss G: 14.5510, L1_cloth loss: 0.4241, VGG loss: 2.2329, TV_tvob loss: 1.3638, TV_taco loss: 0.0451, CE: 0.2868, G GAN: 1.9768
+loss D: 0.0408, D real: 0.0199, D fake: 0.0209, z_non_roi: 0.3211, z_roi: 0.0935
+ 55%|███████████████████████████████████████████████████████████████▏                                                   | 5499/10000 [1:47:28<1:29:59,  1.20s/it]step:     5500, time: 1.190
+loss G: 15.4535, L1_cloth loss: 0.5251, VGG loss: 2.3681, TV_tvob loss: 1.3347, TV_taco loss: 0.0453, CE: 0.2529, G GAN: 2.1864
+loss D: 0.0680, D real: 0.0400, D fake: 0.0280, z_non_roi: 0.2857, z_roi: 0.0731
+ 56%|████████████████████████████████████████████████████████████████▍                                                  | 5599/10000 [1:49:27<1:26:13,  1.18s/it]step:     5600, time: 1.192
+loss G: 17.6377, L1_cloth loss: 0.3151, VGG loss: 2.1598, TV_tvob loss: 1.2078, TV_taco loss: 0.0414, CE: 0.7354, G GAN: 2.1004
+loss D: 0.0475, D real: 0.0318, D fake: 0.0157, z_non_roi: 0.2834, z_roi: 0.0904
+ 57%|█████████████████████████████████████████████████████████████████▌                                                 | 5699/10000 [1:51:27<1:25:50,  1.20s/it]step:     5700, time: 1.192
+loss G: 13.0563, L1_cloth loss: 0.3421, VGG loss: 2.1553, TV_tvob loss: 1.2615, TV_taco loss: 0.0422, CE: 0.2593, G GAN: 1.9904
+loss D: 0.0264, D real: 0.0098, D fake: 0.0167, z_non_roi: 0.2150, z_roi: 0.0741
+ 58%|██████████████████████████████████████████████████████████████████▋                                                | 5799/10000 [1:53:26<1:23:52,  1.20s/it]step:     5800, time: 1.197
+loss G: 14.1196, L1_cloth loss: 0.3968, VGG loss: 1.9265, TV_tvob loss: 1.2241, TV_taco loss: 0.0513, CE: 0.3444, G GAN: 1.8411
+loss D: 0.0368, D real: 0.0213, D fake: 0.0155, z_non_roi: 0.2534, z_roi: 0.1357
+ 59%|███████████████████████████████████████████████████████████████████▊                                               | 5899/10000 [1:55:58<1:21:37,  1.19s/it]step:     5900, time: 1.204
+loss G: 15.2267, L1_cloth loss: 0.3414, VGG loss: 1.9284, TV_tvob loss: 1.3520, TV_taco loss: 0.0396, CE: 0.4846, G GAN: 1.8945
+loss D: 0.0424, D real: 0.0213, D fake: 0.0211, z_non_roi: 0.3085, z_roi: 0.0520
+ 60%|████████████████████████████████████████████████████████████████████▉                                              | 5999/10000 [1:57:55<1:19:57,  1.20s/it]step:     6000, time: 1.194
+loss G: 13.9670, L1_cloth loss: 0.4057, VGG loss: 1.8626, TV_tvob loss: 1.2692, TV_taco loss: 0.0410, CE: 0.3009, G GAN: 2.0350
+loss D: 0.0621, D real: 0.0359, D fake: 0.0262, z_non_roi: 0.2699, z_roi: 0.1127
+ 60%|█████████████████████████████████████████████████████████████████████▎                                             | 6025/10000 [1:58:26<1:19:24,  1.20s/it]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+ 61%|██████████████████████████████████████████████████████████████████████▏                                            | 6099/10000 [1:59:55<1:17:47,  1.20s/it]step:     6100, time: 1.230
+loss G: 14.1638, L1_cloth loss: 0.3749, VGG loss: 1.8877, TV_tvob loss: 1.0615, TV_taco loss: 0.0393, CE: 0.4014, G GAN: 1.9678
+loss D: 0.0267, D real: 0.0131, D fake: 0.0136, z_non_roi: 0.3031, z_roi: 0.0412
+ 62%|███████████████████████████████████████████████████████████████████████▎                                           | 6199/10000 [2:01:54<1:15:48,  1.20s/it]step:     6200, time: 1.200
+loss G: 12.1774, L1_cloth loss: 0.4310, VGG loss: 1.5794, TV_tvob loss: 1.1169, TV_taco loss: 0.0427, CE: 0.1976, G GAN: 1.6590
+loss D: 0.1040, D real: 0.0220, D fake: 0.0819, z_non_roi: 0.2758, z_roi: 0.0589
+ 62%|███████████████████████████████████████████████████████████████████████▍                                           | 6216/10000 [2:02:14<1:15:27,  1.20s/it]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+ 63%|████████████████████████████████████████████████████████████████████████▍                                          | 6295/10000 [2:03:49<1:13:13,  1.19s/it]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+ 63%|████████████████████████████████████████████████████████████████████████▍                                          | 6299/10000 [2:03:54<1:13:12,  1.19s/it]step:     6300, time: 1.178
+loss G: 12.4097, L1_cloth loss: 0.3623, VGG loss: 1.6383, TV_tvob loss: 1.1572, TV_taco loss: 0.0368, CE: 0.2431, G GAN: 2.0277
+loss D: 0.0520, D real: 0.0278, D fake: 0.0242, z_non_roi: 0.2362, z_roi: 0.0648
+ 64%|█████████████████████████████████████████████████████████████████████████▌                                         | 6399/10000 [2:05:54<1:11:58,  1.20s/it]step:     6400, time: 1.196
+loss G: 14.9040, L1_cloth loss: 0.3623, VGG loss: 1.8865, TV_tvob loss: 1.2916, TV_taco loss: 0.0371, CE: 0.4494, G GAN: 1.9101
+loss D: 0.0433, D real: 0.0245, D fake: 0.0188, z_non_roi: 0.2795, z_roi: 0.0537
+ 65%|██████████████████████████████████████████████████████████████████████████▋                                        | 6499/10000 [2:07:52<1:09:48,  1.20s/it]step:     6500, time: 1.203
+loss G: 14.3381, L1_cloth loss: 0.4373, VGG loss: 1.8118, TV_tvob loss: 1.1268, TV_taco loss: 0.0353, CE: 0.3389, G GAN: 2.1276
+loss D: 0.1553, D real: 0.1369, D fake: 0.0184, z_non_roi: 0.2632, z_roi: 0.0487
+ 66%|███████████████████████████████████████████████████████████████████████████▉                                       | 6599/10000 [2:09:52<1:07:49,  1.20s/it]step:     6600, time: 1.199
+loss G: 14.1489, L1_cloth loss: 0.3356, VGG loss: 1.8097, TV_tvob loss: 1.0689, TV_taco loss: 0.0398, CE: 0.4355, G GAN: 2.0897
+loss D: 0.0322, D real: 0.0160, D fake: 0.0162, z_non_roi: 0.2596, z_roi: 0.0622
+ 67%|████████████████████████████████████████████████████████████████████████████▉                                      | 6690/10000 [2:11:41<1:05:57,  1.20s/it]C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:73: RuntimeWarning: invalid value encountered in divide
+  pose_data[9] = point + (pose_data[9] - point) / length_b * length_a
+C:\Users\Shreshth\projects\TRYON_PROJECT\SD-VITON\cp_dataset.py:74: RuntimeWarning: invalid value encountered in divide
+  pose_data[12] = point + (pose_data[12] - point) / length_b * length_a
+ 67%|█████████████████████████████████████████████████████████████████████████████                                      | 6699/10000 [2:11:52<1:05:47,  1.20s/it]step:     6700, time: 1.202
+loss G: 13.6685, L1_cloth loss: 0.4261, VGG loss: 2.1277, TV_tvob loss: 1.3126, TV_taco loss: 0.0389, CE: 0.2336, G GAN: 1.9460
+loss D: 0.0616, D real: 0.0355, D fake: 0.0260, z_non_roi: 0.2270, z_roi: 0.0673
+ 68%|██████████████████████████████████████████████████████████████████████████████▏                                    | 6799/10000 [2:13:52<1:03:49,  1.20s/it]step:     6800, time: 1.197
+loss G: 15.1187, L1_cloth loss: 0.5402, VGG loss: 1.6778, TV_tvob loss: 1.4918, TV_taco loss: 0.0462, CE: 0.2427, G GAN: 2.1654
+loss D: 0.0447, D real: 0.0239, D fake: 0.0208, z_non_roi: 0.2841, z_roi: 0.0860
+ 69%|███████████████████████████████████████████████████████████████████████████████▎                                   | 6899/10000 [2:15:51<1:01:47,  1.20s/it]step:     6900, time: 1.205
+loss G: 17.9797, L1_cloth loss: 0.5796, VGG loss: 2.9006, TV_tvob loss: 1.5100, TV_taco loss: 0.0454, CE: 0.3764, G GAN: 1.9716
+loss D: 0.0249, D real: 0.0151, D fake: 0.0098, z_non_roi: 0.2912, z_roi: 0.1459
+ 70%|████████████████████████████████████████████████████████████████████████████████▍                                  | 6999/10000 [2:17:52<1:00:02,  1.20s/it]step:     7000, time: 1.196
+loss G: 12.5576, L1_cloth loss: 0.2056, VGG loss: 1.4832, TV_tvob loss: 1.2997, TV_taco loss: 0.0383, CE: 0.4044, G GAN: 1.9649
+loss D: 0.0593, D real: 0.0410, D fake: 0.0183, z_non_roi: 0.2794, z_roi: 0.0544
+ 71%|█████████████████████████████████████████████████████████████████████████████████▋                                 | 7099/10000 [2:19:53<1:00:05,  1.24s/it]step:     7100, time: 1.191
+loss G: 14.2143, L1_cloth loss: 0.4252, VGG loss: 2.3099, TV_tvob loss: 1.4081, TV_taco loss: 0.0407, CE: 0.2214, G GAN: 2.1922
+loss D: 0.1135, D real: 0.0770, D fake: 0.0364, z_non_roi: 0.2489, z_roi: 0.0995
+ 72%|████████████████████████████████████████████████████████████████████████████████████▏                                | 7199/10000 [2:21:54<55:52,  1.20s/it]step:     7200, time: 1.195
+loss G: 14.3838, L1_cloth loss: 0.3725, VGG loss: 1.7859, TV_tvob loss: 1.3088, TV_taco loss: 0.0393, CE: 0.4709, G GAN: 1.1205
+loss D: 0.4546, D real: 0.0459, D fake: 0.4087, z_non_roi: 0.2991, z_roi: 0.0476
+ 73%|█████████████████████████████████████████████████████████████████████████████████████▍                               | 7299/10000 [2:23:57<54:06,  1.20s/it]step:     7300, time: 1.188
+loss G: 17.5304, L1_cloth loss: 0.4849, VGG loss: 2.0373, TV_tvob loss: 0.8910, TV_taco loss: 0.0398, CE: 0.7071, G GAN: 1.2336
+loss D: 0.4203, D real: 0.1314, D fake: 0.2888, z_non_roi: 0.3760, z_roi: 0.1021
+ 74%|██████████████████████████████████████████████████████████████████████████████████████▌                              | 7399/10000 [2:25:56<51:59,  1.20s/it]step:     7400, time: 1.191
+loss G: 17.6625, L1_cloth loss: 0.5294, VGG loss: 2.0387, TV_tvob loss: 1.4709, TV_taco loss: 0.0396, CE: 0.4972, G GAN: 2.0117
+loss D: 0.0207, D real: 0.0122, D fake: 0.0084, z_non_roi: 0.2171, z_roi: 0.1077
+ 75%|███████████████████████████████████████████████████████████████████████████████████████▋                             | 7499/10000 [2:27:57<50:04,  1.20s/it]step:     7500, time: 1.199
+loss G: 14.2303, L1_cloth loss: 0.3202, VGG loss: 1.6442, TV_tvob loss: 1.4442, TV_taco loss: 0.0403, CE: 0.4029, G GAN: 2.0744
+loss D: 0.0185, D real: 0.0108, D fake: 0.0077, z_non_roi: 0.2661, z_roi: 0.0460
+ 76%|████████████████████████████████████████████████████████████████████████████████████████▉                            | 7599/10000 [2:29:57<47:52,  1.20s/it]step:     7600, time: 1.193
+loss G: 14.7934, L1_cloth loss: 0.5416, VGG loss: 1.9911, TV_tvob loss: 1.4388, TV_taco loss: 0.0428, CE: 0.2072, G GAN: 2.0243
+loss D: 0.0192, D real: 0.0109, D fake: 0.0083, z_non_roi: 0.2142, z_roi: 0.1129
+ 77%|██████████████████████████████████████████████████████████████████████████████████████████                           | 7699/10000 [2:31:57<45:52,  1.20s/it]step:     7700, time: 1.200
+loss G: 13.4089, L1_cloth loss: 0.3164, VGG loss: 1.7500, TV_tvob loss: 1.0668, TV_taco loss: 0.0409, CE: 0.3972, G GAN: 1.9987
+loss D: 0.0260, D real: 0.0141, D fake: 0.0119, z_non_roi: 0.2543, z_roi: 0.0541
+ 78%|███████████████████████████████████████████████████████████████████████████████████████████▏                         | 7799/10000 [2:33:57<43:57,  1.20s/it]step:     7800, time: 1.196
+loss G: 13.8679, L1_cloth loss: 0.2255, VGG loss: 1.3970, TV_tvob loss: 1.4862, TV_taco loss: 0.0515, CE: 0.4513, G GAN: 2.3116
+loss D: 0.0536, D real: 0.0285, D fake: 0.0250, z_non_roi: 0.2703, z_roi: 0.0466
+ 79%|████████████████████████████████████████████████████████████████████████████████████████████▍                        | 7899/10000 [2:35:57<42:00,  1.20s/it]step:     7900, time: 1.195
+loss G: 14.0132, L1_cloth loss: 0.4172, VGG loss: 1.7481, TV_tvob loss: 1.1991, TV_taco loss: 0.0380, CE: 0.3253, G GAN: 2.0365
+loss D: 0.0136, D real: 0.0077, D fake: 0.0059, z_non_roi: 0.2911, z_roi: 0.0382
+ 80%|█████████████████████████████████████████████████████████████████████████████████████████████▌                       | 7999/10000 [2:37:57<39:51,  1.20s/it]step:     8000, time: 1.209
+loss G: 16.9166, L1_cloth loss: 0.4304, VGG loss: 2.5026, TV_tvob loss: 1.4320, TV_taco loss: 0.0428, CE: 0.4725, G GAN: 2.0839
+loss D: 0.0174, D real: 0.0077, D fake: 0.0098, z_non_roi: 0.1888, z_roi: 0.1624
+ 81%|██████████████████████████████████████████████████████████████████████████████████████████████▊                      | 8099/10000 [2:39:58<38:15,  1.21s/it]step:     8100, time: 1.192
+loss G: 21.7337, L1_cloth loss: 0.5692, VGG loss: 2.9949, TV_tvob loss: 1.1234, TV_taco loss: 0.0422, CE: 0.8220, G GAN: 2.0258
+loss D: 0.0616, D real: 0.0320, D fake: 0.0297, z_non_roi: 0.2702, z_roi: 0.2002
+ 82%|███████████████████████████████████████████████████████████████████████████████████████████████▉                     | 8199/10000 [2:41:59<35:58,  1.20s/it]step:     8200, time: 1.192
+loss G: 12.3716, L1_cloth loss: 0.3089, VGG loss: 1.7602, TV_tvob loss: 1.2277, TV_taco loss: 0.0398, CE: 0.2851, G GAN: 1.8344
+loss D: 0.0396, D real: 0.0192, D fake: 0.0205, z_non_roi: 0.2431, z_roi: 0.0593
+ 83%|█████████████████████████████████████████████████████████████████████████████████████████████████                    | 8299/10000 [2:43:59<33:58,  1.20s/it]step:     8300, time: 1.192
+loss G: 14.0091, L1_cloth loss: 0.4024, VGG loss: 2.0927, TV_tvob loss: 1.2053, TV_taco loss: 0.0396, CE: 0.2991, G GAN: 2.0875
+loss D: 0.0726, D real: 0.0569, D fake: 0.0158, z_non_roi: 0.2451, z_roi: 0.0797
+ 84%|██████████████████████████████████████████████████████████████████████████████████████████████████▎                  | 8399/10000 [2:46:01<31:56,  1.20s/it]step:     8400, time: 1.203
+loss G: 15.3018, L1_cloth loss: 0.3779, VGG loss: 1.9713, TV_tvob loss: 1.4356, TV_taco loss: 0.0435, CE: 0.4599, G GAN: 1.6579
+loss D: 0.9247, D real: 0.4520, D fake: 0.4727, z_non_roi: 0.2946, z_roi: 0.0413
+ 85%|███████████████████████████████████████████████████████████████████████████████████████████████████▍                 | 8499/10000 [2:48:01<29:56,  1.20s/it]step:     8500, time: 1.203
+loss G: 13.2492, L1_cloth loss: 0.4786, VGG loss: 1.8051, TV_tvob loss: 1.3279, TV_taco loss: 0.0443, CE: 0.1617, G GAN: 1.9421
+loss D: 0.0339, D real: 0.0197, D fake: 0.0142, z_non_roi: 0.2639, z_roi: 0.0904
+ 86%|████████████████████████████████████████████████████████████████████████████████████████████████████▌                | 8599/10000 [2:50:01<28:00,  1.20s/it]step:     8600, time: 1.191
+loss G: 13.7311, L1_cloth loss: 0.3265, VGG loss: 1.9262, TV_tvob loss: 1.3615, TV_taco loss: 0.0382, CE: 0.3580, G GAN: 1.8540
+loss D: 0.0205, D real: 0.0096, D fake: 0.0109, z_non_roi: 0.2606, z_roi: 0.0459
+ 87%|█████████████████████████████████████████████████████████████████████████████████████████████████████▊               | 8699/10000 [2:52:01<27:02,  1.25s/it]step:     8700, time: 1.200
+loss G: 16.0851, L1_cloth loss: 0.5503, VGG loss: 1.8108, TV_tvob loss: 1.1873, TV_taco loss: 0.0351, CE: 0.3856, G GAN: 2.0927
+loss D: 0.0208, D real: 0.0114, D fake: 0.0094, z_non_roi: 0.2621, z_roi: 0.1155
+ 88%|██████████████████████████████████████████████████████████████████████████████████████████████████████▉              | 8799/10000 [2:54:04<26:11,  1.31s/it]step:     8800, time: 1.207
+loss G: 14.9071, L1_cloth loss: 0.4538, VGG loss: 1.6675, TV_tvob loss: 1.3442, TV_taco loss: 0.0393, CE: 0.3662, G GAN: 1.9575
+loss D: 0.0268, D real: 0.0115, D fake: 0.0153, z_non_roi: 0.2271, z_roi: 0.0886
+ 89%|████████████████████████████████████████████████████████████████████████████████████████████████████████             | 8899/10000 [2:56:07<22:39,  1.23s/it]step:     8900, time: 1.204
+loss G: 13.6298, L1_cloth loss: 0.3211, VGG loss: 1.8359, TV_tvob loss: 1.2607, TV_taco loss: 0.0414, CE: 0.3306, G GAN: 2.3761
+loss D: 0.1402, D real: 0.0611, D fake: 0.0791, z_non_roi: 0.2102, z_roi: 0.0859
+ 90%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▎           | 8999/10000 [2:58:11<20:09,  1.21s/it]step:     9000, time: 1.211
+loss G: 15.1527, L1_cloth loss: 0.5068, VGG loss: 2.3460, TV_tvob loss: 1.4433, TV_taco loss: 0.0406, CE: 0.2616, G GAN: 1.8325
+loss D: 0.0273, D real: 0.0155, D fake: 0.0118, z_non_roi: 0.2603, z_roi: 0.0618
+ 91%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▍          | 9099/10000 [3:00:13<18:07,  1.21s/it]step:     9100, time: 1.215
+loss G: 16.8890, L1_cloth loss: 0.6172, VGG loss: 2.9442, TV_tvob loss: 1.3633, TV_taco loss: 0.0375, CE: 0.2565, G GAN: 2.0536
+loss D: 0.0208, D real: 0.0126, D fake: 0.0082, z_non_roi: 0.2261, z_roi: 0.1257
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▋         | 9199/10000 [3:02:14<16:05,  1.21s/it]step:     9200, time: 1.214
+loss G: 14.9023, L1_cloth loss: 0.4652, VGG loss: 2.5071, TV_tvob loss: 1.1539, TV_taco loss: 0.0414, CE: 0.2996, G GAN: 2.0415
+loss D: 0.0206, D real: 0.0116, D fake: 0.0089, z_non_roi: 0.2507, z_roi: 0.0641
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▊        | 9299/10000 [3:04:15<14:06,  1.21s/it]step:     9300, time: 1.212
+loss G: 13.6355, L1_cloth loss: 0.3403, VGG loss: 1.7797, TV_tvob loss: 1.0967, TV_taco loss: 0.0359, CE: 0.3754, G GAN: 2.1195
+loss D: 0.0116, D real: 0.0054, D fake: 0.0062, z_non_roi: 0.1845, z_roi: 0.1293
+ 94%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▉       | 9399/10000 [3:06:17<12:17,  1.23s/it]step:     9400, time: 1.211
+loss G: 19.8658, L1_cloth loss: 0.5344, VGG loss: 2.3945, TV_tvob loss: 1.3116, TV_taco loss: 0.0459, CE: 0.6939, G GAN: 2.0466
+loss D: 0.0207, D real: 0.0087, D fake: 0.0120, z_non_roi: 0.3698, z_roi: 0.0569
+ 95%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▏     | 9499/10000 [3:08:17<10:05,  1.21s/it]step:     9500, time: 1.207
+loss G: 12.6670, L1_cloth loss: 0.3241, VGG loss: 1.9434, TV_tvob loss: 1.1747, TV_taco loss: 0.0357, CE: 0.2767, G GAN: 1.9736
+loss D: 0.0151, D real: 0.0082, D fake: 0.0068, z_non_roi: 0.2301, z_roi: 0.0915
+ 96%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎    | 9599/10000 [3:10:18<08:04,  1.21s/it]step:     9600, time: 1.199
+loss G: 16.6230, L1_cloth loss: 0.5604, VGG loss: 2.2630, TV_tvob loss: 1.0256, TV_taco loss: 0.0348, CE: 0.4340, G GAN: 1.9427
+loss D: 0.0218, D real: 0.0116, D fake: 0.0102, z_non_roi: 0.2630, z_roi: 0.0892
+ 97%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍   | 9699/10000 [3:12:19<06:03,  1.21s/it]step:     9700, time: 1.213
+loss G: 13.8165, L1_cloth loss: 0.3769, VGG loss: 1.9013, TV_tvob loss: 1.3543, TV_taco loss: 0.0411, CE: 0.3001, G GAN: 2.0605
+loss D: 0.0162, D real: 0.0082, D fake: 0.0079, z_non_roi: 0.2247, z_roi: 0.0692
+ 98%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋  | 9799/10000 [3:14:20<04:03,  1.21s/it]step:     9800, time: 1.202
+loss G: 14.7505, L1_cloth loss: 0.4111, VGG loss: 2.5233, TV_tvob loss: 1.3102, TV_taco loss: 0.0358, CE: 0.3197, G GAN: 1.8950
+loss D: 0.0146, D real: 0.0061, D fake: 0.0085, z_non_roi: 0.2659, z_roi: 0.0670
+ 99%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊ | 9899/10000 [3:16:22<02:02,  1.21s/it]step:     9900, time: 1.208
+loss G: 11.9210, L1_cloth loss: 0.3237, VGG loss: 1.9788, TV_tvob loss: 1.0458, TV_taco loss: 0.0388, CE: 0.2226, G GAN: 1.9726
+loss D: 0.0225, D real: 0.0127, D fake: 0.0098, z_non_roi: 0.2562, z_roi: 0.0812
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉| 9999/10000 [3:18:23<00:01,  1.21s/it]step:    10000, time: 1.202
+loss G: 14.6607, L1_cloth loss: 0.4256, VGG loss: 2.0696, TV_tvob loss: 1.1390, TV_taco loss: 0.0382, CE: 0.3552, G GAN: 2.0549
+loss D: 0.0489, D real: 0.0267, D fake: 0.0222, z_non_roi: 0.3010, z_roi: 0.0728
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10000/10000 [3:18:25<00:00,  1.19s/it]
+Finished training finetune_cond!
