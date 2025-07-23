@@ -25,6 +25,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Health check endpoints
+@app.get("/")
+async def root():
+    return {"status": "healthy"}
+
+@app.get("/health")
+async def health():
+    return {"status": "ok", "message": "Server is running"}
+
 load_dotenv()
 
 QDRANT_DB_URL = os.getenv("QDRANT_DB_URL")
