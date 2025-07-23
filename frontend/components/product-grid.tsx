@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import ProductCard from "./product-card"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
@@ -139,9 +139,12 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     }
   }
 
+  const selectedFiltersString = useMemo(() => JSON.stringify(selectedFilters), [selectedFilters]);
+
+  
   useEffect(() => {
     loadProducts(false)
-  }, [JSON.stringify(selectedFilters), isMatchStyleActive, uniquenessLevel[0], searchQuery])
+  }, [selectedFiltersString, isMatchStyleActive, uniquenessLevel[0], searchQuery])
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
