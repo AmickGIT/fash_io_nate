@@ -95,7 +95,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   }
 
   const selectedFiltersString = useMemo(() => JSON.stringify(selectedFilters), [selectedFilters]);
-
+  const uniqueness = uniquenessLevel[0];
   const buildParams = useCallback(
     (loadMore = false) => {
       const params = new URLSearchParams();
@@ -121,7 +121,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       selectedFilters,
       searchQuery,
       isMatchStyleActive,
-      uniquenessLevel[0],
+      uniqueness,
       nextOffset
     ]
   );
@@ -157,7 +157,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
 
   useEffect(() => {
     loadProducts(false)
-  }, [selectedFiltersString, isMatchStyleActive, uniquenessLevel[0], searchQuery, loadProducts])
+  }, [selectedFiltersString, isMatchStyleActive, uniqueness, searchQuery, loadProducts])
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
@@ -231,7 +231,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               onValueCommit={(val) => { setUniquenessLevel(val); }}
               className="text-left w-4/12"
             />
-            <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniquenessLevel[0])}</span>
+            <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniqueness)}</span>
           </div>
         )}
       </div>
