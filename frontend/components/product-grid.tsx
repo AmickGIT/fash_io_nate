@@ -242,7 +242,10 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
         )}
       </div>
       {loading && products.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">Loading products...</div>
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="w-8 h-8 border-4 border-pink-200 border-t-pink-600 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-500">Loading products...</p>
+        </div>
       ) : error ? (
         <div className="text-center py-12 text-red-500">{error}</div>
       ) : (

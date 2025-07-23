@@ -21,13 +21,13 @@ Our project blends the following into a unified web platform that understands yo
 
 
 ## UI Features
-- Filtering: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
-- Search Bar: The search bar understands the context of your search and filters out results. For example: It can handle queries like “Pink Athletic Wear, that go with black pants” and returns the most relevant clothes in the dataset.
-- Virtual Wardrobe: This feature is to store their whole wardrobe in the platform, which will help the recommender model understand the user’s preference.
-- Buy/Not Interested: We can buy/reject clothes based on our liking, bought clothes get stored in the virtual wardrobe.
-- Match my Style: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
-- Uniqueness Bar: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
-- Wardrobe Builder (Future Prospect): 
+- **Filtering**: Seamless filtering integration with brands, dress code, sleeve, fit, and most importantly color.
+- **Search Bar**: The search bar understands the context of your search and filters out results. For example: It can handle queries like “Pink Athletic Wear, that go with black pants” and returns the most relevant clothes in the dataset.
+- **Virtual Wardrobe**: This feature is to store their whole wardrobe in the platform, which will help the recommender model understand the user’s preference.
+- **Buy/Not Interested**: We can buy/reject clothes based on our liking, bought clothes get stored in the virtual wardrobe.
+- **Match my Style**: This button is used to align the filtered clothes according to the user’s preference (both positive and negative embeddings), and returns the 20 best clothes.
+- **Uniqueness Bar**: The uniqueness bar has 3 modes: “low”, “medium” and “high”. It can be used when the user has selected the Match my Style button, and based on the value of the bar, the model recommends clothes. - Low: Clothes very similar to the user’s liking, High: Clothes just about the user’s style but still unique enough.
+- **Wardrobe Builder (Future Prospect)**: Helps the user build an overall balanced wardrobe, we plan to find out ideal wardrobe vectors, and create a model that will recommend clothes, that will make the user’s wardrobe drift towards the ideal wardrobe. The Ideal wardrobe can be defined as one where every type of cloth type exists.
 
 ## Example of the "Match my Style" functionality based on user preferences and past choices:
 ![MatchMyStyle](demos/match_my_style.gif)
