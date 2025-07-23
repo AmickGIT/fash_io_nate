@@ -30,39 +30,6 @@ interface SidebarProps {
   onClearSearch?: () => void;
 }
 
-const defaultFilters = {
-  gender: [],
-  categories: [],
-  brands: [],
-  dressCode: [],
-  color: [],
-  sleeves: [],
-  fit: [],
-  neckline: [],
-};
-
-const genderOptions = [
-  { id: "women", label: "Women", checked: true },
-  { id: "men", label: "Men", checked: false },
-  { id: "kids", label: "Kids", checked: false },
-]
-
-const categoryOptions = [
-  { id: "dresses", label: "Dresses", count: 190947 },
-  { id: "ethnic-dresses", label: "Ethnic Dresses", count: 13619 },
-  { id: "tops", label: "Tops", count: 45230 },
-  { id: "jeans", label: "Jeans", count: 23456 },
-]
-
-const brandOptions = [
-  { id: "trendyol", label: "Trendyol", count: 7251 },
-  { id: "stylecast", label: "StyleCast", count: 6840 },
-  { id: "lulu-sky", label: "LULU & SKY", count: 6268 },
-  { id: "dressberry", label: "DressBerry", count: 5586 },
-  { id: "jc-collection", label: "JC Collection", count: 5189 },
-  { id: "baesd", label: "BAESD", count: 4190 },
-  { id: "tokyo-talkies", label: "Tokyo Talkies", count: 3818 },
-]
 
 export default function Sidebar({
   selectedFilters,

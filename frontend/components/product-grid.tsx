@@ -60,7 +60,6 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       });
       const data = await res.json();
       if (data.success) {
-        const boughtProduct = products.find((product) => product.id === id) || null;
         setProducts((prev) => prev.filter((product) => product.id !== id));
         // setSuccessProduct(boughtProduct);
         setShowSuccess(true);
