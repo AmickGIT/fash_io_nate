@@ -94,60 +94,70 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     setShowSuccess(false);
   }
 
-  const buildParams = (loadMore = false) => {
-    const params = new URLSearchParams()
-    selectedFilters.brands.forEach(b => params.append("brand", b));
-    selectedFilters.color.forEach(c => params.append("color", c));
-    selectedFilters.sleeves.forEach(s => params.append("sleeve", s));
-    selectedFilters.fit.forEach(f => params.append("fit", f));
-    selectedFilters.neckline.forEach(n => params.append("neckline", n));
-    selectedFilters.dressCode.forEach(d => params.append("dress_code", d));
-    params.set("limit", "20")
-    if (searchQuery) {
-      params.set("search_query", searchQuery);
-    }
-    if (isMatchStyleActive) {
-      params.set("match_style", "true")
-      params.set("uniqueness", String(uniquenessLevel[0]))
-    }
-    if (loadMore && nextOffset != null) {
-      params.set("offset", String(nextOffset))
-    }
-    return params
-  }
+  const selectedFiltersString = useMemo(() => JSON.stringify(selectedFilters), [selectedFilters]);
+
+  const buildParams = useCallback(
+    (loadMore = false) => {
+      const params = new URLSearchParams();
+      selectedFilters.brands.forEach(b => params.append("brand", b));
+      selectedFilters.color.forEach(c => params.append("color", c));
+      selectedFilters.sleeves.forEach(s => params.append("sleeve", s));
+      selectedFilters.fit.forEach(f => params.append("fit", f));
+      selectedFilters.neckline.forEach(n => params.append("neckline", n));
+      selectedFilters.dressCode.forEach(d => params.append("dress_code", d));
+
+      params.set("limit", "20");
+      if (searchQuery) params.set("search_query", searchQuery);
+      if (isMatchStyleActive) {
+        params.set("match_style", "true");
+        params.set("uniqueness", String(uniquenessLevel[0]));
+      }
+      if (loadMore && nextOffset != null) {
+        params.set("offset", String(nextOffset));
+      }
+      return params;
+    },
+    [
+      selectedFilters,
+      searchQuery,
+      isMatchStyleActive,
+      uniquenessLevel[0],
+      nextOffset
+    ]
+  );
 
   const loadProducts = useCallback(
     async (loadMore = false) => {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
       try {
-        const params = buildParams(loadMore)
-        const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`)
-        const data = await res.json()
+        const params = buildParams(loadMore);
+        const res = await fetch(`http://localhost:8000/api/products?${params.toString()}`);
+        const data = await res.json();
         if (res.status === 400 && data.error?.includes("wardrobe")) {
           alert(data.error);
           setIsMatchStyleActive(false);
           return;
         }
-        if (!res.ok) throw new Error(data.error || 'Something went wrong')
+        if (!res.ok) throw new Error(data.error || "Something went wrong");
 
-        setProducts(prev => loadMore ? [...prev, ...(data.items || [])] : (data.items || []))
-        setNextOffset(data.next_offset)
+        setProducts(prev =>
+          loadMore ? [...prev, ...(data.items || [])] : data.items || []
+        );
+        setNextOffset(data.next_offset);
       } catch (err) {
-        setError(err instanceof Error ? err.message : String(err))
+        setError(err instanceof Error ? err.message : String(err));
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     },
     [buildParams]
-  )
+  );
 
-  const selectedFiltersString = useMemo(() => JSON.stringify(selectedFilters), [selectedFilters]);
 
-  
   useEffect(() => {
     loadProducts(false)
-  }, [selectedFiltersString, isMatchStyleActive, uniquenessLevel[0], searchQuery])
+  }, [selectedFiltersString, isMatchStyleActive, uniquenessLevel[0], searchQuery, loadProducts])
 
   const handleMatchStyleClick = () => {
     setIsMatchStyleActive((prev) => !prev)
