@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Eye, CheckCircle } from "lucide-react"
 import { CardContent } from "@/components/ui/card"
+import { unique } from "next/dist/build/utils"
 
 interface ProductGridProps {
   selectedFilters?: {
@@ -110,7 +111,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       if (searchQuery) params.set("search_query", searchQuery);
       if (isMatchStyleActive) {
         params.set("match_style", "true");
-        params.set("uniqueness", String(uniquenessLevel[0]));
+        params.set("uniqueness", String(uniqueness));
       }
       if (loadMore && nextOffset != null) {
         params.set("offset", String(nextOffset));
