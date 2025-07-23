@@ -1,6 +1,6 @@
+torch==2.1.2+cpu
+sentence-transformers
 fastapi
-uvicorn
-qdrant-client 
-sentence_transformers
-numpy
+uvicorn[standard]
+qdrant-client
 python-dotenv
