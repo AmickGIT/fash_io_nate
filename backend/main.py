@@ -8,6 +8,9 @@ from functools import lru_cache
 import numpy as np
 from typing import List, Optional, Tuple
 from text_embedder import TextEmbedder
+from dotenv import load_dotenv
+
+
 
 
 app = FastAPI()
@@ -20,7 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+load_dotenv()
 # QDrant connection details (update as needed)
 QDRANT_DB_URL = os.getenv("QDRANT_DB_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
