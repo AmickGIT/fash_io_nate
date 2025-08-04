@@ -191,7 +191,7 @@ class CPDataset(data.Dataset):
 
         parse_agnostic_map = torch.FloatTensor(20, self.fine_height, self.fine_width).zero_()
         parse_agnostic_map = parse_agnostic_map.scatter_(0, parse_agnostic, 1.0)
-        new_parse_agnostic_map = torch.FloatTensor(self.semantic_nc, self.fine_height, self.fine_width).zero_()
+        new_parse_agnostic_map = torch.FloatTensor(self .semantic_nc, self.fine_height, self.fine_width).zero_()
         for i in range(len(labels)):
             for label in labels[i][1]:
                 new_parse_agnostic_map[i] += parse_agnostic_map[label]        

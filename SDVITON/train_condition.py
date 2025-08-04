@@ -31,7 +31,6 @@ def freeze_tocg_final_layers(tocg, num_unfrozen=2):
     for param in tocg.parameters():
         param.requires_grad = False
 
-    # Unfreeze final num_unfrozen layers
     for idx in range(total_layers - num_unfrozen, total_layers):
         _, layer = layers[idx]
         for param in layer.parameters():

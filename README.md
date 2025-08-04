@@ -36,7 +36,10 @@ https://docs.google.com/document/d/17rj-0hl3oz1yn3Gq9TJSe_hsq0bpeobA_2kSxKkKrMo/
 
 ---
 ## Process Flow:
-![Dia](demos/Fashionate.jpg)
+### Recommendation System:
+![Dia](demos/Fashionate_Recommend.jpg)
+### VITON:
+![Dia](demos/Fashionate_VITON.jpg)
 ## Features
 
 ### 1. Skin Color Compatibility Model
