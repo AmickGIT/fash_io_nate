@@ -5,19 +5,21 @@
 Our project blends the following into a unified web platform that understands your fashion sense, recommends what suits your skin tone.
 
 
-## 🚀 Try It Live!
+## Try It Live!
 
 ### [**✨ Fashionate - Your Fashion Destination ✨**](https://fash-io-nate.vercel.app/)
 
-🎯 **Experience AI-powered fashion recommendations**
+ **Experience AI-powered fashion recommendations**
 
 ---
 
-**🔔 Current Status:**
+**Current Status:**
 - ✅ Fully functional fashion recommendation system
 - ⚠️ Wardrobe is currently shared among all users
 - 🔜 Individual user profiles coming soon
 
+## Detailed Documentation:
+https://docs.google.com/document/d/17rj-0hl3oz1yn3Gq9TJSe_hsq0bpeobA_2kSxKkKrMo/edit?usp=sharing
 
 
 ## UI Features
