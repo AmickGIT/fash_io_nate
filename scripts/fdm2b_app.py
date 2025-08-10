@@ -82,11 +82,13 @@ def tensor_to_pil(tensor_img):
 
 st.title("Fashion Style Transfer")
 
+st.markdown('[Back](https://fash-io-nate.vercel.app)')
+
 st.markdown("Upload content image, style image, and the parse mask")
 
 content_file = st.file_uploader("Upload Content Image (person wearing top)", type=["jpg", "png"])
 style_file = st.file_uploader("Upload Style Image (pattern to apply)", type=["jpg", "png"])
-mask_file = st.file_uploader("Upload Segmentation Mask", type=["png"])
+mask_file = st.file_uploader("Upload Segmentation Mask of the Content Image", type=["png"])
 
 if content_file and style_file and mask_file and st.button("Generate Stylized Output"):
     with st.spinner("Processing images..."):
@@ -130,13 +132,8 @@ if content_file and style_file and mask_file and st.button("Generate Stylized Ou
 
             if i % 50 == 0:
                 #st.info(f"Step {i}, Total loss: {total_loss.item():.4f}")
+                pass
 
         final_img = target.clone().detach()
         final_masked = final_img * mask + content * (1 - mask)
 
-        output_path = get_next_filename(OUTPUT_DIR)
-        final_pil = tensor_to_pil(final_masked)
-        final_pil.save(output_path)
-
-        st.image(final_pil, caption="Stylized Output (Top Region Only)", use_column_width=True)
-        st.success(f"Image saved at: {output_path}")
