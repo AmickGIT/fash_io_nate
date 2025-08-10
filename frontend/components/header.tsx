@@ -12,6 +12,7 @@ import { API_BASE } from "@/lib/constants"
 
 const navigationTabs = [
   { name: "Recommender", href: "/" },
+  { name: "Style Transfer", href:"https://fashionatedesign.streamlit.app/" }
 ]
 
 interface WardrobeItem {
