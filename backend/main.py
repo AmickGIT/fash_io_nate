@@ -19,7 +19,7 @@ app = FastAPI()
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://fash-io-nate.vercel.app"],  # Your frontend domain
+    allow_origins=["https://fash-io-nate.vercel.app", "http://localhost:3000"],  # Your frontend domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
