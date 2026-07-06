@@ -19,7 +19,12 @@ app = FastAPI()
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://fash-io-nate.vercel.app", "http://localhost:3000"],  # Your frontend domain
+    allow_origins=[
+        "https://fash-io-nate.vercel.app",
+        "http://localhost:3000",
+        "https://amickcodes-fashionate.hf.space",
+        "*",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -392,12 +397,7 @@ if __name__ == "__main__":
     import uvicorn
     import os
     
-    # Log all environment info for debugging
-    railway_port = os.environ.get("PORT")
-    print(f"Railway PORT env var: {railway_port}")
-    print(f"All env vars: {dict(os.environ)}")
-    
-    port = int(railway_port) if railway_port else 8000
-    print(f"Using port: {port}")
+    port = int(os.environ.get("PORT", 7860))
+    print(f"Starting server on port: {port}")
     
     uvicorn.run(app, host="0.0.0.0", port=port)
