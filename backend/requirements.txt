@@ -3,6 +3,6 @@ torchvision
 sentence-transformers
 fastapi
 uvicorn[standard]
-qdrant-client
+qdrant-client==1.9.1
 python-dotenv
 numpy<2.0
