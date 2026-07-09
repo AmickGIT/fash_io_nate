@@ -170,13 +170,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
     setIsMatchStyleActive((prev) => !prev)
   }
 
-  const getUniquenessLabel = (value: number) => {
-    if (value <= 10) return `Low (${value}%)`;
-    if (value <= 40) return `Low-Med (${value}%)`;
-    if (value <= 60) return `Medium (${value}%)`;
-    if (value <= 90) return `Med-High (${value}%)`;
-    return `High (${value}%)`;
-  }
+
 
   return (
     <div>
@@ -239,7 +233,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               onValueCommit={(val) => { setUniquenessLevel(val); }}
               className="text-left flex-1"
             />
-            <span className="text-sm text-gray-600 text-right whitespace-nowrap min-w-[85px]">{getUniquenessLabel(uniqueness)}</span>
+            <span className="text-sm text-gray-600 text-right whitespace-nowrap min-w-[35px]">{localuniquenessLevel[0]}%</span>
           </div>
         )}
       </div>
