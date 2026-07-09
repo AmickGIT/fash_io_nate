@@ -247,11 +247,13 @@ def get_products(
         text_embedding = text_embedder.encode(search_query)
         print(f"Generated embedding of shape: {text_embedding.shape}")
         # Query EXT_COLLECTION_NAME for nearest neighbors using client.search
-        ext_pts = client.search(
+        results = client.query_points(
             collection_name=EXT_COLLECTION_NAME,
-            query_vector=('text', text_embedding.tolist()),
+            query=text_embedding.tolist(),
+            using="text",
             limit=20
         )
+        ext_pts = results.points
         text_ids = [pt.id for pt in ext_pts] if ext_pts else []
 
         if not text_ids:
