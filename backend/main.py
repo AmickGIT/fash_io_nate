@@ -330,7 +330,8 @@ def get_products(
                 )
                 points = results.points
             else:
-                fetch_k = limit * 3
+                skip_count = int((uniqueness / 100.0) * 15)
+                fetch_k = limit * 3 + skip_count
                 lambda_mult = max(0.0, min(1.0, 1.0 - (uniqueness / 100.0)))
                 
                 results = client.query_points(
@@ -347,7 +348,8 @@ def get_products(
                     with_payload=['img_path'],
                     with_vectors=True
                 )
-                candidates = results.points
+                raw_candidates = results.points
+                candidates = raw_candidates[skip_count:]
                 
                 if len(candidates) <= limit:
                     points = candidates
