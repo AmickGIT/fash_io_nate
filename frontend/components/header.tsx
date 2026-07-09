@@ -16,6 +16,7 @@ const navigationTabs = [
 ]
 
 interface WardrobeItem {
+  id: number;
   img_path: string;
   image_url: string;
   payload?: { bought?: boolean };
@@ -60,6 +61,25 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
   useEffect(() => {
     fetchWardrobe()
   }, [fetchWardrobe])
+
+  const handleRemove = (id: number) => {
+    fetch(`${API_BASE}/api/remove_from_wardrobe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchWardrobe()
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to remove item:", err)
+      })
+  }
 
   // Fetch when wardrobe panel toggles open
   useEffect(() => {
@@ -170,7 +190,7 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
                 <div className="text-gray-400 text-xs col-span-full">No wardrobe items found.</div>
               ) : (
                 wardrobeItems.map((item: WardrobeItem) => (
-                  <div key={item.img_path} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow flex flex-col items-center">
+                  <div key={item.img_path} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow flex flex-col items-center relative group">
                     <div className="relative w-full" style={{ aspectRatio: '189/256' }}>
                       <Image
                         src={item.image_url}
@@ -179,8 +199,15 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
                         style={{ objectFit: 'cover' }}
                         className="rounded-t"
                       />
+                      <button
+                        onClick={() => handleRemove(item.id)}
+                        className="absolute top-2 right-2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full transition-colors duration-200 shadow-md backdrop-blur-sm"
+                        title="Remove from wardrobe"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
                     </div>
-                    <p className="text-xs text-gray-600 truncate w-full">{item.img_path}</p>
+                    <p className="text-xs text-gray-600 truncate w-full mt-2">{item.img_path}</p>
                   </div>
                 ))
               )}

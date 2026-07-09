@@ -68,6 +68,7 @@ export default function Home() {
               selectedFilters={selectedFilters}
               onWardrobeUpdate={handleWardrobeUpdate}
               searchQuery={submittedQuery}
+              wardrobeCount={wardrobeCount}
             />
           </div>
         </div>

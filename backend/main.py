@@ -4,11 +4,73 @@ from fastapi.responses import JSONResponse
 from qdrant_client import QdrantClient, models       # gRPC client + models
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, HasIdCondition
 import os
+import numpy as np
 from functools import lru_cache
 from typing import List, Optional, Tuple
 from text_embedder import TextEmbedder
 from dotenv import load_dotenv
 
+
+def maximal_marginal_relevance(candidate_vectors: np.ndarray, candidate_scores: np.ndarray, lambda_mult: float, k: int) -> List[int]:
+    """
+    Selects k items using Maximal Marginal Relevance.
+    candidate_vectors: (N, D) array of embeddings for candidate items.
+    candidate_scores: (N,) array of relevance scores from Qdrant.
+    lambda_mult: Number between 0 and 1. 1 = pure relevance, 0 = pure diversity.
+    k: Number of items to select.
+    Returns: List of indices of the selected candidates.
+    """
+    if k >= len(candidate_vectors):
+        return list(range(len(candidate_vectors)))
+
+    # Normalize candidate_scores to [0, 1] for balanced weighting
+    min_score = np.min(candidate_scores)
+    max_score = np.max(candidate_scores)
+    if max_score > min_score:
+        norm_scores = (candidate_scores - min_score) / (max_score - min_score)
+    else:
+        norm_scores = candidate_scores
+
+    # Normalize vectors to compute cosine similarity easily via dot product
+    norms = np.linalg.norm(candidate_vectors, axis=1, keepdims=True)
+    norms[norms == 0] = 1e-10
+    norm_vectors = candidate_vectors / norms
+
+    selected = []
+    unselected = list(range(len(candidate_vectors)))
+    
+    # Pick first item based purely on relevance (highest score)
+    first_idx = int(np.argmax(norm_scores))
+    selected.append(first_idx)
+    unselected.remove(first_idx)
+
+    # Iteratively pick remaining items
+    for _ in range(k - 1):
+        if not unselected:
+            break
+            
+        unselected_vectors = norm_vectors[unselected]
+        selected_vectors = norm_vectors[selected]
+        
+        # Calculate cosine similarity between unselected items and ALREADY selected items
+        # Shape: (len(unselected), len(selected))
+        sims = np.dot(unselected_vectors, selected_vectors.T)
+        
+        # Max similarity to any already selected item (Redundancy)
+        max_sims = np.max(sims, axis=1)
+        
+        # Calculate MMR score for each unselected item
+        # lambda * relevance - (1 - lambda) * redundancy
+        mmr_scores = lambda_mult * norm_scores[unselected] - (1 - lambda_mult) * max_sims
+        
+        # Pick the one with the highest MMR score
+        best_idx_idx = int(np.argmax(mmr_scores))
+        best_idx = unselected[best_idx_idx]
+        
+        selected.append(best_idx)
+        unselected.remove(best_idx)
+
+    return selected
 
 
 
@@ -253,42 +315,47 @@ def get_products(
                     content={"error": "Please add at least one item to your wardrobe to get personalized recommendations."}
                 )
             if uniqueness == 0:
-                points = client.recommend(
+                results = client.query_points(
                     collection_name=COLLECTION_NAME,
-                    positive=positive_embeddings,   
-                    negative=negative_embeddings,
+                    query=models.RecommendQuery(
+                        recommend=models.RecommendInput(
+                            positive=positive_embeddings,
+                            negative=negative_embeddings,
+                            strategy=models.RecommendStrategy.AVERAGE_VECTOR,
+                        )
+                    ),
                     query_filter=scroll_filter,
-                    strategy=models.RecommendStrategy.AVERAGE_VECTOR,
                     limit=limit,
                     with_payload=['img_path'],
                 )
-            elif uniqueness == 50:
-                points = client.recommend(
+                points = results.points
+            else:
+                fetch_k = limit * 3
+                lambda_mult = max(0.0, min(1.0, 1.0 - (uniqueness / 100.0)))
+                
+                results = client.query_points(
                     collection_name=COLLECTION_NAME,
-                    positive=positive_embeddings,   
-                    negative=negative_embeddings,
+                    query=models.RecommendQuery(
+                        recommend=models.RecommendInput(
+                            positive=positive_embeddings,
+                            negative=negative_embeddings,
+                            strategy=models.RecommendStrategy.AVERAGE_VECTOR,
+                        )
+                    ),
                     query_filter=scroll_filter,
-                    strategy=models.RecommendStrategy.SUM_SCORES,
-                    limit=limit,
+                    limit=fetch_k,
                     with_payload=['img_path'],
+                    with_vectors=True
                 )
-            elif uniqueness == 100:
-                points = client.recommend(
-                    collection_name=COLLECTION_NAME,
-                    positive=positive_embeddings,   
-                    query_filter=scroll_filter,
-                    strategy=models.RecommendStrategy.SUM_SCORES,
-                    limit=limit,
-                    with_payload=['img_path'],
-                )
-            # points = client.recommend(
-            #     collection_name=COLLECTION_NAME,
-            #     positive=positive_embeddings,   
-            #     negative=negative_embeddings,
-            #     query_filter=scroll_filter,
-            #     limit=limit,
-            #     with_payload=True,
-            # )
+                candidates = results.points
+                
+                if len(candidates) <= limit:
+                    points = candidates
+                else:
+                    candidate_vectors = np.array([pt.vector for pt in candidates])
+                    candidate_scores = np.array([pt.score for pt in candidates])
+                    selected_indices = maximal_marginal_relevance(candidate_vectors, candidate_scores, lambda_mult, limit)
+                    points = [candidates[i] for i in selected_indices]
             
             next_offset = None  # Qdrant search does not support offset
         else:
@@ -314,6 +381,8 @@ def get_products(
             "next_offset": next_offset
         }
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return {"error": str(e)}
 
 @app.get("/api/wardrobe")
@@ -370,6 +439,37 @@ def buy_item(id: int = Body(..., embed=True)):
     )
     wardrobe_count = len(points)
     return {"success": True, "point_id": id, "wardrobe_count": wardrobe_count}
+
+@app.post("/api/remove_from_wardrobe")
+def remove_from_wardrobe(id: int = Body(..., embed=True)):
+    """
+    Set the 'bought' key of the item with the given id to False, and update the profile embedding cache.
+    Return the updated wardrobe count (number of bought=True items).
+    """
+    try:
+        client.set_payload(
+            collection_name=COLLECTION_NAME,
+            payload={"bought": False},
+            points=[id]
+        )
+        get_profile_embedding.cache_clear()
+        print(f"Item {id} removed from wardrobe.")
+        # Fetch updated wardrobe count
+        from qdrant_client.http import models as rest
+        flt = rest.Filter(must=[rest.FieldCondition(key="bought", match=rest.MatchValue(value=True))])
+        points, _ = client.scroll(
+            collection_name=COLLECTION_NAME,
+            scroll_filter=flt,
+            with_payload=["bought"],
+            limit=10000
+        )
+        wardrobe_count = len(points)
+        return {"success": True, "point_id": id, "wardrobe_count": wardrobe_count}
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"error": str(e)}
+
 
 @app.post("/api/not_interested")
 def mark_not_interested(id: int = Body(..., embed=True)):

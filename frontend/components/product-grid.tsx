@@ -21,6 +21,7 @@ interface ProductGridProps {
     neckline: string[];
   };
   searchQuery: string;
+  wardrobeCount?: number;
 }
 
 interface Product {
@@ -40,7 +41,7 @@ const defaultFilters = {
   neckline: [],
 };
 
-export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate, searchQuery }: ProductGridProps & { onWardrobeUpdate?: (wardrobeCount: number) => void }) {
+export default function ProductGrid({ selectedFilters = defaultFilters, onWardrobeUpdate, searchQuery, wardrobeCount = 0 }: ProductGridProps & { onWardrobeUpdate?: (wardrobeCount: number) => void }) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -160,7 +161,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
       await loadProducts(false);
     }
     reload();
-  }, [selectedFiltersString, isMatchStyleActive, uniqueness, searchQuery]);
+  }, [selectedFiltersString, isMatchStyleActive, uniqueness, searchQuery, wardrobeCount]);
 
 
   
