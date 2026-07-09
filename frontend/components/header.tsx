@@ -173,47 +173,65 @@ export default function Header({ wardrobeCount = 0, onWardrobeUpdate, searchQuer
         </div>
       </div>
       {showWardrobe && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t z-50">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">My Wardrobe</h2>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-pink-600 border-pink-600 hover:bg-pink-50 bg-transparent"
+        <>
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 bg-black/30 backdrop-blur-xs z-50 transition-opacity"
+            onClick={() => setShowWardrobe(false)}
+          />
+          
+          {/* Drawer Panel */}
+          <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col h-full border-l animate-in slide-in-from-right duration-300">
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                <ShoppingBag className="w-5 h-5 text-pink-600" />
+                My Wardrobe
+              </h2>
+              <button
+                onClick={() => setShowWardrobe(false)}
+                className="p-1 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"
               >
-                Add New Item
-              </Button>
+                <X className="w-5 h-5" />
+              </button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-h-96 overflow-y-auto">
+
+            {/* Drawer Body */}
+            <div className="flex-1 overflow-y-auto p-6">
               {wardrobeItems.length === 0 ? (
-                <div className="text-gray-400 text-xs col-span-full">No wardrobe items found.</div>
+                <div className="flex flex-col items-center justify-center h-64 text-center">
+                  <ShoppingBag className="w-12 h-12 text-gray-300 mb-3 animate-pulse" />
+                  <p className="text-gray-500 text-sm font-medium">Your wardrobe is empty</p>
+                  <p className="text-gray-400 text-xs mt-1 max-w-[200px]">Add items from the catalog to match your style!</p>
+                </div>
               ) : (
-                wardrobeItems.map((item: WardrobeItem) => (
-                  <div key={item.img_path} className="bg-gray-50 rounded-lg p-3 hover:shadow-md transition-shadow flex flex-col items-center relative group">
-                    <div className="relative w-full" style={{ aspectRatio: '189/256' }}>
-                      <Image
-                        src={item.image_url}
-                        alt={item.img_path}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        className="rounded-t"
-                      />
-                      <button
-                        onClick={() => handleRemove(item.id)}
-                        className="absolute top-2 right-2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full transition-colors duration-200 shadow-md backdrop-blur-sm"
-                        title="Remove from wardrobe"
-                      >
-                        <X className="w-3.5 h-3.5" />
-                      </button>
+                <div className="grid grid-cols-2 gap-4">
+                  {wardrobeItems.map((item: WardrobeItem) => (
+                    <div key={item.img_path} className="bg-gray-50 rounded-xl p-3 border border-gray-100 hover:shadow-md transition-all flex flex-col items-center relative group">
+                      <div className="relative w-full rounded-lg overflow-hidden" style={{ aspectRatio: '189/256' }}>
+                        <Image
+                          src={item.image_url}
+                          alt={item.img_path}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                          className="transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <button
+                          onClick={() => handleRemove(item.id)}
+                          className="absolute top-2 right-2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full transition-colors duration-200 shadow-md backdrop-blur-sm"
+                          title="Remove from wardrobe"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <p className="text-xs text-gray-600 truncate w-full mt-2 text-center">{item.img_path.replace("images/", "")}</p>
                     </div>
-                    <p className="text-xs text-gray-600 truncate w-full mt-2">{item.img_path}</p>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   )
