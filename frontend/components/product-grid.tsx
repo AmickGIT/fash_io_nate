@@ -171,10 +171,11 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
   }
 
   const getUniquenessLabel = (value: number) => {
-    if (value === 0) return "Low"
-    if (value === 50) return "Medium"
-    if (value === 100) return "High"
-    return ""
+    if (value <= 10) return `Low (${value}%)`;
+    if (value <= 40) return `Low-Med (${value}%)`;
+    if (value <= 60) return `Medium (${value}%)`;
+    if (value <= 90) return `Med-High (${value}%)`;
+    return `High (${value}%)`;
   }
 
   return (
@@ -224,7 +225,7 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
           </Button>
         </div>
         {isMatchStyleActive && (
-          <div className="justify-self-end flex items-center gap-4 w-64">
+          <div className="justify-self-end flex items-center gap-3 w-72">
             <Label htmlFor="uniqueness-bar" className="text-sm text-gray-600 whitespace-nowrap">
               Uniqueness:
             </Label>
@@ -232,13 +233,13 @@ export default function ProductGrid({ selectedFilters = defaultFilters, onWardro
               id="uniqueness-bar"
               min={0}
               max={100}
-              step={50}
+              step={1}
               value={localuniquenessLevel}
               onValueChange={setLocaluniquenessLevel}
               onValueCommit={(val) => { setUniquenessLevel(val); }}
-              className="text-left w-4/12"
+              className="text-left flex-1"
             />
-            <span className="text-sm text-gray-600 text-right">{getUniquenessLabel(uniqueness)}</span>
+            <span className="text-sm text-gray-600 text-right whitespace-nowrap min-w-[85px]">{getUniquenessLabel(uniqueness)}</span>
           </div>
         )}
       </div>
